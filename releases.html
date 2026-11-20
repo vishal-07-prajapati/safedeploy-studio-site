@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeDeploy Studio — Releases & Downloads</title>
+    <meta name="description" content="Download official releases of SafeDeploy Studio for 64-bit Windows environments. Verified Windows installer and portable packages.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-brand">
+                <div class="nav-brand-icon">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <span>SafeDeploy Studio</span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="index.html#overview" class="nav-link">Product</a>
+                <a href="index.html#features" class="nav-link">Features</a>
+                <a href="index.html#workflow" class="nav-link">How It Works</a>
+                <a href="user-guide.html" class="nav-link">User Guide</a>
+                <a href="docs.html" class="nav-link">Documentation</a>
+                <a href="releases.html" class="nav-link active">Releases</a>
+            </nav>
+
+            <div class="nav-actions">
+                <button id="themeToggle" class="btn btn-icon" aria-label="Toggle theme">
+                    <svg class="icon theme-icon-dark" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                    <svg class="icon theme-icon-light" style="display: none;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+                </button>
+                <a href="https://github.com/vishal-07-prajapati/safedeploy-studio" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                    <span>GitHub</span>
+                </a>
+                <a href="#downloads" class="btn btn-primary">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    <span>Download</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container" style="padding: 3rem 1.5rem; max-width: 960px;">
+        <div class="breadcrumbs">
+            <a href="index.html">Home</a>
+            <span>/</span>
+            <span>Releases & Downloads</span>
+        </div>
+
+        <h1 class="article-title" style="font-size: 2.25rem;">Releases & Official Distribution</h1>
+        <p class="article-p" style="margin-bottom: 2rem;">
+            Official binary distributions of SafeDeploy Studio for 64-bit Windows. Every artifact is built through automated GitHub Actions CI/CD pipelines and published with cryptographic SHA-256 checksums.
+        </p>
+
+        <!-- Current Release Card -->
+        <div id="downloads" class="release-card">
+            <div class="release-header">
+                <div>
+                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.35rem;">
+                        <span class="release-version">SafeDeploy Studio v1.0.0 LTS</span>
+                        <span class="badge badge-success">Latest Release</span>
+                    </div>
+                    <div class="release-tag">Release tag: v1.0.0 &bull; Target: .NET 10.0 LTS (win-x64)</div>
+                </div>
+                <a href="https://github.com/vishal-07-prajapati/safedeploy-studio/releases/tag/v1.0.0" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="font-size: 12px;">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    <span>GitHub Release</span>
+                </a>
+            </div>
+
+            <div class="download-grid">
+                <!-- Windows Installer Card -->
+                <div class="download-item">
+                    <div class="download-title">Windows Installer (.msi)</div>
+                    <p class="download-desc">
+                        Full Windows setup with desktop shortcut, Start menu integration, and WebView2 runtime verification.
+                    </p>
+                    <a href="https://github.com/vishal-07-prajapati/safedeploy-studio/releases/download/v1.0.0/SafeDeployStudio-Setup.msi" class="btn btn-primary" style="justify-content: center;">
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        <span>Download MSI Installer (x64)</span>
+                    </a>
+                    <div class="checksum-box">
+                        <span>SHA256: 4e9c70a1a5cf970428d022bfe5f8e6b1897c8d929c3683a45c36b69fa021d7b3</span>
+                    </div>
+                </div>
+
+                <!-- Portable Zip Card -->
+                <div class="download-item">
+                    <div class="download-title">Portable Standalone Package (.zip)</div>
+                    <p class="download-desc">
+                        Zero-installation self-contained binary package. Extract to any directory and launch immediately without administrator privileges.
+                    </p>
+                    <a href="https://github.com/vishal-07-prajapati/safedeploy-studio/releases/download/v1.0.0/SafeDeployStudio-Portable-win-x64.zip" class="btn btn-secondary" style="justify-content: center;">
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        <span>Download Portable ZIP (x64)</span>
+                    </a>
+                    <div class="checksum-box">
+                        <span>SHA256: 91b0f5e71e54ca6d582f3c0384a3b7d120a1ef8f58b738e4a9e9a4d8120ec289</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Requirements -->
+        <section class="article-section">
+            <h2 class="article-h2">System Requirements</h2>
+            <div class="table-wrapper">
+                <table class="spec-table">
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Minimum Requirement</th>
+                            <th>Recommended Specification</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="font-weight: 600; color: var(--color-fg-default);">Operating System</td>
+                            <td>Windows 10 Version 1809+ (64-bit)</td>
+                            <td>Windows 11 or Windows Server 2022 (64-bit)</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; color: var(--color-fg-default);">Processor</td>
+                            <td>Intel Core i3 or AMD equivalent (x64)</td>
+                            <td>Intel Core i5 / AMD Ryzen 5 or higher</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; color: var(--color-fg-default);">Memory (RAM)</td>
+                            <td>4 GB RAM</td>
+                            <td>8 GB RAM or more</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; color: var(--color-fg-default);">Disk Space</td>
+                            <td>250 MB free disk space</td>
+                            <td>1 GB free disk space (for Backup Vault storage)</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; color: var(--color-fg-default);">Web Runtime</td>
+                            <td>Microsoft Edge WebView2 Evergreen</td>
+                            <td>Included with Windows 11 / Automated by installer</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; color: var(--color-fg-default);">Target Database</td>
+                            <td>SQL Server 2016+, Azure SQL</td>
+                            <td>SQL Server 2019 / 2022, Azure SQL Managed Instance</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Release Notes Section -->
+        <section class="article-section">
+            <h2 class="article-h2">Release Notes — v1.0.0 LTS</h2>
+            <ul style="margin-left: 1.5rem; color: var(--color-fg-muted); line-height: 1.8; margin-bottom: 1.5rem;">
+                <li><strong>AST Guardrails Engine:</strong> Initial release of Abstract Syntax Tree validation powered by <code>Microsoft.SqlServer.TransactSql.ScriptDom 180</code>. Blocks physical table drops and alterations while permitting temporary staging tables (<code>#temp</code>).</li>
+                <li><strong>Transactional Sandboxes:</strong> Implemented <code>BEGIN TRAN ... ROLLBACK TRAN</code> dry-run verification on target databases with clean rollback guarantee.</li>
+                <li><strong>Backup Vault & 1-Click Rollback:</strong> Automated cryptographic pre-change snapshot synthesis with SHA-256 integrity validation.</li>
+                <li><strong>SQL Diff Viewer:</strong> Whitespace-normalized line-by-line comparison powered by <code>DiffPlex</code>.</li>
+                <li><strong>Deterministic SARGability Analyzer:</strong> Static query optimization warnings for date function traps, non-SARGable <code>ISNULL</code> predicates, and missing <code>SET NOCOUNT ON</code>.</li>
+                <li><strong>Dual Interface:</strong> Full Blazor Server interactive workbench and native Windows WPF desktop shell with Microsoft WebView2 integration.</li>
+            </ul>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-bottom">
+            <span>&copy; 2026 SafeDeploy Studio. All rights reserved. Open source under the MIT License.</span>
+            <span><a href="index.html">Home</a> &bull; <a href="user-guide.html">User Guide</a> &bull; <a href="docs.html">Technical Documentation</a></span>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

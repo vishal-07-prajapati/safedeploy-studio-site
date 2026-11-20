@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeDeploy Studio — Technical Architecture & Specifications</title>
+    <meta name="description" content="Technical architecture, AST visitor engine, database provider abstraction, and IIS hosting guide for SafeDeploy Studio.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-brand">
+                <div class="nav-brand-icon">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <span>SafeDeploy Studio</span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="index.html#overview" class="nav-link">Product</a>
+                <a href="index.html#features" class="nav-link">Features</a>
+                <a href="index.html#workflow" class="nav-link">How It Works</a>
+                <a href="user-guide.html" class="nav-link">User Guide</a>
+                <a href="docs.html" class="nav-link active">Documentation</a>
+                <a href="releases.html" class="nav-link">Releases</a>
+            </nav>
+
+            <div class="nav-actions">
+                <button id="themeToggle" class="btn btn-icon" aria-label="Toggle theme">
+                    <svg class="icon theme-icon-dark" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                    <svg class="icon theme-icon-light" style="display: none;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+                </button>
+                <a href="https://github.com/vishal-07-prajapati/safedeploy-studio" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                    <span>GitHub</span>
+                </a>
+                <a href="releases.html" class="btn btn-primary">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    <span>Download</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container" style="padding: 3rem 1.5rem; max-width: 960px;">
+        <div class="breadcrumbs">
+            <a href="index.html">Home</a>
+            <span>/</span>
+            <span>Technical Documentation</span>
+        </div>
+
+        <h1 class="article-title" style="font-size: 2.25rem;">Technical Architecture & Engineering Reference</h1>
+        <div class="article-meta">
+            <span>Target Runtime: .NET 10.0 LTS</span>
+            <span>Language: C# 13</span>
+            <span>Architecture: Clean Architecture Modular Monolith</span>
+        </div>
+
+        <!-- Section 1 -->
+        <section id="architecture" class="article-section">
+            <h2 class="article-h2">1. Solution Structure & Dependency Rules</h2>
+            <p class="article-p">
+                SafeDeploy Studio is structured into 14 decoupled projects enforcing strict unidirectional Clean Architecture dependency flows. The Domain core has zero external library dependencies.
+            </p>
+            <div class="code-block">
+SafeDeployStudio.slnx
+├── SafeDeployStudio.Domain                   (Entities, Enums, Value Objects, Interfaces)
+├── SafeDeployStudio.DatabaseProviders
+│   ├── SafeDeployStudio.DatabaseProviders.Abstractions (IDatabaseProvider contracts)
+│   └── SafeDeployStudio.DatabaseProviders.SqlServer    (Dapper, SqlClient, ScriptDom)
+├── SafeDeployStudio.Guardrails               (ScriptDom TSql160Parser AST Visitors)
+├── SafeDeployStudio.Deployment               (DiffPlex side-by-side SQL diff engine)
+├── SafeDeployStudio.Backup                   (Pre-change snapshot generator & Vault)
+├── SafeDeployStudio.AI                       (SARGability analyzer & LLM adapter)
+├── SafeDeployStudio.Application              (CQRS use cases, DTOs, workflow service)
+├── SafeDeployStudio.Infrastructure           (EF Core SQLite & SQL Server Repositories)
+├── SafeDeployStudio.Api                      (ASP.NET Core Web API, SignalR hub)
+├── SafeDeployStudio.Web                      (Blazor Server Interactive UI)
+├── SafeDeployStudio.Desktop                  (WPF host + Microsoft WebView2)
+└── tests/
+    ├── SafeDeployStudio.UnitTests            (xUnit, FluentAssertions, Moq)
+    └── SafeDeployStudio.IntegrationTests     (In-Memory EF Core database integration)
+            </div>
+        </section>
+
+        <!-- Section 2 -->
+        <section id="guardrails" class="article-section">
+            <h2 class="article-h2">2. ScriptDom AST Guardrails Engine</h2>
+            <p class="article-p">
+                Static validation is performed by compiling raw migration SQL into an Abstract Syntax Tree using <code>Microsoft.SqlServer.TransactSql.ScriptDom.TSql160Parser</code>.
+            </p>
+            <p class="article-p">
+                Custom visitors inherit from <code>TSqlFragmentVisitor</code> and inspect nodes:
+            </p>
+            <ul style="margin-left: 1.5rem; color: var(--color-fg-muted); line-height: 1.8; margin-bottom: 1rem;">
+                <li><code>DropTableStatement</code>: Evaluates <code>node.Objects</code>. Physical tables trigger a critical violation. Temporary tables starting with <code>#</code> or <code>##</code> are passed.</li>
+                <li><code>TruncateTableStatement</code>: Evaluates <code>node.TableName</code>. Truncating non-temporary tables is blocked.</li>
+                <li><code>AlterTableStatement</code>: Evaluates <code>node.SchemaObjectName</code> to block unauthorized structural alterations.</li>
+                <li><code>UpdateStatement</code> & <code>DeleteStatement</code>: Verifies that <code>WhereClause != null</code> to eliminate accidental whole-table operations.</li>
+            </ul>
+        </section>
+
+        <!-- Section 3 -->
+        <section id="vault" class="article-section">
+            <h2 class="article-h2">3. Pre-Change Backup Snapshot Algorithm</h2>
+            <p class="article-p">
+                Before applying changes to a target database, SafeDeploy Studio executes an automated backup procedure:
+            </p>
+            <ol style="margin-left: 1.5rem; color: var(--color-fg-muted); line-height: 1.8; margin-bottom: 1rem;">
+                <li>Connects to the target database and queries <code>sys.sql_modules</code> for existing definitions.</li>
+                <li>Generates an idempotent restore script containing a safe <code>DROP IF EXISTS</code> block followed by the original active definition.</li>
+                <li>Computes the SHA-256 hash of the generated payload.</li>
+                <li>Saves the script to <code>%LocalAppData%/SafeDeployStudio/Vault/{project}/{environment}/{timestamp}.sql</code>.</li>
+                <li>Creates a tracked <code>BackupSnapshot</code> record linked to the deployment ID.</li>
+            </ol>
+        </section>
+
+        <!-- Section 4 -->
+        <section id="iis" class="article-section">
+            <h2 class="article-h2">4. Windows Server IIS Hosting Architecture</h2>
+            <p class="article-p">
+                For centralized multi-user enterprise deployments, <code>SafeDeployStudio.Web</code> runs under Windows Server IIS using the <code>AspNetCoreModuleV2</code> out-of-process hosting model.
+            </p>
+            <div class="code-block">
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;configuration&gt;
+  &lt;location path="." inheritInChildApplications="false"&gt;
+    &lt;system.webServer&gt;
+      &lt;handlers&gt;
+        &lt;add name="aspNetCore" path="*" verb="*" modules="AspNetCoreModuleV2" resourceType="Unspecified" /&gt;
+      &lt;/handlers&gt;
+      &lt;aspNetCore processPath="dotnet"
+                  arguments=".\SafeDeployStudio.Web.dll"
+                  stdoutLogEnabled="true"
+                  stdoutLogFile=".\logs\stdout"
+                  hostingModel="inprocess" /&gt;
+    &lt;/system.webServer&gt;
+  &lt;/location&gt;
+&lt;/configuration&gt;
+            </div>
+        </section>
+
+        <!-- Section 5 -->
+        <section id="build" class="article-section">
+            <h2 class="article-h2">5. Building from Source</h2>
+            <p class="article-p">
+                Clone the repository and build using the .NET 10 SDK:
+            </p>
+            <div class="code-block">
+git clone https://github.com/vishal-07-prajapati/safedeploy-studio.git
+cd safedeploy-studio
+dotnet restore SafeDeployStudio.slnx
+dotnet build SafeDeployStudio.slnx --configuration Release
+dotnet test SafeDeployStudio.slnx
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-bottom">
+            <span>&copy; 2026 SafeDeploy Studio. All rights reserved. Open source under the MIT License.</span>
+            <span><a href="index.html">Home</a> &bull; <a href="user-guide.html">User Guide</a> &bull; <a href="releases.html">Releases</a></span>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

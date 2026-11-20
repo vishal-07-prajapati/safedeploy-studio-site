@@ -4,226 +4,329 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SafeDeploy Studio — Intelligent Database Deployment & Management Platform</title>
-    <meta name="description" content="Reusable, project-independent enterprise database deployment platform with AST guardrails, SQL diffing, transactional sandboxes, pre-change backups, and 1-click rollback built on .NET 10.">
+    <meta name="description" content="Centralized database deployment and management platform for engineering teams. AST safety guardrails, side-by-side SQL diffs, transactional dry-runs, and 1-click rollback built on .NET 10.">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container nav-content">
-            <a href="#" class="nav-brand">
-                <div class="brand-logo">S</div>
+    <!-- Header Navigation -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-brand">
+                <div class="nav-brand-icon">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
                 <span>SafeDeploy Studio</span>
             </a>
-            <div class="nav-links">
+
+            <nav class="nav-links">
+                <a href="#overview" class="nav-link">Product</a>
                 <a href="#features" class="nav-link">Features</a>
-                <a href="#workflow" class="nav-link">6-Step Workflow</a>
-                <a href="#architecture" class="nav-link">Architecture</a>
-                <a href="#downloads" class="nav-link">Downloads</a>
-                <a href="https://github.com/vishal-07-prajapati/safedeploy-studio" target="_blank" class="nav-link">GitHub</a>
-                <button id="themeToggle" class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">🌙 Theme</button>
-                <a href="#downloads" class="btn btn-primary" style="padding: 0.45rem 1rem; font-size: 0.85rem;">Get SafeDeploy</a>
-            </div>
-        </div>
-    </nav>
+                <a href="#workflow" class="nav-link">How It Works</a>
+                <a href="user-guide.html" class="nav-link">User Guide</a>
+                <a href="docs.html" class="nav-link">Documentation</a>
+                <a href="releases.html" class="nav-link">Releases</a>
+            </nav>
 
-    <!-- Hero -->
-    <header class="hero">
-        <div class="container">
-            <div class="hero-badge">
-                <span>🛡️ Enterprise Database Deployment Platform</span>
-                <span style="opacity: 0.5;">|</span>
-                <span>Powered by .NET 10 LTS</span>
-            </div>
-            <h1 class="hero-title">
-                Deploy with confidence.<br>
-                <span>Manage database changes intelligently.</span>
-            </h1>
-            <p class="hero-subtitle">
-                An intelligent, project-independent database migration platform combining AST safety guardrails, side-by-side SQL diffing, transactional sandbox dry-runs, automated pre-change snapshots, and 1-click rollback.
-            </p>
-            <div class="hero-actions">
-                <a href="#downloads" class="btn btn-primary">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                    Download Windows Client
+            <div class="nav-actions">
+                <button id="themeToggle" class="btn btn-icon" aria-label="Toggle theme">
+                    <svg class="icon theme-icon-dark" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                    <svg class="icon theme-icon-light" style="display: none;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+                </button>
+                <a href="https://github.com/vishal-07-prajapati/safedeploy-studio" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                    <span>GitHub</span>
                 </a>
-                <a href="https://github.com/vishal-07-prajapati/safedeploy-studio" target="_blank" class="btn btn-outline">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-                    View Source on GitHub
+                <a href="releases.html" class="btn btn-primary">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    <span>Download</span>
                 </a>
-            </div>
-
-            <!-- Visual Preview Card -->
-            <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.5rem; text-align: left; box-shadow: 0 20px 40px rgba(0,0,0,0.4); max-width: 900px; margin: 0 auto;">
-                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem; margin-bottom: 1rem;">
-                    <div style="display: flex; gap: 6px;">
-                        <span style="width: 12px; height: 12px; border-radius: 50%; background: #ef4444; display: inline-block;"></span>
-                        <span style="width: 12px; height: 12px; border-radius: 50%; background: #f59e0b; display: inline-block;"></span>
-                        <span style="width: 12px; height: 12px; border-radius: 50%; background: #10b981; display: inline-block;"></span>
-                    </div>
-                    <span style="font-family: var(--font-mono); font-size: 12px; color: var(--text-muted);">SafeDeploy Studio — Procedure Diff & Guardrail Gate</span>
-                    <span style="font-size: 11px; background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 2px 8px; border-radius: 4px; font-weight: 600;">DRY-RUN VERIFIED</span>
-                </div>
-                <div style="font-family: var(--font-mono); font-size: 13px; line-height: 1.6; background: #0b0d13; padding: 1rem; border-radius: 6px; overflow-x: auto;">
-                    <div style="color: #64748b;">-- [PRE-FLIGHT GUARDRAILS] AST Syntax Verified: 0 Violations</div>
-                    <div style="color: #10b981;">+ ALTER PROCEDURE [dbo].[sp_GetCustomerMetrics]</div>
-                    <div style="color: #10b981;">+     @CustomerId INT,</div>
-                    <div style="color: #10b981;">+     @StartDate DATE</div>
-                    <div style="color: #94a3b8;">  AS BEGIN</div>
-                    <div style="color: #94a3b8;">      SET NOCOUNT ON;</div>
-                    <div style="color: #ef4444;">-     SELECT * FROM Orders WHERE YEAR(OrderDate) = 2024; -- Non-SARGable Trap</div>
-                    <div style="color: #10b981;">+     SELECT OrderId, Total, OrderDate FROM Orders WHERE OrderDate &gt;= @StartDate; -- SARGable Seek</div>
-                    <div style="color: #38bdf8;">-- [VAULT] Pre-change snapshot captured: Snapshot_PlatformDB_20261120_130000.sql (SHA-256)</div>
-                    <div style="color: #10b981;">-- [STATUS] Transaction committed cleanly. 1-Click Rollback armed.</div>
-                </div>
             </div>
         </div>
     </header>
 
-    <!-- 6-Step Workflow -->
-    <section id="workflow" class="workflow-section">
-        <div class="container">
-            <h2 class="section-title">The 6-Step Zero-Risk Deployment Lifecycle</h2>
-            <p class="section-desc">Every procedural database change is guided through strict automated validation gates before touching production.</p>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container hero-grid">
+            <div>
+                <div class="hero-tagline">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    <span>Enterprise Database Operations</span>
+                </div>
+                <h1 class="hero-heading">
+                    Database deployments.<br>Controlled with confidence.
+                </h1>
+                <p class="hero-description">
+                    A centralized database deployment and management platform for engineering teams. Compare database changes, validate deployment scripts, enforce configurable safety policies and manage deployment history from one unified workspace.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#overview" class="btn btn-primary">
+                        <span>Explore SafeDeploy Studio</span>
+                    </a>
+                    <a href="user-guide.html" class="btn btn-secondary">
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                        <span>Read the User Guide</span>
+                    </a>
+                </div>
+                <div class="hero-meta">
+                    <div class="hero-meta-item">
+                        <svg class="icon" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                        <span>Microsoft SQL Server & Azure SQL</span>
+                    </div>
+                    <div class="hero-meta-item">
+                        <svg class="icon" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+                        <span>.NET 10 LTS Core Engine</span>
+                    </div>
+                </div>
+            </div>
 
-            <div class="steps-container">
-                <div class="step-card">
-                    <div class="step-num">1</div>
-                    <h3 class="step-title">Route & Isolate</h3>
-                    <p class="step-text">Select source and target environment with isolated project boundaries.</p>
+            <!-- Realistic Product Preview Frame -->
+            <div class="ide-frame">
+                <div class="ide-header">
+                    <div class="ide-tabs">
+                        <div class="ide-tab active">
+                            <svg class="icon" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                            <span>sp_ProcessBilling_Diff.sql</span>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="badge badge-success">Dry-Run Passed</span>
+                    </div>
                 </div>
-                <div class="step-card">
-                    <div class="step-num">2</div>
-                    <h3 class="step-title">Object Discovery</h3>
-                    <p class="step-text">Auto-fetch live definitions from sys.sql_modules or paste migration scripts.</p>
+                <div class="ide-body">
+                    <div style="color: var(--color-fg-subtle); margin-bottom: 0.5rem;">-- Route: Development &rarr; Staging [Transactional Sandbox Verified]</div>
+                    <div style="color: var(--color-success-fg);">+ ALTER PROCEDURE [dbo].[sp_ProcessBilling]</div>
+                    <div style="color: var(--color-success-fg);">+     @InvoiceId UNIQUEIDENTIFIER,</div>
+                    <div style="color: var(--color-success-fg);">+     @BatchDate DATE</div>
+                    <div style="color: var(--color-fg-muted);">  AS BEGIN</div>
+                    <div style="color: var(--color-fg-muted);">      SET NOCOUNT ON;</div>
+                    <div style="color: var(--color-danger-fg); text-decoration: line-through;">-     SELECT * FROM BillingLedger WHERE YEAR(CreatedUtc) = 2026;</div>
+                    <div style="color: var(--color-success-fg);">+     SELECT LedgerId, Total, CreatedUtc FROM BillingLedger WHERE CreatedUtc &gt;= @BatchDate;</div>
+                    <div style="color: var(--color-fg-muted);">  END</div>
+                    <div style="margin-top: 0.75rem; color: var(--color-accent-emphasis);">-- [Vault] Snapshot Captured: Snapshot_Billing_20261120_1340.sql (SHA-256)</div>
                 </div>
-                <div class="step-card">
-                    <div class="step-num">3</div>
-                    <h3 class="step-title">SQL Diff & AI</h3>
-                    <p class="step-text">Side-by-side AST comparison and SARGability performance advisory.</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-num">4</div>
-                    <h3 class="step-title">Pre-Flight Safety</h3>
-                    <p class="step-text">Blocks physical table DDL, smart quotes, missing WHEREs, and admin commands.</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-num">5</div>
-                    <h3 class="step-title">Sandbox Dry-Run</h3>
-                    <p class="step-text">Executes inside target transaction sandbox with verified rollback.</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-num">6</div>
-                    <h3 class="step-title">Vault & Rollback</h3>
-                    <p class="step-text">Captures SHA-256 pre-change snapshot and arms 1-click instant rollback.</p>
+                <div class="ide-status-bar">
+                    <span>Guardrails: 0 Critical Violations</span>
+                    <span>Rollback: Ready</span>
+                    <span>Target: SQL Server 2022</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Features -->
-    <section id="features" class="features-section">
+    <!-- Product Overview Section -->
+    <section id="overview" class="section">
         <div class="container">
-            <h2 class="section-title">Engineered for Database Reliability</h2>
-            <p class="section-desc">Production-grade features replacing error-prone manual SQL Server scripts.</p>
+            <div class="section-header">
+                <div class="section-label">Centralized Workspace</div>
+                <h2 class="section-title">End-to-End Database Change Governance</h2>
+                <p class="section-lead">
+                    SafeDeploy Studio replaces ad-hoc manual scripts with a structured, repeatable deployment pipeline built for high-consequence database environments.
+                </p>
+            </div>
 
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🛡️</div>
-                    <h3 class="feature-heading">AST Safety Guardrails</h3>
-                    <p class="feature-text">
-                        Powered by <code>Microsoft.SqlServer.TransactSql.ScriptDom</code>. Accurately inspects syntax trees to block physical DROP/TRUNCATE/ALTER tables while permitting temporary staging tables (<code>#temp</code>).
+            <div class="features-grid">
+                <div class="feature-box">
+                    <div class="feature-header">
+                        <div class="feature-icon-wrapper">
+                            <svg class="icon" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                        </div>
+                        <h3 class="feature-title">Database Comparison</h3>
+                    </div>
+                    <p class="feature-body">
+                        Compare source and target database objects. Inspect live object definitions from <code>sys.sql_modules</code> with whitespace-normalized line-by-line diffing.
                     </p>
+                    <div class="feature-footer">DiffPlex AST Engine</div>
                 </div>
 
-                <div class="feature-card">
-                    <div class="feature-icon">🔄</div>
-                    <h3 class="feature-heading">1-Click Instant Rollback</h3>
-                    <p class="feature-text">
-                        Every deployment automatically stores an immutable pre-change SQL snapshot in the Vault. If a regression occurs, restore the previous state with a single button click.
+                <div class="feature-box">
+                    <div class="feature-header">
+                        <div class="feature-icon-wrapper">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                        <h3 class="feature-title">AST Safety Guardrails</h3>
+                    </div>
+                    <p class="feature-body">
+                        Static T-SQL Abstract Syntax Tree verification blocks physical table drops, truncations, and schema alterations while permitting temporary staging tables.
                     </p>
+                    <div class="feature-footer">Microsoft.SqlServer.ScriptDom 180</div>
                 </div>
 
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3 class="feature-heading">Transactional Dry-Run Sandbox</h3>
-                    <p class="feature-text">
-                        Tests the migration script against the live target schema inside an isolated transaction (<code>BEGIN TRAN ... ROLLBACK TRAN</code>) to catch constraint and syntax errors with zero side effects.
+                <div class="feature-box">
+                    <div class="feature-header">
+                        <div class="feature-icon-wrapper">
+                            <svg class="icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                        <h3 class="feature-title">Transactional Sandbox Dry-Runs</h3>
+                    </div>
+                    <p class="feature-body">
+                        Execute migration scripts against the target schema in an atomic transaction sandbox with automatic rollback to catch syntax and permission errors.
                     </p>
+                    <div class="feature-footer">Isolated BEGIN TRAN ... ROLLBACK</div>
                 </div>
 
-                <div class="feature-card">
-                    <div class="feature-icon">🤖</div>
-                    <h3 class="feature-heading">Deterministic SARGability Advisor</h3>
-                    <p class="feature-text">
-                        Catches index-invalidating anti-patterns: date function traps (<code>YEAR(Col) = ...</code>), non-SARGable <code>ISNULL</code> predicates, <code>SELECT *</code> in procedures, and missing <code>SET NOCOUNT ON</code>.
+                <div class="feature-box">
+                    <div class="feature-header">
+                        <div class="feature-icon-wrapper">
+                            <svg class="icon" viewBox="0 0 24 24"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+                        </div>
+                        <h3 class="feature-title">Pre-Change Backup Vault</h3>
+                    </div>
+                    <p class="feature-body">
+                        Captures an immutable pre-change snapshot with SHA-256 integrity checksums prior to applying any modifications to target environments.
                     </p>
+                    <div class="feature-footer">Cryptographic Snapshot Storage</div>
                 </div>
 
-                <div class="feature-card">
-                    <div class="feature-icon">🏢</div>
-                    <h3 class="feature-heading">Multi-Tenant Hierarchy</h3>
-                    <p class="feature-text">
-                        Clean separation between Organizations, Projects, Environments (Dev, Staging, Production), and Database Connections with encrypted credential storage.
+                <div class="feature-box">
+                    <div class="feature-header">
+                        <div class="feature-icon-wrapper">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg>
+                        </div>
+                        <h3 class="feature-title">1-Click Instant Rollback</h3>
+                    </div>
+                    <p class="feature-body">
+                        Instantly restore previous procedural states using self-contained rollback scripts generated automatically before change execution.
                     </p>
+                    <div class="feature-footer">Automated Idempotent DDL</div>
                 </div>
 
-                <div class="feature-card">
-                    <div class="feature-icon">💻</div>
-                    <h3 class="feature-heading">Dual Interface: Web & Desktop</h3>
-                    <p class="feature-text">
-                        Run as an interactive Blazor Server web application or as a native Windows WPF desktop shell with Microsoft WebView2 integration.
+                <div class="feature-box">
+                    <div class="feature-header">
+                        <div class="feature-icon-wrapper">
+                            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        </div>
+                        <h3 class="feature-title">Deployment Audit Trail</h3>
+                    </div>
+                    <p class="feature-body">
+                        Complete deployment records including execution logs, exact timestamps, duration in milliseconds, risk assessments, and user identity.
                     </p>
+                    <div class="feature-footer">Immutable Audit Repository</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6-Step Workflow Section -->
+    <section id="workflow" class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Deployment Lifecycle</div>
+                <h2 class="section-title">The 7-Step Controlled Workflow</h2>
+                <p class="section-lead">
+                    Every database change progresses through strict automated checkpoints before touching production databases.
+                </p>
+            </div>
+
+            <div class="lifecycle-list">
+                <div class="lifecycle-item">
+                    <div class="lifecycle-step-num">STEP 01</div>
+                    <h3 class="lifecycle-step-name">Select Project</h3>
+                    <p class="lifecycle-step-desc">Choose the project and source/target environment route within isolated tenant boundaries.</p>
+                </div>
+                <div class="lifecycle-item">
+                    <div class="lifecycle-step-num">STEP 02</div>
+                    <h3 class="lifecycle-step-name">Compare Changes</h3>
+                    <p class="lifecycle-step-desc">Review object differences from live schema modules with line-by-line additions and deletions.</p>
+                </div>
+                <div class="lifecycle-item">
+                    <div class="lifecycle-step-num">STEP 03</div>
+                    <h3 class="lifecycle-step-name">Validate</h3>
+                    <p class="lifecycle-step-desc">Run AST guardrail checks blocking destructive DDL, smart quotes, and administrative commands.</p>
+                </div>
+                <div class="lifecycle-item">
+                    <div class="lifecycle-step-num">STEP 04</div>
+                    <h3 class="lifecycle-step-name">Review</h3>
+                    <p class="lifecycle-step-desc">Inspect generated plan, SARGability index warnings, and deterministic performance advisory.</p>
+                </div>
+                <div class="lifecycle-item">
+                    <div class="lifecycle-step-num">STEP 05</div>
+                    <h3 class="lifecycle-step-name">Authorize</h3>
+                    <p class="lifecycle-step-desc">Verify required approvals for production targets before execution permissions are granted.</p>
+                </div>
+                <div class="lifecycle-item">
+                    <div class="lifecycle-step-num">STEP 06</div>
+                    <h3 class="lifecycle-step-name">Deploy</h3>
+                    <p class="lifecycle-step-desc">Capture pre-change backup snapshot in Vault and execute changes within an atomic transaction.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Architecture Section -->
-    <section id="architecture" class="features-section" style="background: rgba(19, 23, 34, 0.4); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
-        <div class="container" style="text-align: center;">
-            <h2 class="section-title">Modern .NET 10 Clean Architecture</h2>
-            <p class="section-desc">Modular monolith architecture with zero Python or PyQt6 dependencies.</p>
+    <section id="architecture" class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Engineering Architecture</div>
+                <h2 class="section-title">Built on .NET 10 LTS Clean Architecture</h2>
+                <p class="section-lead">
+                    Modular monolith engineered for enterprise reliability, high performance, and long-term maintainability.
+                </p>
+            </div>
 
-            <div class="tech-badges">
-                <span class="tech-badge">.NET 10 LTS</span>
-                <span class="tech-badge">C# 13</span>
-                <span class="tech-badge">Microsoft.Data.SqlClient</span>
-                <span class="tech-badge">Dapper 2.1</span>
-                <span class="tech-badge">TSql ScriptDom 180</span>
-                <span class="tech-badge">DiffPlex 1.9</span>
-                <span class="tech-badge">EF Core 9 (SQLite / SQL Server)</span>
-                <span class="tech-badge">ASP.NET Core Web API</span>
-                <span class="tech-badge">Blazor Server</span>
-                <span class="tech-badge">WPF + WebView2</span>
+            <div class="table-wrapper">
+                <table class="spec-table">
+                    <thead>
+                        <tr>
+                            <th>Layer</th>
+                            <th>Projects</th>
+                            <th>Core Responsibilities & Technologies</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="font-weight: 600; color: var(--color-fg-default);">Presentation</td>
+                            <td><code>SafeDeployStudio.Web</code><br><code>SafeDeployStudio.Desktop</code></td>
+                            <td>Blazor Server interactive workbench with Dark/Light themes; Native Windows WPF client hosting Microsoft WebView2 runtime.</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; color: var(--color-fg-default);">Application & API</td>
+                            <td><code>SafeDeployStudio.Application</code><br><code>SafeDeployStudio.Api</code></td>
+                            <td>CQRS workflow orchestration, procedure migration pipelines, RESTful controllers, SignalR real-time log streaming hub.</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; color: var(--color-fg-default);">Safety & Analysis</td>
+                            <td><code>SafeDeployStudio.Guardrails</code><br><code>SafeDeployStudio.AI</code></td>
+                            <td>Microsoft.SqlServer.TransactSql.ScriptDom 180 AST visitors, deterministic SARGability query anti-pattern analyzer.</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; color: var(--color-fg-default);">Database Operations</td>
+                            <td><code>SafeDeployStudio.DatabaseProviders.SqlServer</code><br><code>SafeDeployStudio.Deployment</code></td>
+                            <td>Microsoft.Data.SqlClient, Dapper, DiffPlex diff engine, transactional sandbox runner with clean rollback.</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; color: var(--color-fg-default);">Storage & Vault</td>
+                            <td><code>SafeDeployStudio.Backup</code><br><code>SafeDeployStudio.Infrastructure</code></td>
+                            <td>Pre-change SHA-256 backup snapshot generator, EF Core SQLite application database, repository abstractions.</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </section>
 
-    <!-- Downloads Section -->
-    <section id="downloads" class="features-section">
-        <div class="container" style="text-align: center;">
-            <h2 class="section-title">Download SafeDeploy Studio</h2>
-            <p class="section-desc">Available for 64-bit Windows environments. Free and open source under the MIT license.</p>
-
-            <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 2rem;">
-                <div class="feature-card" style="width: 340px; text-align: left;">
-                    <div class="feature-icon">📦</div>
-                    <h3 class="feature-heading">Windows Installer (.msi)</h3>
-                    <p class="feature-text" style="margin-bottom: 1.25rem;">Standard Windows installer with desktop shortcut, Start menu integration, and WebView2 runtime verification.</p>
-                    <a href="https://github.com/vishal-07-prajapati/safedeploy-studio/releases/latest" class="btn btn-primary" style="width: 100%; justify-content: center;">Download Installer (.msi)</a>
-                </div>
-
-                <div class="feature-card" style="width: 340px; text-align: left;">
-                    <div class="feature-icon">🗜️</div>
-                    <h3 class="feature-heading">Portable Standalone Zip</h3>
-                    <p class="feature-text" style="margin-bottom: 1.25rem;">Zero-installation portable binary. Extract and run directly on development workstations or jump boxes.</p>
-                    <a href="https://github.com/vishal-07-prajapati/safedeploy-studio/releases/latest" class="btn btn-outline" style="width: 100%; justify-content: center;">Download Portable Zip</a>
-                </div>
+    <!-- Community & GitHub -->
+    <section class="section">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem;">
+            <div>
+                <div class="section-label">Open Source</div>
+                <h2 class="section-title" style="margin-bottom: 0.35rem;">Publicly Available Source Code</h2>
+                <p style="color: var(--color-fg-muted); font-size: 14px; max-width: 580px;">
+                    SafeDeploy Studio is developed openly on GitHub under the MIT License. Explore the repository, review the Clean Architecture implementation, and submit feedback.
+                </p>
+            </div>
+            <div style="display: flex; gap: 0.75rem;">
+                <a href="https://github.com/vishal-07-prajapati/safedeploy-studio" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                    <span>Source Repository</span>
+                </a>
+                <a href="https://github.com/vishal-07-prajapati/safedeploy-studio/issues" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    <span>Report Issue</span>
+                </a>
             </div>
         </div>
     </section>
@@ -231,12 +334,52 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>© 2026 SafeDeploy Studio. Built with .NET 10 LTS and Microsoft SQL Server AST technologies. MIT Licensed.</p>
-            <p style="margin-top: 0.5rem; font-size: 0.82rem;">
-                <a href="https://github.com/vishal-07-prajapati/safedeploy-studio" target="_blank">GitHub Repository</a> &bull;
-                <a href="https://github.com/vishal-07-prajapati/safedeploy-studio/releases" target="_blank">Release Notes</a> &bull;
-                <a href="#workflow">Documentation</a>
-            </p>
+            <div class="footer-grid">
+                <div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; font-weight: 600; color: var(--color-fg-default); margin-bottom: 0.65rem;">
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        <span>SafeDeploy Studio</span>
+                    </div>
+                    <p style="color: var(--color-fg-muted); font-size: 12px; line-height: 1.6; max-width: 320px;">
+                        Enterprise database deployment and change management platform built on .NET 10 LTS and Microsoft SQL Server technologies.
+                    </p>
+                </div>
+
+                <div>
+                    <div class="footer-col-title">Product</div>
+                    <ul class="footer-links">
+                        <li><a href="#overview" class="footer-link">Overview</a></li>
+                        <li><a href="#features" class="footer-link">Features</a></li>
+                        <li><a href="#workflow" class="footer-link">Workflow</a></li>
+                        <li><a href="releases.html" class="footer-link">Downloads</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <div class="footer-col-title">Documentation</div>
+                    <ul class="footer-links">
+                        <li><a href="user-guide.html" class="footer-link">User Guide</a></li>
+                        <li><a href="docs.html" class="footer-link">Technical Specs</a></li>
+                        <li><a href="docs.html#guardrails" class="footer-link">Guardrail Rules</a></li>
+                        <li><a href="docs.html#iis" class="footer-link">IIS Hosting</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <div class="footer-col-title">Community</div>
+                    <ul class="footer-links">
+                        <li><a href="https://github.com/vishal-07-prajapati/safedeploy-studio" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub Repository</a></li>
+                        <li><a href="https://github.com/vishal-07-prajapati/safedeploy-studio/releases" target="_blank" rel="noopener noreferrer" class="footer-link">Release Notes</a></li>
+                        <li><a href="https://github.com/vishal-07-prajapati/safedeploy-studio/issues" target="_blank" rel="noopener noreferrer" class="footer-link">Issue Tracker</a></li>
+                        <li><a href="https://github.com/vishal-07-prajapati/safedeploy-studio/blob/master/LICENSE" target="_blank" rel="noopener noreferrer" class="footer-link">MIT License</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>&copy; 2026 SafeDeploy Studio. All rights reserved. Open source under the MIT License.</span>
+                <span>Version 1.0.0 LTS &bull; .NET 10.0</span>
+            </div>
         </div>
     </footer>
 
