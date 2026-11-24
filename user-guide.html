@@ -652,6 +652,19 @@ CREATE PROCEDURE [dbo].[proc_OrderItem_ChangeProductOrEventTime]
                         <em>"Target database CE21_0001 is part of a multi-tenant group. Would you like to apply this change to ALL identical tenant databases (0001, 0002...), or only apply to CE21_0001?"</em>
                     </div>
                 </div>
+
+                <div class="article-section">
+                    <h2 class="article-h2">3. Bulk Stored Procedure Apply &amp; All Apply Button</h2>
+                    <p class="article-p">
+                        When migrating multiple stored procedures at once (such as sprint releases or daily bug fix batches), SQL Diff Studio provides high-throughput bulk deployment:
+                    </p>
+                    <ul style="margin-left: 1.5rem; color: var(--color-fg-muted); margin-bottom: 1rem; line-height: 1.8;">
+                        <li><strong>⚡ Apply ALL Button:</strong> Located both in the top table header and the bottom diff toolbar. Clicking it collects all candidate procedures currently shown in your filtered comparison grid and stages them for bulk deployment.</li>
+                        <li><strong>Multi-Row Selection:</strong> The comparison grid supports extended multi-selection (Ctrl+Click, Shift+Click). Selecting multiple rows and clicking <code>🚀 Apply to target DB</code> deploys the selected subset in bulk.</li>
+                        <li><strong>Batch Confirmation &amp; Review:</strong> A unified modal displays the count and full list of stored procedures scheduled for deployment, allowing you to review all objects, confirm tenant database scope (e.g. <code>CE21_0001, CE21_0002</code>), and verify the backup folder destination.</li>
+                        <li><strong>Atomic Backups &amp; Progress Reporting:</strong> SQL Diff Studio generates separate pre-change rollback snapshots for every procedure on every target database before applying, tracks live progress in the status bar (e.g. <code>Applying (3/10): [proc_...]</code>), automatically updates applied rows to <code>Identical</code>, and presents a comprehensive completion summary report.</li>
+                    </ul>
+                </div>
             </article>
 
             <!-- ================= ARTICLE 13: PRE-CHANGE BACKUP VAULT ================= -->
