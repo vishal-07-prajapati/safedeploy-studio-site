@@ -24,6 +24,7 @@
 
             <nav class="nav-links">
                 <a href="#overview" class="nav-link">Product</a>
+                <a href="#screenshots" class="nav-link">Visual Tour</a>
                 <a href="#features" class="nav-link">Features</a>
                 <a href="#workflow" class="nav-link">How It Works</a>
                 <a href="user-guide.html" class="nav-link">User Guide</a>
@@ -84,34 +85,20 @@
             </div>
 
             <!-- Realistic Product Preview Frame -->
-            <div class="ide-frame">
-                <div class="ide-header">
-                    <div class="ide-tabs">
-                        <div class="ide-tab active">
-                            <svg class="icon" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-                            <span>sp_ProcessBilling_Diff.sql</span>
-                        </div>
+            <div class="screenshot-container" style="margin: 0; box-shadow: 0 16px 40px rgba(0,0,0,0.35);">
+                <div class="screenshot-header">
+                    <div class="screenshot-dots">
+                        <div class="screenshot-dot dot-red"></div>
+                        <div class="screenshot-dot dot-yellow"></div>
+                        <div class="screenshot-dot dot-green"></div>
                     </div>
-                    <div>
-                        <span class="badge badge-success">Dry-Run Passed</span>
-                    </div>
+                    <span class="screenshot-title">SafeDeploy Studio &bull; Live SQL Diff &amp; AI Advisor</span>
+                    <span class="badge badge-success">Production Ready</span>
                 </div>
-                <div class="ide-body">
-                    <div style="color: var(--color-fg-subtle); margin-bottom: 0.5rem;">-- Route: Development &rarr; Staging [Transactional Sandbox Verified]</div>
-                    <div style="color: var(--color-success-fg);">+ ALTER PROCEDURE [dbo].[sp_ProcessBilling]</div>
-                    <div style="color: var(--color-success-fg);">+     @InvoiceId UNIQUEIDENTIFIER,</div>
-                    <div style="color: var(--color-success-fg);">+     @BatchDate DATE</div>
-                    <div style="color: var(--color-fg-muted);">  AS BEGIN</div>
-                    <div style="color: var(--color-fg-muted);">      SET NOCOUNT ON;</div>
-                    <div style="color: var(--color-danger-fg); text-decoration: line-through;">-     SELECT * FROM BillingLedger WHERE YEAR(CreatedUtc) = 2026;</div>
-                    <div style="color: var(--color-success-fg);">+     SELECT LedgerId, Total, CreatedUtc FROM BillingLedger WHERE CreatedUtc &gt;= @BatchDate;</div>
-                    <div style="color: var(--color-fg-muted);">  END</div>
-                    <div style="margin-top: 0.75rem; color: var(--color-accent-emphasis);">-- [Vault] Snapshot Captured: Snapshot_Billing_20261120_1340.sql (SHA-256)</div>
-                </div>
-                <div class="ide-status-bar">
-                    <span>Guardrails: 0 Critical Violations</span>
-                    <span>Rollback: Ready</span>
-                    <span>Target: SQL Server 2022</span>
+                <img src="assets/img/slack_05_deploy_studio_route.png" alt="SafeDeploy Studio SQL Diff Viewer &amp; AI Performance Advisor" class="screenshot-img" />
+                <div class="screenshot-caption">
+                    <span>⚡ Side-by-Side SQL diff with AST syntax guardrails &amp; live AI query rewrite suggestions</span>
+                    <span class="screenshot-badge">v1.0.0 LTS</span>
                 </div>
             </div>
         </div>
@@ -205,6 +192,93 @@
                         Complete deployment records including execution logs, exact timestamps, duration in milliseconds, risk assessments, and user identity.
                     </p>
                     <div class="feature-footer">Immutable Audit Repository</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visual Tour / Screenshots Showcase Section -->
+    <section id="screenshots" class="section" style="background-color: var(--color-canvas-inset);">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">Visual Walkthrough</div>
+                <h2 class="section-title">See SafeDeploy Studio in Action</h2>
+                <p class="section-lead">
+                    Explore real interfaces for side-by-side SQL diffing, live LLM query performance optimization, pre-change backup vaults, and multi-tenant environment governance.
+                </p>
+            </div>
+
+            <div class="screenshot-grid">
+                <!-- Showcase 1: SQL Diff Viewer -->
+                <div class="screenshot-container">
+                    <div class="screenshot-header">
+                        <div class="screenshot-dots">
+                            <div class="screenshot-dot dot-red"></div>
+                            <div class="screenshot-dot dot-yellow"></div>
+                            <div class="screenshot-dot dot-green"></div>
+                        </div>
+                        <span class="screenshot-title">01_Diff_Viewer &bull; Side-by-Side SQL Comparison</span>
+                        <span class="badge badge-success">Live Inspection</span>
+                    </div>
+                    <img src="assets/img/slack_05_deploy_studio_route.png" alt="Side-by-side SQL Diff View" class="screenshot-img" />
+                    <div class="screenshot-caption">
+                        <span>Side-by-side line comparison with addition/deletion gutter counters and AST syntax normalization.</span>
+                        <a href="user-guide.html#reviewing-diff" class="screenshot-badge">Learn More &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Showcase 2: AI Performance Advisor & SARGability -->
+                <div class="screenshot-container">
+                    <div class="screenshot-header">
+                        <div class="screenshot-dots">
+                            <div class="screenshot-dot dot-red"></div>
+                            <div class="screenshot-dot dot-yellow"></div>
+                            <div class="screenshot-dot dot-green"></div>
+                        </div>
+                        <span class="screenshot-title">02_AI_Assistant &bull; Live Query Tuning &amp; Quota Tracker</span>
+                        <span class="badge badge-attention">AI Powered</span>
+                    </div>
+                    <img src="assets/img/slack_07_ai_assistant.png" alt="AI Performance Advisor &amp; SARGability Drawer" class="screenshot-img" />
+                    <div class="screenshot-caption">
+                        <span>Offline SARGability anti-pattern detection + live Groq/OpenAI query rewrites with rate-limit budget tracking.</span>
+                        <a href="user-guide.html#sargability" class="screenshot-badge">Learn More &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Showcase 3: Pre-Change Backup Vault -->
+                <div class="screenshot-container">
+                    <div class="screenshot-header">
+                        <div class="screenshot-dots">
+                            <div class="screenshot-dot dot-red"></div>
+                            <div class="screenshot-dot dot-yellow"></div>
+                            <div class="screenshot-dot dot-green"></div>
+                        </div>
+                        <span class="screenshot-title">03_Backup_Vault &bull; 1-Click Rollback Storage</span>
+                        <span class="badge badge-success">Cryptographic Vault</span>
+                    </div>
+                    <img src="assets/img/slack_06_backup_vault.png" alt="Pre-change Backup Vault &amp; Rollback" class="screenshot-img" />
+                    <div class="screenshot-caption">
+                        <span>Automated pre-change DDL snapshots stamped with SHA-256 hashes and in-file audit headers before execution.</span>
+                        <a href="user-guide.html#backup-vault" class="screenshot-badge">Learn More &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Showcase 4: Database Connections & Configurations -->
+                <div class="screenshot-container">
+                    <div class="screenshot-header">
+                        <div class="screenshot-dots">
+                            <div class="screenshot-dot dot-red"></div>
+                            <div class="screenshot-dot dot-yellow"></div>
+                            <div class="screenshot-dot dot-green"></div>
+                        </div>
+                        <span class="screenshot-title">04_Connections &bull; Encrypted Credentials &amp; Handshake Test</span>
+                        <span class="badge badge-success">DPAPI Protected</span>
+                    </div>
+                    <img src="assets/img/slack_03_projects_connections.png" alt="Database Connections Management" class="screenshot-img" />
+                    <div class="screenshot-caption">
+                        <span>Windows Integrated &amp; SQL Authentication with DPAPI encrypted secrets and live server test ping.</span>
+                        <a href="user-guide.html#database-connections" class="screenshot-badge">Learn More &rarr;</a>
+                    </div>
                 </div>
             </div>
         </div>

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SafeDeploy Studio — User Guide</title>
-    <meta name="description" content="Official User Guide for SafeDeploy Studio. Step-by-step instructions for database comparison, guardrail validation, dry-runs, backups, and 1-click rollback.">
+    <title>SafeDeploy Studio — Comprehensive User Guide &amp; Operational Manual</title>
+    <meta name="description" content="Official User Guide for SafeDeploy Studio and SQL Diff Studio. Complete visual walkthroughs for database comparison, multi-SP filtering, guardrails, AI query tuning, token budget management, and 1-click rollback.">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,6 +24,7 @@
 
             <nav class="nav-links">
                 <a href="index.html#overview" class="nav-link">Product</a>
+                <a href="index.html#screenshots" class="nav-link">Visual Tour</a>
                 <a href="index.html#features" class="nav-link">Features</a>
                 <a href="index.html#workflow" class="nav-link">How It Works</a>
                 <a href="user-guide.html" class="nav-link active">User Guide</a>
@@ -54,22 +55,22 @@
         <aside class="docs-sidebar">
             <div class="docs-search">
                 <svg class="icon docs-search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                <input type="text" id="guideSearchInput" class="docs-search-input" placeholder="Search guides..." aria-label="Search user guide">
+                <input type="text" id="guideSearchInput" class="docs-search-input" placeholder="Search 17 guides..." aria-label="Search user guide">
             </div>
 
             <div id="guideNavList">
                 <div class="docs-nav-group">
                     <div class="docs-group-title">Getting Started</div>
-                    <div class="docs-nav-item active" data-article="getting-started">Overview & Concepts</div>
-                    <div class="docs-nav-item" data-article="installation">Installation & Desktop Setup</div>
+                    <div class="docs-nav-item active" data-article="getting-started">Overview &amp; Concepts</div>
+                    <div class="docs-nav-item" data-article="installation">Installation &amp; Desktop Setup</div>
                     <div class="docs-nav-item" data-article="workspace">Understanding Workspace</div>
                 </div>
 
                 <div class="docs-nav-group">
                     <div class="docs-group-title">Configuration</div>
-                    <div class="docs-nav-item" data-article="organizations-projects">Organizations & Projects</div>
+                    <div class="docs-nav-item" data-article="organizations-projects">Organizations &amp; Projects</div>
                     <div class="docs-nav-item" data-article="database-connections">Database Connections</div>
-                    <div class="docs-nav-item" data-article="environment-setup">Environments & Routes</div>
+                    <div class="docs-nav-item" data-article="environment-setup">Environments &amp; Routes</div>
                 </div>
 
                 <div class="docs-nav-group">
@@ -83,12 +84,12 @@
                 </div>
 
                 <div class="docs-nav-group">
-                    <div class="docs-group-title">Recovery & Governance</div>
+                    <div class="docs-group-title">Recovery &amp; Governance</div>
                     <div class="docs-nav-item" data-article="backup-vault">Pre-Change Backup Vault</div>
                     <div class="docs-nav-item" data-article="rollback">1-Click Instant Rollback</div>
-                    <div class="docs-nav-item" data-article="sargability">AI & SARGability Advisor</div>
-                    <div class="docs-nav-item" data-article="audit-logs">Deployment History & Audit</div>
-                    <div class="docs-nav-item" data-article="troubleshooting">Troubleshooting & FAQ</div>
+                    <div class="docs-nav-item" data-article="sargability">AI &amp; SARGability Advisor</div>
+                    <div class="docs-nav-item" data-article="audit-logs">Deployment History &amp; Audit</div>
+                    <div class="docs-nav-item" data-article="troubleshooting">Troubleshooting &amp; FAQ</div>
                 </div>
             </div>
         </aside>
@@ -100,187 +101,142 @@
                 <span>/</span>
                 <a href="user-guide.html">User Guide</a>
                 <span>/</span>
-                <span id="breadcrumbCurrent">Overview & Concepts</span>
+                <span id="breadcrumbCurrent">Overview &amp; Concepts</span>
             </div>
 
-            <!-- Article 1: Getting Started -->
+            <!-- ================= ARTICLE 1: GETTING STARTED ================= -->
             <article id="art-getting-started" class="guide-article">
-                <h1 class="article-title">Overview & Concepts</h1>
+                <h1 class="article-title">Overview &amp; Core Concepts</h1>
                 <div class="article-meta">
                     <span>Reading time: 4 min</span>
-                    <span>Applies to: SafeDeploy Studio v1.0+</span>
+                    <span>Applies to: SafeDeploy Studio &amp; SQL Diff Studio v1.0+</span>
+                </div>
+
+                <div class="screenshot-container">
+                    <div class="screenshot-header">
+                        <div class="screenshot-dots">
+                            <div class="screenshot-dot dot-red"></div>
+                            <div class="screenshot-dot dot-yellow"></div>
+                            <div class="screenshot-dot dot-green"></div>
+                        </div>
+                        <span class="screenshot-title">01_Overview &bull; Centralized Management Hub</span>
+                        <span class="badge badge-success">Production Ready</span>
+                    </div>
+                    <img src="assets/img/slack_01_overview.png" alt="SafeDeploy Studio Overview Dashboard" class="screenshot-img" />
+                    <div class="screenshot-caption">
+                        <span>Centralized control panel displaying active database environments, recent deployments, and safety posture.</span>
+                    </div>
                 </div>
 
                 <div class="article-section">
                     <h2 class="article-h2">1. What SafeDeploy Studio Does</h2>
                     <p class="article-p">
-                        SafeDeploy Studio is a centralized database deployment and management platform engineered for development teams and database administrators working with Microsoft SQL Server and Azure SQL. It replaces risky, manual script execution via SSMS with a controlled, audited, and recoverable deployment workflow.
-                    </p>
-                    <p class="article-p">
-                        Every procedural change (stored procedures, views, functions) passes through automated syntax verification, static Abstract Syntax Tree (AST) guardrails, and target sandbox dry-runs before touching production databases.
+                        SafeDeploy Studio is a centralized database change governance and comparison platform built for engineering teams, DBA specialists, and DevOps administrators working with Microsoft SQL Server and Azure SQL. It eliminates dangerous manual script execution in SQL Server Management Studio (SSMS) by enforcing automated AST syntax validation, side-by-side diffing, AI-assisted query optimization, and instant 1-click rollback snapshots.
                     </p>
                 </div>
 
                 <div class="article-section">
-                    <h2 class="article-h2">2. When to Use It</h2>
-                    <p class="article-p">
-                        Use SafeDeploy Studio whenever deploying database changes across environments:
-                    </p>
-                    <ul style="margin-left: 1.5rem; color: var(--color-fg-muted); margin-bottom: 1rem; line-height: 1.8;">
-                        <li>Migrating tested stored procedures from Development to Staging or Production.</li>
-                        <li>Verifying that migration scripts contain zero destructive physical table drops or truncations.</li>
-                        <li>Auditing query execution plans for non-SARGable functions that cause performance regressions.</li>
-                        <li>Ensuring that a guaranteed pre-change rollback snapshot exists before altering live schema.</li>
-                    </ul>
+                    <h2 class="article-h2">2. The 3 Core Tenets</h2>
+                    <ol style="margin-left: 1.5rem; color: var(--color-fg-muted); margin-bottom: 1rem; line-height: 1.8;">
+                        <li><strong>Zero Blind Deployments:</strong> Every statement is parsed through Microsoft's official T-SQL Abstract Syntax Tree (AST) engine to verify additions and block accidental schema wipes.</li>
+                        <li><strong>Live AI Performance Tuning:</strong> Detect non-SARGable column operations (like <code>YEAR(CreatedDate)</code> or <code>ISNULL()</code> wrappers) and obtain real-time query rewrite suggestions from local or cloud LLMs.</li>
+                        <li><strong>Guaranteed Recovery:</strong> Prior to applying any change, an immutable pre-change DDL snapshot is stored with a SHA-256 hash in a local vault, enabling 1-click disaster recovery.</li>
+                    </ol>
+                </div>
+            </article>
+
+            <!-- ================= ARTICLE 2: INSTALLATION ================= -->
+            <article id="art-installation" class="guide-article" style="display: none;">
+                <h1 class="article-title">Installation &amp; Desktop Setup</h1>
+                <div class="article-meta">
+                    <span>Reading time: 3 min</span>
+                    <span>Platform: Windows 10 / 11 / Server 2019+ (x64)</span>
                 </div>
 
-                <div class="article-section">
-                    <h2 class="article-h2">3. Prerequisites</h2>
-                    <div class="callout callout-info">
-                        <strong>Environment Requirements:</strong> Windows 10, Windows 11, or Windows Server 2019+ (x64). Target databases require SQL Server 2016 or later with network accessibility on port 1433.
+                <div class="screenshot-container">
+                    <div class="screenshot-header">
+                        <div class="screenshot-dots">
+                            <div class="screenshot-dot dot-red"></div>
+                            <div class="screenshot-dot dot-yellow"></div>
+                            <div class="screenshot-dot dot-green"></div>
+                        </div>
+                        <span class="screenshot-title">02_Welcome &bull; Clean Desktop Client Launch</span>
+                    </div>
+                    <img src="assets/img/01_deploy_studio_welcome_dark.png" alt="Desktop client welcome screen" class="screenshot-img" />
+                    <div class="screenshot-caption">
+                        <span>High-performance desktop client engineered with native .NET 8 / 10 and Microsoft WebView2.</span>
                     </div>
                 </div>
 
                 <div class="article-section">
-                    <h2 class="article-h2">4. Core Architecture Tenets</h2>
+                    <h2 class="article-h2">1. Distribution Formats</h2>
                     <p class="article-p">
-                        SafeDeploy Studio enforces three mandatory principles on every deployment operation:
+                        SafeDeploy Studio is provided in two ready-to-run release channels from the <a href="releases.html">Releases</a> portal:
                     </p>
-                    <ol style="margin-left: 1.5rem; color: var(--color-fg-muted); margin-bottom: 1rem; line-height: 1.8;">
-                        <li><strong>Zero Blind Deployments:</strong> Every statement is parsed into a syntax tree and diffed against the target environment.</li>
-                        <li><strong>Sandbox Verification:</strong> Scripts execute inside a target transaction sandbox (<code>BEGIN TRAN ... ROLLBACK TRAN</code>) prior to authorization.</li>
-                        <li><strong>Automated Recovery:</strong> An immutable pre-change DDL snapshot is captured with SHA-256 validation before changes are applied.</li>
-                    </ol>
+                    <ul style="margin-left: 1.5rem; color: var(--color-fg-muted); margin-bottom: 1rem; line-height: 1.8;">
+                        <li><strong>Self-Contained Single Executable (<code>SqlDiffStudio.exe</code>):</strong> Completely portable 73 MB binary containing all .NET runtime components, DiffPlex diffing libraries, and SQL metadata providers. Requires no pre-installed .NET SDK.</li>
+                        <li><strong>Windows MSI Installer (<code>SafeDeployStudio-Setup.msi</code>):</strong> Enterprise installer with start-menu shortcuts and automated Edge WebView2 verification.</li>
+                    </ul>
+                </div>
+
+                <div class="article-section">
+                    <h2 class="article-h2">2. Verifying Installation Integrity</h2>
+                    <div class="code-block">Get-FileHash -Algorithm SHA256 .\publish\SqlDiffStudio.exe</div>
+                    <p class="article-p" style="margin-top: 0.5rem;">
+                        Verify that the SHA-256 hash matches the release catalog before running on production jump boxes.
+                    </p>
                 </div>
             </article>
 
-            <!-- Article 2: Installation -->
-            <article id="art-installation" class="guide-article" style="display: none;">
-                <h1 class="article-title">Installation & Desktop Setup</h1>
+            <!-- ================= ARTICLE 3: WORKSPACE ================= -->
+            <article id="art-workspace" class="guide-article" style="display: none;">
+                <h1 class="article-title">Understanding the Workspace</h1>
                 <div class="article-meta">
                     <span>Reading time: 3 min</span>
-                    <span>Platform: Windows x64</span>
+                    <span>Component: UI Shell &amp; Tabbed Workflow</span>
+                </div>
+
+                <div class="screenshot-container">
+                    <div class="screenshot-header">
+                        <div class="screenshot-dots">
+                            <div class="screenshot-dot dot-red"></div>
+                            <div class="screenshot-dot dot-yellow"></div>
+                            <div class="screenshot-dot dot-green"></div>
+                        </div>
+                        <span class="screenshot-title">03_Workspace &bull; Streamlined Navigation</span>
+                    </div>
+                    <img src="assets/img/slack_02_sidebar_collapsed.png" alt="SafeDeploy Studio Workspace Shell" class="screenshot-img" />
+                    <div class="screenshot-caption">
+                        <span>Compact navigation shell with collapsible navigation and quick-switch tabs.</span>
+                    </div>
                 </div>
 
                 <div class="article-section">
-                    <h2 class="article-h2">1. Installation Options</h2>
-                    <p class="article-p">
-                        SafeDeploy Studio is distributed in two official binary formats:
-                    </p>
-                    <ul style="margin-left: 1.5rem; color: var(--color-fg-muted); margin-bottom: 1rem; line-height: 1.8;">
-                        <li><strong>Windows MSI Installer:</strong> Recommended for workstations. Installs system shortcuts, sets up file associations, and verifies WebView2 dependencies.</li>
-                        <li><strong>Portable Standalone Package:</strong> A zero-installation ZIP package containing self-contained binaries for jump boxes or locked-down environments.</li>
-                    </ul>
-                </div>
-
-                <div class="article-section">
-                    <h2 class="article-h2">2. Step-by-Step Installation</h2>
-                    <ol style="margin-left: 1.5rem; color: var(--color-fg-muted); margin-bottom: 1rem; line-height: 1.8;">
-                        <li>Navigate to the <a href="releases.html">Releases</a> page and download <code>SafeDeployStudio-Setup.msi</code>.</li>
-                        <li>Verify the SHA-256 checksum against the published release hash using PowerShell:
-                            <div class="code-block">Get-FileHash -Algorithm SHA256 SafeDeployStudio-Setup.msi</div>
-                        </li>
-                        <li>Run the installer and follow the setup wizard prompts.</li>
-                        <li>Launch <strong>SafeDeploy Studio</strong> from the Start menu or desktop shortcut.</li>
-                    </ol>
-                </div>
-
-                <div class="article-section">
-                    <h2 class="article-h2">3. Edge WebView2 Runtime</h2>
-                    <p class="article-p">
-                        The native Windows desktop shell utilizes the Microsoft Edge WebView2 Evergreen Runtime. Windows 11 includes this by default. On Windows Server or older workstations, download the runtime from Microsoft's official portal if prompted.
-                    </p>
-                </div>
-            </article>
-
-            <!-- Article 3: Database Connections -->
-            <article id="art-database-connections" class="guide-article" style="display: none;">
-                <h1 class="article-title">Configuring Database Connections</h1>
-                <div class="article-meta">
-                    <span>Reading time: 4 min</span>
-                    <span>Security: Encrypted Secrets</span>
-                </div>
-
-                <div class="article-section">
-                    <h2 class="article-h2">1. Connection Security</h2>
-                    <p class="article-p">
-                        Database connection credentials are never stored in plaintext and never committed to source control. Secrets are protected using local machine DPAPI or user-level encrypted storage keys.
-                    </p>
-                </div>
-
-                <div class="article-section">
-                    <h2 class="article-h2">2. Supported Authentication Types</h2>
-                    <ul style="margin-left: 1.5rem; color: var(--color-fg-muted); margin-bottom: 1rem; line-height: 1.8;">
-                        <li><strong>Windows Integrated:</strong> Uses current Windows identity (Active Directory / Kerberos) for local domain SQL Servers.</li>
-                        <li><strong>SQL Server Authentication:</strong> Standard SQL username and password for isolated or cross-network servers.</li>
-                        <li><strong>Azure Active Directory (Default):</strong> Connects securely to Azure SQL Database or Managed Instances using Azure AD tokens.</li>
-                    </ul>
-                </div>
-
-                <div class="article-section">
-                    <h2 class="article-h2">3. Testing Connections</h2>
-                    <p class="article-p">
-                        Always click <strong>Test Connection</strong> after saving an endpoint. The system performs an immediate handshake query (<code>SELECT 1</code>) to confirm hostname resolution, port connectivity, SSL/TLS handshake, and credentials.
-                    </p>
-                </div>
-            </article>
-
-            <!-- Article 4: Pre-Flight Guardrails -->
-            <article id="art-guardrails" class="guide-article" style="display: none;">
-                <h1 class="article-title">Pre-Flight Safety Guardrails</h1>
-                <div class="article-meta">
-                    <span>Reading time: 5 min</span>
-                    <span>Parser: T-SQL ScriptDom 180</span>
-                </div>
-
-                <div class="article-section">
-                    <h2 class="article-h2">1. AST-Based Static Verification</h2>
-                    <p class="article-p">
-                        Unlike fragile regex checkers that fail on multiline comments or strings, SafeDeploy Studio uses the official Microsoft T-SQL compiler parser (<code>TSql160Parser</code>). The Abstract Syntax Tree is inspected by dedicated visitor rules.
-                    </p>
-                </div>
-
-                <div class="article-section">
-                    <h2 class="article-h2">2. Enforced Rules</h2>
+                    <h2 class="article-h2">Workspace Primary Sections</h2>
                     <div class="table-wrapper">
                         <table class="spec-table">
                             <thead>
                                 <tr>
-                                    <th>Rule Name</th>
-                                    <th>Severity</th>
-                                    <th>Description & Permitted Exceptions</th>
+                                    <th>Tab / Zone</th>
+                                    <th>Purpose</th>
+                                    <th>Key Capabilities</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><strong>BlockDropTable</strong></td>
-                                    <td><span class="badge badge-danger">Critical</span></td>
-                                    <td>Blocks <code>DROP TABLE</code> on physical tables. Dropping temporary staging tables (<code>#temp</code>) is permitted.</td>
+                                    <td><strong>1. Configurations</strong></td>
+                                    <td>Connection profiles &amp; AI settings</td>
+                                    <td>Server profiles, password encryption, LLM endpoint URL, masked API keys, live token budget meter.</td>
                                 </tr>
                                 <tr>
-                                    <td><strong>BlockTruncateTable</strong></td>
-                                    <td><span class="badge badge-danger">Critical</span></td>
-                                    <td>Blocks <code>TRUNCATE TABLE</code> on physical tables to prevent accidental bulk data wiping.</td>
+                                    <td><strong>2. Comparison Setup</strong></td>
+                                    <td>Scope definition &amp; filtering</td>
+                                    <td>Pair mapping, multi-SP filter box, exclude version patterns, schema object type toggles.</td>
                                 </tr>
                                 <tr>
-                                    <td><strong>BlockAlterPhysicalTable</strong></td>
-                                    <td><span class="badge badge-danger">Error</span></td>
-                                    <td>Prohibits physical schema column drops or table redefinitions in procedural change sets.</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>ForbiddenAdminKeywords</strong></td>
-                                    <td><span class="badge badge-danger">Critical</span></td>
-                                    <td>Detects unauthorized procedures: <code>xp_cmdshell</code>, <code>sp_configure</code>, <code>SHUTDOWN</code>, <code>RECONFIGURE</code>.</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>AsciiCompliance</strong></td>
-                                    <td><span class="badge badge-attention">Warning</span></td>
-                                    <td>Flags smart quotes, non-breaking spaces, or Unicode symbols that corrupt SQL Server batch compilation.</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>UnqualifiedUpdateDelete</strong></td>
-                                    <td><span class="badge badge-danger">Error</span></td>
-                                    <td>Flags any <code>UPDATE</code> or <code>DELETE</code> statement lacking an explicit <code>WHERE</code> clause.</td>
+                                    <td><strong>3. Review Differences</strong></td>
+                                    <td>Inspection &amp; deployment</td>
+                                    <td>Side-by-side diffing, copy buttons, AI suggestions drawer, apply to target DB button.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -288,76 +244,607 @@
                 </div>
             </article>
 
-            <!-- Article 5: 1-Click Rollback -->
-            <article id="art-rollback" class="guide-article" style="display: none;">
-                <h1 class="article-title">Pre-Change Vault & 1-Click Rollback</h1>
+            <!-- ================= ARTICLE 4: ORGANIZATIONS & PROJECTS ================= -->
+            <article id="art-organizations-projects" class="guide-article" style="display: none;">
+                <h1 class="article-title">Organizations &amp; Project Workspaces</h1>
+                <div class="article-meta">
+                    <span>Reading time: 3 min</span>
+                    <span>Governance: Multi-Tenant Boundary Isolation</span>
+                </div>
+
+                <div class="screenshot-container">
+                    <div class="screenshot-header">
+                        <div class="screenshot-dots">
+                            <div class="screenshot-dot dot-red"></div>
+                            <div class="screenshot-dot dot-yellow"></div>
+                            <div class="screenshot-dot dot-green"></div>
+                        </div>
+                        <span class="screenshot-title">04_Projects &bull; Multi-Tenant Schema Boundaries</span>
+                    </div>
+                    <img src="assets/img/slack_04_projects_environments.png" alt="Projects and Environments Management" class="screenshot-img" />
+                    <div class="screenshot-caption">
+                        <span>Group client databases, microservice schemas, and staging instances into isolated project workspaces.</span>
+                    </div>
+                </div>
+
+                <div class="article-section">
+                    <h2 class="article-h2">1. Multi-Tenant Project Isolation</h2>
+                    <p class="article-p">
+                        In enterprise architectures (e.g. CE21 Multi-Tenant databases such as <code>CE21_0001</code>, <code>CE21_0002</code>, ..., <code>CE21_0045</code>), database configurations are mapped within project profiles so developers cannot accidentally execute changes across unauthorized tenant environments.
+                    </p>
+                </div>
+            </article>
+
+            <!-- ================= ARTICLE 5: DATABASE CONNECTIONS ================= -->
+            <article id="art-database-connections" class="guide-article" style="display: none;">
+                <h1 class="article-title">Database Connections &amp; Configurations</h1>
+                <div class="article-meta">
+                    <span>Reading time: 5 min</span>
+                    <span>Security: DPAPI Secret Encryption &amp; Live Quota Meter</span>
+                </div>
+
+                <div class="screenshot-container">
+                    <div class="screenshot-header">
+                        <div class="screenshot-dots">
+                            <div class="screenshot-dot dot-red"></div>
+                            <div class="screenshot-dot dot-yellow"></div>
+                            <div class="screenshot-dot dot-green"></div>
+                        </div>
+                        <span class="screenshot-title">05_Connections &bull; Active Server Handshake &amp; Auth</span>
+                    </div>
+                    <img src="assets/img/slack_03_projects_connections.png" alt="Database Connection Configuration" class="screenshot-img" />
+                    <div class="screenshot-caption">
+                        <span>Configured connection profiles supporting Windows Authentication, SQL Server Authentication, and Azure AD.</span>
+                    </div>
+                </div>
+
+                <div class="article-section">
+                    <h2 class="article-h2">1. Configuring Server Endpoints</h2>
+                    <p class="article-p">
+                        In the <strong>1. Configurations</strong> tab, you can register and duplicate connection profiles. Enter your SQL Server hostname or IP address (e.g., <code>192.168.0.10\SQL2022</code> or <code>dev-ce21.database.windows.net</code>).
+                    </p>
+                    <p class="article-p">
+                        Passwords are never stored in plain text. Windows Data Protection API (DPAPI) encrypts credentials using the local Windows user master key.
+                    </p>
+                </div>
+
+                <div class="article-section">
+                    <h2 class="article-h2">2. AI Performance Advisor Settings</h2>
+                    <div class="screenshot-container">
+                        <div class="screenshot-header">
+                            <div class="screenshot-dots">
+                                <div class="screenshot-dot dot-red"></div>
+                                <div class="screenshot-dot dot-yellow"></div>
+                                <div class="screenshot-dot dot-green"></div>
+                            </div>
+                            <span class="screenshot-title">AI_Settings &bull; Protected Keys &amp; Live Rate-Limit Quota Meter</span>
+                        </div>
+                        <img src="assets/img/sqldiff_ai_advisor_settings.png" alt="AI Performance Advisor Settings in SqlDiffStudio" class="screenshot-img" />
+                        <div class="screenshot-caption">
+                            <span>API key masked by default with bullet protection, reveal toggle, and one-click connection test button.</span>
+                        </div>
+                    </div>
+
+                    <p class="article-p">
+                        SafeDeploy Studio integrates with any OpenAI-compatible LLM endpoint (e.g., Groq, Azure OpenAI, Ollama, vLLM):
+                    </p>
+                    <ul style="margin-left: 1.5rem; color: var(--color-fg-muted); margin-bottom: 1rem; line-height: 1.8;">
+                        <li><strong>Endpoint URL:</strong> Enter the chat completion URL (e.g., <code>https://api.groq.com/openai/v1/chat/completions</code>).</li>
+                        <li><strong>Model Identifier:</strong> Set your model of choice (e.g., <code>qwen/qwen3.8-27b</code> or <code>llama-3.3-70b-versatile</code>).</li>
+                        <li><strong>Protected API Key:</strong> Rendered in a secure <code>PasswordBox</code> with bullets (<code>••••••••</code>). Click <code>[ 👁 Show / 🙈 Hide ]</code> to reveal the plaintext key. Keys are encrypted with Windows DPAPI before being saved to local settings.</li>
+                        <li><strong>Connection Test &amp; Live Quota Card:</strong> Click <code>[ ⚡ Test AI Connection ]</code> to verify the API key, view latency in milliseconds, and display the live token budget progress meter!</li>
+                    </ul>
+                </div>
+
+                <div class="article-section">
+                    <h2 class="article-h2">3. Backup Vault Directory</h2>
+                    <p class="article-p">
+                        Specify the local or network drive directory where pre-change rollback snapshots and audit logs are saved (e.g., <code>D:\Project\CE21 DB Changes Backup\Dev\</code>). Pointing this to a team drive or cloud-synced folder allows tracking change history across all developers on your team!
+                    </p>
+                </div>
+            </article>
+
+            <!-- ================= ARTICLE 6: ENVIRONMENTS & ROUTES ================= -->
+            <article id="art-environment-setup" class="guide-article" style="display: none;">
+                <h1 class="article-title">Environments &amp; Deployment Routes</h1>
+                <div class="article-meta">
+                    <span>Reading time: 3 min</span>
+                    <span>Topology: Dev &rarr; Staging &rarr; Production</span>
+                </div>
+
+                <div class="screenshot-container">
+                    <div class="screenshot-header">
+                        <div class="screenshot-dots">
+                            <div class="screenshot-dot dot-red"></div>
+                            <div class="screenshot-dot dot-yellow"></div>
+                            <div class="screenshot-dot dot-green"></div>
+                        </div>
+                        <span class="screenshot-title">06_Routes &bull; Defined Promotion Stages</span>
+                    </div>
+                    <img src="assets/img/slack_04_projects_environments.png" alt="Environment Promotion Routes" class="screenshot-img" />
+                    <div class="screenshot-caption">
+                        <span>Define strict promotion paths between database tiers with gated production safeguards.</span>
+                    </div>
+                </div>
+
+                <div class="article-section">
+                    <h2 class="article-h2">1. Controlled Promotion Paths</h2>
+                    <p class="article-p">
+                        SafeDeploy Studio defines explicit progression routes (Local &rarr; Development &rarr; Staging &rarr; Production). Direct, uncontrolled pushes to Production are flagged, requiring confirmation modals before live execution.
+                    </p>
+                </div>
+            </article>
+
+            <!-- ================= ARTICLE 7: CREATING A DEPLOYMENT ================= -->
+            <article id="art-creating-deployment" class="guide-article" style="display: none;">
+                <h1 class="article-title">Creating a Deployment</h1>
                 <div class="article-meta">
                     <span>Reading time: 4 min</span>
-                    <span>Disaster Recovery: Immediate</span>
+                    <span>Operation: Initiating a Comparison Run</span>
                 </div>
 
-                <div class="article-section">
-                    <h2 class="article-h2">1. How Pre-Change Snapshots Work</h2>
-                    <p class="article-p">
-                        Prior to executing changes on a target database, SafeDeploy Studio queries <code>sys.sql_modules</code> and reads the exact definition currently active on the target.
-                    </p>
-                    <p class="article-p">
-                        It synthesizes a self-contained, idempotent rollback script:
-                    </p>
-                    <div class="code-block">
--- Self-contained pre-change snapshot generated by SafeDeploy Studio Vault
-IF OBJECT_ID(N'[dbo].[sp_ProcessBilling]', 'P') IS NOT NULL
-    DROP PROCEDURE [dbo].[sp_ProcessBilling];
-GO
-
-CREATE PROCEDURE [dbo].[sp_ProcessBilling]
-    -- Original verified definition
-AS BEGIN
-    ...
-END
-GO
+                <div class="screenshot-container">
+                    <div class="screenshot-header">
+                        <div class="screenshot-dots">
+                            <div class="screenshot-dot dot-red"></div>
+                            <div class="screenshot-dot dot-yellow"></div>
+                            <div class="screenshot-dot dot-green"></div>
+                        </div>
+                        <span class="screenshot-title">07_Create &bull; Comparison Route Initialization</span>
                     </div>
-                    <p class="article-p">
-                        The script is written to local cryptographic storage, its SHA-256 hash is computed, and a database record is linked to the deployment ID.
-                    </p>
+                    <img src="assets/img/slack_05_deploy_studio_route.png" alt="Deployment route creation" class="screenshot-img" />
+                    <div class="screenshot-caption">
+                        <span>Select comparison pairs, configure object filters, and initiate automated discovery.</span>
+                    </div>
                 </div>
 
                 <div class="article-section">
-                    <h2 class="article-h2">2. Executing a 1-Click Rollback</h2>
+                    <h2 class="article-h2">Step-by-Step Instructions</h2>
                     <ol style="margin-left: 1.5rem; color: var(--color-fg-muted); margin-bottom: 1rem; line-height: 1.8;">
-                        <li>Open the <strong>Audit & Rollback</strong> view in SafeDeploy Studio.</li>
-                        <li>Locate the deployment that needs to be reverted.</li>
-                        <li>Click the red <strong>Rollback</strong> action button.</li>
-                        <li>Review the snapshot name, target environment, and original object count in the confirmation modal.</li>
-                        <li>Confirm execution. The previous SQL snapshot is applied inside an atomic transaction, reverting the database instantly.</li>
+                        <li>Navigate to <strong>2. Comparison Setup</strong> tab.</li>
+                        <li>Select your Source Connection and Target Connection pair.</li>
+                        <li>Choose the Source Database and Target Database from the dropdown options.</li>
+                        <li>Click <strong>Compare Databases</strong> to begin live schema module querying.</li>
                     </ol>
                 </div>
             </article>
 
-            <!-- Article 6: Troubleshooting -->
-            <article id="art-troubleshooting" class="guide-article" style="display: none;">
-                <h1 class="article-title">Troubleshooting & Frequently Asked Questions</h1>
+            <!-- ================= ARTICLE 8: COMPARING CHANGES & MULTI-SP ================= -->
+            <article id="art-comparing-changes" class="guide-article" style="display: none;">
+                <h1 class="article-title">Comparing Database Objects &amp; Multi-SP Filtering</h1>
                 <div class="article-meta">
-                    <span>Reading time: 3 min</span>
-                    <span>Support: Self-Service</span>
+                    <span>Reading time: 4 min</span>
+                    <span>Feature: Multi-SP Filter &amp; Smart Version Exclusion</span>
+                </div>
+
+                <div class="screenshot-container">
+                    <div class="screenshot-header">
+                        <div class="screenshot-dots">
+                            <div class="screenshot-dot dot-red"></div>
+                            <div class="screenshot-dot dot-yellow"></div>
+                            <div class="screenshot-dot dot-green"></div>
+                        </div>
+                        <span class="screenshot-title">08_Filter &bull; Multi-Line SP Filtering &amp; Version Rules</span>
+                    </div>
+                    <img src="assets/img/sqldiff_multi_sp_filter.png" alt="Name filters and multiple SP search in SqlDiffStudio" class="screenshot-img" />
+                    <div class="screenshot-caption">
+                        <span>Paste multiple stored procedure names and exclude backup timestamp versions automatically.</span>
+                    </div>
                 </div>
 
                 <div class="article-section">
-                    <h2 class="article-h2">Frequently Asked Questions</h2>
+                    <h2 class="article-h2">1. Multiple Stored Procedure Search</h2>
+                    <p class="article-p">
+                        In real-world sprint tickets, developers frequently modify 5 to 20 stored procedures at once. In the <strong>Only include (blank = all)</strong> box, you can paste full procedure lists separated by newlines, commas, or semicolons:
+                    </p>
+                    <div class="code-block">
+proc_Products_GetAllFeaturedDistinctProduct
+proc_Products_ColumnListDistinctProduct
+proc_Products_GetAllSearchProductList_CTE_Discount
+proc_Products_SearchDistinctProductList_CTE
+proc_Products_GetRelationalDataForCatalog
+                    </div>
+                    <p class="article-p" style="margin-top: 0.5rem;">
+                        The comparison engine automatically strips leading syntax (<code>DROP PROCEDURE</code>, <code>CREATE PROCEDURE</code>, <code>EXEC</code>) and square brackets (<code>[dbo].[proc_...]</code>) to match exact schema names!
+                    </p>
+                </div>
+
+                <div class="article-section">
+                    <h2 class="article-h2">2. Smart Version Exclusion Filter</h2>
+                    <p class="article-p">
+                        Databases often accumulate backup versions of stored procedures (e.g., <code>proc_OrderItem_ChangeProductOrEventTime_12348395484_26_07</code>).
+                    </p>
+                    <div class="callout callout-info">
+                        <strong>Smart Exclusion Rule:</strong> When you input original procedure names, SafeDeploy Studio automatically compares only the active production SPs and ignores versioned timestamp clones unless you explicitly enter a versioned name in the input box!
+                    </div>
+                </div>
+            </article>
+
+            <!-- ================= ARTICLE 9: REVIEWING SQL DIFFS ================= -->
+            <article id="art-reviewing-diff" class="guide-article" style="display: none;">
+                <h1 class="article-title">Reviewing SQL Diffs &amp; Code Inspector</h1>
+                <div class="article-meta">
+                    <span>Reading time: 5 min</span>
+                    <span>Engine: DiffPlex Whitespace-Normalized Line Diffing</span>
+                </div>
+
+                <div class="screenshot-container">
+                    <div class="screenshot-header">
+                        <div class="screenshot-dots">
+                            <div class="screenshot-dot dot-red"></div>
+                            <div class="screenshot-dot dot-yellow"></div>
+                            <div class="screenshot-dot dot-green"></div>
+                        </div>
+                        <span class="screenshot-title">09_Diff &bull; Side-by-Side Line-by-Line Code Comparator</span>
+                    </div>
+                    <img src="assets/img/sqldiff_diff_viewer.jpg" alt="Real side-by-side SQL diff inspection" class="screenshot-img" />
+                    <div class="screenshot-caption">
+                        <span>Side-by-side diff with line numbering, addition/deletion colors, change navigation, and action buttons.</span>
+                    </div>
+                </div>
+
+                <div class="article-section">
+                    <h2 class="article-h2">1. Diff Controls &amp; Capabilities</h2>
+                    <ul style="margin-left: 1.5rem; color: var(--color-fg-muted); margin-bottom: 1rem; line-height: 1.8;">
+                        <li><strong>Side-by-Side vs. Unified:</strong> Toggle the <code>Side by side</code> checkbox to view changes split across source and target columns or in a single inline stream.</li>
+                        <li><strong>Only Changed Lines:</strong> Hide hundreds of lines of identical procedural code and focus exclusively on the lines that changed with context.</li>
+                        <li><strong>Prev / Next Change:</strong> Jump directly from diff block to diff block across large 2,000-line stored procedures.</li>
+                        <li><strong>Copy Source / Copy Target:</strong> One-click buttons to copy the full T-SQL definition of either database version directly to your clipboard.</li>
+                        <li><strong>Right-Click Stored Procedure Name:</strong> Select any row in the differences grid to copy the procedure name with <code>Ctrl+C</code>.</li>
+                    </ul>
+                </div>
+            </article>
+
+            <!-- ================= ARTICLE 10: GUARDRAILS ================= -->
+            <article id="art-guardrails" class="guide-article" style="display: none;">
+                <h1 class="article-title">Pre-Flight Safety Guardrails</h1>
+                <div class="article-meta">
+                    <span>Reading time: 5 min</span>
+                    <span>Engine: Microsoft T-SQL ScriptDom 180 AST Parser</span>
+                </div>
+
+                <div class="screenshot-container">
+                    <div class="screenshot-header">
+                        <div class="screenshot-dots">
+                            <div class="screenshot-dot dot-red"></div>
+                            <div class="screenshot-dot dot-yellow"></div>
+                            <div class="screenshot-dot dot-green"></div>
+                        </div>
+                        <span class="screenshot-title">10_Guardrails &bull; Destructive DDL Blocker &amp; Syntax Rules</span>
+                    </div>
+                    <img src="assets/img/06_guardrails_policy_dark.png" alt="Safety guardrail policies" class="screenshot-img" />
+                    <div class="screenshot-caption">
+                        <span>Configurable rules blocking physical table drops, truncations, and schema alterations.</span>
+                    </div>
+                </div>
+
+                <div class="article-section">
+                    <h2 class="article-h2">1. Non-Negotiable Protection Rules</h2>
+                    <p class="article-p">
+                        SafeDeploy Studio parses every SQL batch into an Abstract Syntax Tree (AST) using <code>Microsoft.SqlServer.TransactSql.ScriptDom</code>. The AST parser analyzes statement tokens semantically:
+                    </p>
+                    <div class="table-wrapper">
+                        <table class="spec-table">
+                            <thead>
+                                <tr>
+                                    <th>Rule Code</th>
+                                    <th>Level</th>
+                                    <th>Enforced Behavior</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>BlockDropTable</strong></td>
+                                    <td><span class="badge badge-danger">Critical</span></td>
+                                    <td>Blocks physical <code>DROP TABLE</code>. Dropping local temporary staging tables (<code>#temp</code>) is permitted.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>BlockTruncateTable</strong></td>
+                                    <td><span class="badge badge-danger">Critical</span></td>
+                                    <td>Blocks <code>TRUNCATE TABLE</code> to prevent accidental bulk data erasure.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>BlockAlterTable</strong></td>
+                                    <td><span class="badge badge-danger">Critical</span></td>
+                                    <td>Blocks physical schema modifications in procedural change pipelines.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>AsciiCompliance</strong></td>
+                                    <td><span class="badge badge-attention">Warning</span></td>
+                                    <td>Catches copy-pasted smart quotes (<code>“</code>, <code>”</code>) and non-breaking spaces that break SQL compilation.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>UnqualifiedUpdateDelete</strong></td>
+                                    <td><span class="badge badge-danger">Error</span></td>
+                                    <td>Blocks any <code>UPDATE</code> or <code>DELETE</code> statement without an explicit <code>WHERE</code> clause.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ================= ARTICLE 11: DRY RUN ================= -->
+            <article id="art-dry-run" class="guide-article" style="display: none;">
+                <h1 class="article-title">Transactional Sandbox Dry-Runs</h1>
+                <div class="article-meta">
+                    <span>Reading time: 3 min</span>
+                    <span>Integrity: Zero-Commit Verification</span>
+                </div>
+
+                <div class="screenshot-container">
+                    <div class="screenshot-header">
+                        <div class="screenshot-dots">
+                            <div class="screenshot-dot dot-red"></div>
+                            <div class="screenshot-dot dot-yellow"></div>
+                            <div class="screenshot-dot dot-green"></div>
+                        </div>
+                        <span class="screenshot-title">11_DryRun &bull; Atomic Transaction Sandbox</span>
+                    </div>
+                    <img src="assets/img/sqldiff_deployment_guardrail.png" alt="Transactional dry run validation" class="screenshot-img" />
+                    <div class="screenshot-caption">
+                        <span>Verification runs inside BEGIN TRAN ... ROLLBACK TRAN to catch missing objects before live commits.</span>
+                    </div>
+                </div>
+
+                <div class="article-section">
+                    <h2 class="article-h2">1. How Sandbox Dry-Runs Work</h2>
+                    <p class="article-p">
+                        Before modifying any target database, the script is tested inside an atomic transaction sandbox on the actual target connection:
+                    </p>
+                    <div class="code-block">
+BEGIN TRANSACTION;
+    -- Execute normalized script batches...
+    -- Validate column bindings, types, and schema dependencies
+ROLLBACK TRANSACTION;
+                    </div>
+                    <p class="article-p" style="margin-top: 0.5rem;">
+                        If any dependency is missing or a permission error occurs, the dry-run captures the exact SQL Server error number and halts the pipeline before any data or schema is permanently modified.
+                    </p>
+                </div>
+            </article>
+
+            <!-- ================= ARTICLE 12: EXECUTING LIVE DEPLOYMENTS ================= -->
+            <article id="art-executing-deployment" class="guide-article" style="display: none;">
+                <h1 class="article-title">Executing Live Deployments &amp; Multi-DB Rollouts</h1>
+                <div class="article-meta">
+                    <span>Reading time: 4 min</span>
+                    <span>Operation: Target Deployment &amp; Multi-Tenant Prompt</span>
+                </div>
+
+                <div class="screenshot-container">
+                    <div class="screenshot-header">
+                        <div class="screenshot-dots">
+                            <div class="screenshot-dot dot-red"></div>
+                            <div class="screenshot-dot dot-yellow"></div>
+                            <div class="screenshot-dot dot-green"></div>
+                        </div>
+                        <span class="screenshot-title">12_Deploy &bull; 1-Click Apply to Target DB</span>
+                    </div>
+                    <img src="assets/img/sqldiff_apply_button.png" alt="Apply to target DB button" class="screenshot-img" style="max-height: 200px; object-fit: contain; background: #fff;" />
+                    <div class="screenshot-caption">
+                        <span>Click "Apply to target DB" to generate automatic pre-change rollback snapshots and apply code atomically.</span>
+                    </div>
+                </div>
+
+                <div class="article-section">
+                    <h2 class="article-h2">1. Safe Drop &amp; Create Normalization</h2>
+                    <p class="article-p">
+                        To prevent <em>"There is already an object named '...' in the database"</em> errors, SafeDeploy Studio normalizes procedures across batches into safe idempotent statements:
+                    </p>
+                    <div class="code-block">
+IF OBJECT_ID(N'[dbo].[proc_OrderItem_ChangeProductOrEventTime]', 'P') IS NOT NULL
+    DROP PROCEDURE [dbo].[proc_OrderItem_ChangeProductOrEventTime];
+GO
+
+CREATE PROCEDURE [dbo].[proc_OrderItem_ChangeProductOrEventTime]
+    ...
+                    </div>
+                </div>
+
+                <div class="article-section">
+                    <h2 class="article-h2">2. Identical Database Multi-Rollout Modal</h2>
+                    <p class="article-p">
+                        When deploying to identical multi-tenant databases (such as <code>CE21_0001</code>, <code>CE21_0002</code>), SafeDeploy Studio detects the multi-tenant context and prompts the developer:
+                    </p>
+                    <div class="callout callout-info">
+                        <strong>Target Confirmation Modal:</strong><br>
+                        <em>"Target database CE21_0001 is part of a multi-tenant group. Would you like to apply this change to ALL identical tenant databases (0001, 0002...), or only apply to CE21_0001?"</em>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ================= ARTICLE 13: PRE-CHANGE BACKUP VAULT ================= -->
+            <article id="art-backup-vault" class="guide-article" style="display: none;">
+                <h1 class="article-title">Pre-Change Backup Vault</h1>
+                <div class="article-meta">
+                    <span>Reading time: 4 min</span>
+                    <span>Safety: Immutable DDL Snapshots &amp; In-File Auditing</span>
+                </div>
+
+                <div class="screenshot-container">
+                    <div class="screenshot-header">
+                        <div class="screenshot-dots">
+                            <div class="screenshot-dot dot-red"></div>
+                            <div class="screenshot-dot dot-yellow"></div>
+                            <div class="screenshot-dot dot-green"></div>
+                        </div>
+                        <span class="screenshot-title">13_Vault &bull; Cryptographic Pre-Change Snapshots</span>
+                    </div>
+                    <img src="assets/img/slack_06_backup_vault.png" alt="Pre-Change Backup Vault" class="screenshot-img" />
+                    <div class="screenshot-caption">
+                        <span>Every deployment captures an exact pre-change snapshot with SHA-256 integrity checksums.</span>
+                    </div>
+                </div>
+
+                <div class="article-section">
+                    <h2 class="article-h2">1. Automatic Pre-Change Snapshots</h2>
+                    <p class="article-p">
+                        Before modifying any target object, SafeDeploy Studio queries the target server's <code>sys.sql_modules</code> and writes the current definition to your configured backup directory:
+                    </p>
+                    <div class="code-block">D:\Project\CE21 DB Changes Backup\Dev\20261124_143022_proc_OrderItem_ChangeProductOrEventTime_DEV.sql</div>
+                </div>
+
+                <div class="article-section">
+                    <h2 class="article-h2">2. In-File Audit Header Stamping</h2>
+                    <p class="article-p">
+                        Every procedure applied by SafeDeploy Studio is stamped with an immutable audit header at the top of the file:
+                    </p>
+                    <div class="code-block">
+-- =========================================================================
+-- APPLIED BY: vishal.prajapati ON 24-Nov-2026 14:30:22 IST
+-- TOOL: SafeDeploy Studio / SQL Diff Studio
+-- ROUTE: Local-0001 -> DEV-0001
+-- PRE-CHANGE ROLLBACK: 20261124_143022_proc_OrderItem_ChangeProductOrEventTime_DEV.sql
+-- =========================================================================
+                    </div>
+                </div>
+            </article>
+
+            <!-- ================= ARTICLE 14: 1-CLICK ROLLBACK ================= -->
+            <article id="art-rollback" class="guide-article" style="display: none;">
+                <h1 class="article-title">Pre-Change Vault &amp; 1-Click Rollback</h1>
+                <div class="article-meta">
+                    <span>Reading time: 4 min</span>
+                    <span>Disaster Recovery: Zero-Downtime Rollback</span>
+                </div>
+
+                <div class="screenshot-container">
+                    <div class="screenshot-header">
+                        <div class="screenshot-dots">
+                            <div class="screenshot-dot dot-red"></div>
+                            <div class="screenshot-dot dot-yellow"></div>
+                            <div class="screenshot-dot dot-green"></div>
+                        </div>
+                        <span class="screenshot-title">14_Rollback &bull; Instant Procedural Revert</span>
+                    </div>
+                    <img src="assets/img/03_audit_rollback_dark.png" alt="1-Click Instant Rollback View" class="screenshot-img" />
+                    <div class="screenshot-caption">
+                        <span>Select any previous deployment and click Rollback to reapply the pre-change snapshot instantly.</span>
+                    </div>
+                </div>
+
+                <div class="article-section">
+                    <h2 class="article-h2">Executing a Rollback</h2>
+                    <ol style="margin-left: 1.5rem; color: var(--color-fg-muted); margin-bottom: 1rem; line-height: 1.8;">
+                        <li>Open the deployment history log or backup folder.</li>
+                        <li>Select the deployment you need to revert.</li>
+                        <li>Click the red <strong>Rollback</strong> button.</li>
+                        <li>Confirm the target database. The pre-change snapshot is executed inside an atomic transaction, reverting the procedure instantly.</li>
+                    </ol>
+                </div>
+            </article>
+
+            <!-- ================= ARTICLE 15: AI PERFORMANCE ADVISOR & QUOTA METER ================= -->
+            <article id="art-sargability" class="guide-article" style="display: none;">
+                <h1 class="article-title">AI Performance Advisor &amp; Live Quota Tracker</h1>
+                <div class="article-meta">
+                    <span>Reading time: 5 min</span>
+                    <span>Capabilities: SARGability Engine + Live Token Budget Meter</span>
+                </div>
+
+                <div class="screenshot-container">
+                    <div class="screenshot-header">
+                        <div class="screenshot-dots">
+                            <div class="screenshot-dot dot-red"></div>
+                            <div class="screenshot-dot dot-yellow"></div>
+                            <div class="screenshot-dot dot-green"></div>
+                        </div>
+                        <span class="screenshot-title">15_AI_Assistant &bull; 2-Tab SARGability &amp; LLM Tuning Drawer</span>
+                    </div>
+                    <img src="assets/img/slack_07_ai_assistant.png" alt="AI Performance Advisor & SARGability Drawer" class="screenshot-img" />
+                    <div class="screenshot-caption">
+                        <span>Two-tab performance drawer: Tab 1 (Offline Static Rules) &amp; Tab 2 (AI Query Optimization with Token Meter).</span>
+                    </div>
+                </div>
+
+                <div class="article-section">
+                    <h2 class="article-h2">1. Two-Tab Performance Architecture</h2>
+                    <p class="article-p">
+                        Click the <code>[ 💡 AI Suggestions ]</code> button above any compared stored procedure to expand the bottom performance drawer:
+                    </p>
+                    <ul style="margin-left: 1.5rem; color: var(--color-fg-muted); margin-bottom: 1rem; line-height: 1.8;">
+                        <li><strong>Tab 1: 🔍 Static SARGability Rules:</strong> Runs 100% offline and instantly. Scans the code for non-SARGable functions (<code>YEAR(DateCol) = 2026</code>, <code>ISNULL(col, 0) = 1</code>, leading wildcards <code>LIKE '%abc'</code>, <code>SELECT *</code>).</li>
+                        <li><strong>Tab 2: 🤖 AI Query Optimization:</strong> Sends the procedural code and detected issues to your configured LLM (e.g., <code>qwen/qwen3.8-27b</code> on Groq). Returns concrete index recommendations (missing indexes, column order, <code>INCLUDE</code> clauses) and rewritten SARGable T-SQL code snippets!</li>
+                    </ul>
+                </div>
+
+                <div class="article-section">
+                    <h2 class="article-h2">2. Live Token Budget &amp; Quota Tracking</h2>
+                    <div class="callout callout-info">
+                        <strong>Token Usage Like Modern AI Agents (Cursor / Claude Code):</strong><br>
+                        SafeDeploy Studio reads live rate-limit response headers (<code>x-ratelimit-remaining-tokens</code>, <code>x-ratelimit-limit-tokens</code>, <code>x-ratelimit-reset-tokens</code>, <code>x-ratelimit-remaining-requests</code>) and renders an interactive token budget meter:
+                    </div>
+                    <ul style="margin-left: 1.5rem; color: var(--color-fg-muted); margin-bottom: 1rem; line-height: 1.8;">
+                        <li>🟢 <strong>Tokens Left:</strong> Shows exact token count and percentage (e.g. <code>298.5k / 300k left (99.5%)</code>).</li>
+                        <li>📊 <strong>Visual Progress Bar:</strong> Flat color-coded meter indicating capacity (Green &gt; 40%, Yellow 15-40%, Red &lt; 15%).</li>
+                        <li>⏱ <strong>Reset Countdown:</strong> Countdown timer to window reset (e.g. <code>in 2.4s</code>).</li>
+                        <li>⚡ <strong>Last Call Usage:</strong> Displays exact prompt vs. completion tokens used in the last query (e.g. <code>470 tokens (P: 120, C: 350)</code>).</li>
+                        <li>📋 <strong>Copy Advice Button:</strong> Instantly copies the full markdown optimization report and SQL rewrite to your clipboard.</li>
+                    </ul>
+                </div>
+            </article>
+
+            <!-- ================= ARTICLE 16: DEPLOYMENT HISTORY & AUDIT ================= -->
+            <article id="art-audit-logs" class="guide-article" style="display: none;">
+                <h1 class="article-title">Deployment History &amp; Audit Logs</h1>
+                <div class="article-meta">
+                    <span>Reading time: 3 min</span>
+                    <span>Compliance: Complete Forensic Audit Trail</span>
+                </div>
+
+                <div class="screenshot-container">
+                    <div class="screenshot-header">
+                        <div class="screenshot-dots">
+                            <div class="screenshot-dot dot-red"></div>
+                            <div class="screenshot-dot dot-yellow"></div>
+                            <div class="screenshot-dot dot-green"></div>
+                        </div>
+                        <span class="screenshot-title">16_History &bull; Searchable Audit Log</span>
+                    </div>
+                    <img src="assets/img/slack_08_history.png" alt="Deployment history and audit trail" class="screenshot-img" />
+                    <div class="screenshot-caption">
+                        <span>Searchable log recording timestamps, developer username, target server, execution latency, and snapshot IDs.</span>
+                    </div>
+                </div>
+
+                <div class="article-section">
+                    <h2 class="article-h2">1. Audit Trail Fields</h2>
+                    <p class="article-p">
+                        Every deployment records developer username, date and time down to the second, execution time in milliseconds, source connection, target database, and SHA-256 rollback snapshot hash in <code>deployment_history.log</code>.
+                    </p>
+                </div>
+            </article>
+
+            <!-- ================= ARTICLE 17: TROUBLESHOOTING & FAQ ================= -->
+            <article id="art-troubleshooting" class="guide-article" style="display: none;">
+                <h1 class="article-title">Troubleshooting &amp; Frequently Asked Questions</h1>
+                <div class="article-meta">
+                    <span>Reading time: 4 min</span>
+                    <span>Support: Self-Service Troubleshooting</span>
+                </div>
+
+                <div class="article-section">
+                    <h2 class="article-h2">Common Questions &amp; Solutions</h2>
                     
-                    <h3 class="article-h3">Can I deploy table schema changes with SafeDeploy Studio?</h3>
+                    <h3 class="article-h3">1. Why do I see "There is already an object named '...' in the database"?</h3>
                     <p class="article-p">
-                        SafeDeploy Studio is optimized for procedural and programmatic database objects (stored procedures, views, functions, triggers). Physical table structural alterations should be managed through formal migration tools like Entity Framework Core Migrations or DbUp, while SafeDeploy Studio governs application procedures and ETL logic.
+                        In previous versions or manual scripts, executing <code>CREATE PROCEDURE</code> fails if the object already exists on the target. SafeDeploy Studio now automatically prepends <code>IF OBJECT_ID(...) IS NOT NULL DROP PROCEDURE ... GO</code> before <code>CREATE PROCEDURE</code>, ensuring idempotent and zero-error deployments.
                     </p>
 
-                    <h3 class="article-h3">Why did my deployment fail with "AsciiCompliance"?</h3>
+                    <h3 class="article-h3">2. How do I prevent comparing backup version procedures?</h3>
                     <p class="article-p">
-                        This occurs when SQL code copied from text editors, collaboration tools (Teams/Slack), or word processors contains typographic quotes (<code>“</code>, <code>”</code>) or en-dashes (<code>–</code>). Replace them with standard ASCII single quotes (<code>'</code>) or double quotes (<code>"</code>).
+                        In <strong>2. Comparison Setup</strong>, the <code>Exclude</code> box contains the pattern <code>_YYYYMMDD_HH_MM</code> or version strings like <code>_5934123544</code>. The engine compares only original production stored procedures unless you explicitly type a versioned name.
                     </p>
 
-                    <h3 class="article-h3">Does the Sandbox Dry-Run write any data?</h3>
+                    <h3 class="article-h3">3. How are my AI API keys protected?</h3>
                     <p class="article-p">
-                        No. The dry-run executes within an explicit transaction that always issues <code>ROLLBACK TRANSACTION</code>. It verifies compilation, column binding, foreign keys, and object permissions without committing any changes.
+                        Your API key is masked with bullets (<code>••••••••</code>) in the UI by default. It can be revealed using the <code>[ 👁 Show ]</code> button. The key is encrypted using Windows DPAPI (<code>DataProtectionScope.CurrentUser</code>) before saving, ensuring plain text keys never sit on disk or in source control.
+                    </p>
+
+                    <h3 class="article-h3">4. What if my LLM rate limit is reached?</h3>
+                    <p class="article-p">
+                        The live Token Budget Meter turns red (&lt; 15% tokens remaining) and displays the reset countdown (e.g., <code>resets in 4.2s</code>). Simply wait for the counter to reset or switch to a higher-capacity model in Configurations!
                     </p>
                 </div>
             </article>
@@ -367,7 +854,7 @@ GO
     <!-- Compact Footer -->
     <footer class="footer">
         <div class="container footer-bottom">
-            <span>&copy; 2026 SafeDeploy Studio. Open source under the MIT License.</span>
+            <span>&copy; 2026 SafeDeploy Studio &bull; SQL Diff Studio. Open source under the MIT License.</span>
             <span><a href="docs.html">Technical Documentation</a> &bull; <a href="releases.html">Releases</a></span>
         </div>
     </footer>

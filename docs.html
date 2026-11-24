@@ -96,6 +96,22 @@ SafeDeployStudio.slnx
             <p class="article-p">
                 Static validation is performed by compiling raw migration SQL into an Abstract Syntax Tree using <code>Microsoft.SqlServer.TransactSql.ScriptDom.TSql160Parser</code>.
             </p>
+
+            <div class="screenshot-container">
+                <div class="screenshot-header">
+                    <div class="screenshot-dots">
+                        <div class="screenshot-dot dot-red"></div>
+                        <div class="screenshot-dot dot-yellow"></div>
+                        <div class="screenshot-dot dot-green"></div>
+                    </div>
+                    <span class="screenshot-title">AST_Guardrails &bull; Policy Engine &amp; Syntax Verification</span>
+                </div>
+                <img src="assets/img/06_guardrails_policy_dark.png" alt="ScriptDom Guardrails Engine" class="screenshot-img" />
+                <div class="screenshot-caption">
+                    <span>Configurable ScriptDom AST visitor rules enforcing physical table preservation and syntax safety.</span>
+                </div>
+            </div>
+
             <p class="article-p">
                 Custom visitors inherit from <code>TSqlFragmentVisitor</code> and inspect nodes:
             </p>
@@ -103,7 +119,7 @@ SafeDeployStudio.slnx
                 <li><code>DropTableStatement</code>: Evaluates <code>node.Objects</code>. Physical tables trigger a critical violation. Temporary tables starting with <code>#</code> or <code>##</code> are passed.</li>
                 <li><code>TruncateTableStatement</code>: Evaluates <code>node.TableName</code>. Truncating non-temporary tables is blocked.</li>
                 <li><code>AlterTableStatement</code>: Evaluates <code>node.SchemaObjectName</code> to block unauthorized structural alterations.</li>
-                <li><code>UpdateStatement</code> & <code>DeleteStatement</code>: Verifies that <code>WhereClause != null</code> to eliminate accidental whole-table operations.</li>
+                <li><code>UpdateStatement</code> &amp; <code>DeleteStatement</code>: Verifies that <code>WhereClause != null</code> to eliminate accidental whole-table operations.</li>
             </ul>
         </section>
 
@@ -113,11 +129,27 @@ SafeDeployStudio.slnx
             <p class="article-p">
                 Before applying changes to a target database, SafeDeploy Studio executes an automated backup procedure:
             </p>
+
+            <div class="screenshot-container">
+                <div class="screenshot-header">
+                    <div class="screenshot-dots">
+                        <div class="screenshot-dot dot-red"></div>
+                        <div class="screenshot-dot dot-yellow"></div>
+                        <div class="screenshot-dot dot-green"></div>
+                    </div>
+                    <span class="screenshot-title">Backup_Vault &bull; Cryptographic Pre-Change Snapshots</span>
+                </div>
+                <img src="assets/img/slack_06_backup_vault.png" alt="Pre-Change Backup Vault" class="screenshot-img" />
+                <div class="screenshot-caption">
+                    <span>Pre-change DDL snapshot generator with SHA-256 integrity verification.</span>
+                </div>
+            </div>
+
             <ol style="margin-left: 1.5rem; color: var(--color-fg-muted); line-height: 1.8; margin-bottom: 1rem;">
                 <li>Connects to the target database and queries <code>sys.sql_modules</code> for existing definitions.</li>
                 <li>Generates an idempotent restore script containing a safe <code>DROP IF EXISTS</code> block followed by the original active definition.</li>
                 <li>Computes the SHA-256 hash of the generated payload.</li>
-                <li>Saves the script to <code>%LocalAppData%/SafeDeployStudio/Vault/{project}/{environment}/{timestamp}.sql</code>.</li>
+                <li>Saves the script to <code>D:\Project\CE21 DB Changes Backup\Dev\{timestamp}_{procedure}.sql</code>.</li>
                 <li>Creates a tracked <code>BackupSnapshot</code> record linked to the deployment ID.</li>
             </ol>
         </section>
@@ -159,6 +191,78 @@ cd safedeploy-studio
 dotnet restore SafeDeployStudio.slnx
 dotnet build SafeDeployStudio.slnx --configuration Release
 dotnet test SafeDeployStudio.slnx
+            </div>
+        </section>
+
+        <!-- Section 6: AI Performance Advisor & Rate Limit Rate Tracking -->
+        <section id="ai-advisor" class="article-section">
+            <h2 class="article-h2">6. AI Performance Advisor &amp; Token Rate Limit Tracking</h2>
+            <p class="article-p">
+                The AI Advisor combines offline static AST analysis with LLM inference over OpenAI-compatible endpoints (Groq, Azure OpenAI, Ollama).
+            </p>
+
+            <div class="screenshot-container">
+                <div class="screenshot-header">
+                    <div class="screenshot-dots">
+                        <div class="screenshot-dot dot-red"></div>
+                        <div class="screenshot-dot dot-yellow"></div>
+                        <div class="screenshot-dot dot-green"></div>
+                    </div>
+                    <span class="screenshot-title">AI_Performance_Advisor &bull; Live Quota Budget &amp; Optimization Drawer</span>
+                </div>
+                <img src="assets/img/slack_07_ai_assistant.png" alt="AI Performance Advisor Specifications" class="screenshot-img" />
+                <div class="screenshot-caption">
+                    <span>Two-tab performance drawer: Tab 1 (Offline SARGability Rules) and Tab 2 (Live AI Query Tuning &amp; Token Meter).</span>
+                </div>
+            </div>
+
+            <h3 class="article-h3">Offline SARGability Ruleset</h3>
+            <div class="table-wrapper">
+                <table class="spec-table">
+                    <thead>
+                        <tr>
+                            <th>Rule ID</th>
+                            <th>Target Anti-Pattern</th>
+                            <th>Optimizer Impact</th>
+                            <th>Recommended Fix</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>SARG001</code></td>
+                            <td>Function wrapping column: <code>YEAR(CreatedDate) = 2026</code></td>
+                            <td>Forces Clustered Index Scan</td>
+                            <td>Range predicate: <code>CreatedDate &gt;= '2026-01-01' AND CreatedDate &lt; '2027-01-01'</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>SARG002</code></td>
+                            <td>Predicate with ISNULL: <code>ISNULL(@Type, 0) = 1</code></td>
+                            <td>Disables Index Seek</td>
+                            <td>Explicit IF/ELSE branching or <code>OPTION (RECOMPILE)</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>SARG003</code></td>
+                            <td>Leading wildcard: <code>LIKE '%searchTerm'</code></td>
+                            <td>Full Table Scan</td>
+                            <td>Full-Text Index or prefix seek (<code>LIKE 'searchTerm%'</code>)</td>
+                        </tr>
+                        <tr>
+                            <td><code>SARG004</code></td>
+                            <td>Wildcard projection: <code>SELECT *</code></td>
+                            <td>High I/O, prevents covering index seeks</td>
+                            <td>Explicit column projection</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="article-h3" style="margin-top: 1.5rem;">Rate Limit HTTP Headers Parsed</h3>
+            <div class="code-block">
+x-ratelimit-remaining-tokens    -> Live tokens remaining in current window
+x-ratelimit-limit-tokens        -> Maximum tokens per minute (TPM ceiling)
+x-ratelimit-reset-tokens        -> Seconds until token window resets (e.g. 2.4s)
+x-ratelimit-remaining-requests  -> Remaining requests in daily or minute window
+x-ratelimit-limit-requests      -> Maximum requests per minute/day
             </div>
         </section>
     </div>

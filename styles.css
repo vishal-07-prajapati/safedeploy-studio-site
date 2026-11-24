@@ -910,3 +910,105 @@ table.spec-table tr:last-child td {
         grid-template-columns: 1fr;
     }
 }
+
+/* ==========================================================================
+   Interactive Screenshot & Visual Showcase Styles
+   ========================================================================== */
+.screenshot-container {
+    margin: 1.5rem 0 2rem 0;
+    border-radius: 8px;
+    border: 1px solid var(--color-border-default);
+    background-color: var(--color-canvas-subtle);
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.screenshot-container:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.screenshot-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.6rem 1rem;
+    background-color: var(--color-canvas-inset);
+    border-bottom: 1px solid var(--color-border-subtle);
+    font-size: 12px;
+    color: var(--color-fg-muted);
+}
+
+.screenshot-dots {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.screenshot-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+.dot-red { background-color: #ff5f56; }
+.dot-yellow { background-color: #ffbd2e; }
+.dot-green { background-color: #27c93f; }
+
+.screenshot-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--color-fg-subtle);
+}
+
+.screenshot-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 0;
+    border-radius: 0;
+}
+
+.screenshot-caption {
+    padding: 0.65rem 1rem;
+    font-size: 12px;
+    color: var(--color-fg-muted);
+    background-color: var(--color-canvas-subtle);
+    border-top: 1px solid var(--color-border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.screenshot-badge {
+    display: inline-block;
+    padding: 0.15rem 0.55rem;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    background-color: var(--color-accent-subtle);
+    color: var(--color-accent-fg);
+}
+
+.screenshot-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.feature-step-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.2rem 0.6rem;
+    background-color: var(--color-canvas-inset);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 4px;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--color-accent-fg);
+    margin-bottom: 0.5rem;
+}
