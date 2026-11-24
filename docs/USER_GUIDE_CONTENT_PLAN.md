@@ -1,8 +1,8 @@
-# SafeDeploy Studio — User Guide Content Plan
+# SQL Diff Studio — User Guide Content Plan
 
 ## 1. Overview
 
-The SafeDeploy Studio User Guide is designed as a software documentation hub. It provides actionable, step-by-step instructions for developers, database administrators, and DevOps personnel to configure and execute safe database deployments.
+The SQL Diff Studio User Guide is designed as a software documentation hub. It provides actionable, step-by-step instructions for developers, database administrators, and DevOps personnel to configure and execute safe database deployments.
 
 ---
 
@@ -10,11 +10,11 @@ The SafeDeploy Studio User Guide is designed as a software documentation hub. It
 
 ### Category 1: Getting Started
 1. **Overview & Concepts**
-   * *Purpose:* Understand why SafeDeploy Studio was created and how it replaces unverified script execution.
+   * *Purpose:* Understand why SQL Diff Studio was created and how it replaces unverified script execution.
    * *Prerequisites:* Basic familiarity with relational databases and SQL scripts.
    * *Key Topics:* The deployment lifecycle, boundary isolation, why traditional migrations fail.
 2. **Installation & Setup**
-   * *Purpose:* Install SafeDeploy Studio on Windows 10/11 or Windows Server.
+   * *Purpose:* Install SQL Diff Studio on Windows 10/11 or Windows Server.
    * *Prerequisites:* Windows x64, .NET 10 Runtime (or self-contained package), Edge WebView2.
    * *Steps:* Running the installer, verifying WebView2 runtime, launching the application.
 3. **Understanding the Workspace**

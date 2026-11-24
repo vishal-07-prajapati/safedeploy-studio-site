@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SafeDeploy Studio — Intelligent Database Deployment & Management Platform</title>
+    <title>SQL Diff Studio — Intelligent Database Deployment & Comparison Platform</title>
     <meta name="description" content="Centralized database deployment and management platform for engineering teams. AST safety guardrails, side-by-side SQL diffs, transactional dry-runs, and 1-click rollback built on .NET 10.">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,7 +19,7 @@
                 <div class="nav-brand-icon">
                     <svg class="icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                 </div>
-                <span>SafeDeploy Studio</span>
+                <span>SQL Diff Studio</span>
             </a>
 
             <nav class="nav-links">
@@ -65,7 +65,7 @@
                 </p>
                 <div class="hero-buttons">
                     <a href="#overview" class="btn btn-primary">
-                        <span>Explore SafeDeploy Studio</span>
+                        <span>Explore SQL Diff Studio</span>
                     </a>
                     <a href="user-guide.html" class="btn btn-secondary">
                         <svg class="icon" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
@@ -92,10 +92,10 @@
                         <div class="screenshot-dot dot-yellow"></div>
                         <div class="screenshot-dot dot-green"></div>
                     </div>
-                    <span class="screenshot-title">SafeDeploy Studio &bull; Live SQL Diff &amp; AI Advisor</span>
+                    <span class="screenshot-title">SQL Diff Studio &bull; Live SQL Diff &amp; AI Advisor</span>
                     <span class="badge badge-success">Production Ready</span>
                 </div>
-                <img src="assets/img/slack_05_deploy_studio_route.png" alt="SafeDeploy Studio SQL Diff Viewer &amp; AI Performance Advisor" class="screenshot-img" />
+                <img src="assets/img/slack_05_deploy_studio_route.png" alt="SQL Diff Studio &amp; AI Performance Advisor" class="screenshot-img" />
                 <div class="screenshot-caption">
                     <span>⚡ Side-by-Side SQL diff with AST syntax guardrails &amp; live AI query rewrite suggestions</span>
                     <span class="screenshot-badge">v1.0.0 LTS</span>
@@ -111,7 +111,7 @@
                 <div class="section-label">Centralized Workspace</div>
                 <h2 class="section-title">End-to-End Database Change Governance</h2>
                 <p class="section-lead">
-                    SafeDeploy Studio replaces ad-hoc manual scripts with a structured, repeatable deployment pipeline built for high-consequence database environments.
+                    SQL Diff Studio replaces ad-hoc manual scripts with a structured, repeatable deployment pipeline built for high-consequence database environments.
                 </p>
             </div>
 
@@ -202,7 +202,7 @@
         <div class="container">
             <div class="section-header">
                 <div class="section-label">Visual Walkthrough</div>
-                <h2 class="section-title">See SafeDeploy Studio in Action</h2>
+                <h2 class="section-title">See SQL Diff Studio in Action</h2>
                 <p class="section-lead">
                     Explore real interfaces for side-by-side SQL diffing, live LLM query performance optimization, pre-change backup vaults, and multi-tenant environment governance.
                 </p>
@@ -353,27 +353,27 @@
                     <tbody>
                         <tr>
                             <td style="font-weight: 600; color: var(--color-fg-default);">Presentation</td>
-                            <td><code>SafeDeployStudio.Web</code><br><code>SafeDeployStudio.Desktop</code></td>
+                            <td><code>SqlDiffStudio.Wpf</code><br><code>SqlDiffStudio.Desktop</code></td>
                             <td>Blazor Server interactive workbench with Dark/Light themes; Native Windows WPF client hosting Microsoft WebView2 runtime.</td>
                         </tr>
                         <tr>
                             <td style="font-weight: 600; color: var(--color-fg-default);">Application & API</td>
-                            <td><code>SafeDeployStudio.Application</code><br><code>SafeDeployStudio.Api</code></td>
+                            <td><code>SqlDiffStudio.Application</code><br><code>SqlDiffStudio.Core</code></td>
                             <td>CQRS workflow orchestration, procedure migration pipelines, RESTful controllers, SignalR real-time log streaming hub.</td>
                         </tr>
                         <tr>
                             <td style="font-weight: 600; color: var(--color-fg-default);">Safety & Analysis</td>
-                            <td><code>SafeDeployStudio.Guardrails</code><br><code>SafeDeployStudio.AI</code></td>
+                            <td><code>SqlDiffStudio.Guardrails</code><br><code>SqlDiffStudio.AI</code></td>
                             <td>Microsoft.SqlServer.TransactSql.ScriptDom 180 AST visitors, deterministic SARGability query anti-pattern analyzer.</td>
                         </tr>
                         <tr>
                             <td style="font-weight: 600; color: var(--color-fg-default);">Database Operations</td>
-                            <td><code>SafeDeployStudio.DatabaseProviders.SqlServer</code><br><code>SafeDeployStudio.Deployment</code></td>
+                            <td><code>SqlDiffStudio.DatabaseProviders</code><br><code>SqlDiffStudio.Deployment</code></td>
                             <td>Microsoft.Data.SqlClient, Dapper, DiffPlex diff engine, transactional sandbox runner with clean rollback.</td>
                         </tr>
                         <tr>
                             <td style="font-weight: 600; color: var(--color-fg-default);">Storage & Vault</td>
-                            <td><code>SafeDeployStudio.Backup</code><br><code>SafeDeployStudio.Infrastructure</code></td>
+                            <td><code>SqlDiffStudio.Backup</code><br><code>SqlDiffStudio.Infrastructure</code></td>
                             <td>Pre-change SHA-256 backup snapshot generator, EF Core SQLite application database, repository abstractions.</td>
                         </tr>
                     </tbody>
@@ -389,7 +389,7 @@
                 <div class="section-label">Open Source</div>
                 <h2 class="section-title" style="margin-bottom: 0.35rem;">Publicly Available Source Code</h2>
                 <p style="color: var(--color-fg-muted); font-size: 14px; max-width: 580px;">
-                    SafeDeploy Studio is developed openly on GitHub under the MIT License. Explore the repository, review the Clean Architecture implementation, and submit feedback.
+                    SQL Diff Studio is developed openly on GitHub under the MIT License. Explore the repository, review the Clean Architecture implementation, and submit feedback.
                 </p>
             </div>
             <div style="display: flex; gap: 0.75rem;">
@@ -412,7 +412,7 @@
                 <div>
                     <div style="display: flex; align-items: center; gap: 0.5rem; font-weight: 600; color: var(--color-fg-default); margin-bottom: 0.65rem;">
                         <svg class="icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                        <span>SafeDeploy Studio</span>
+                        <span>SQL Diff Studio</span>
                     </div>
                     <p style="color: var(--color-fg-muted); font-size: 12px; line-height: 1.6; max-width: 320px;">
                         Enterprise database deployment and change management platform built on .NET 10 LTS and Microsoft SQL Server technologies.
@@ -451,7 +451,7 @@
             </div>
 
             <div class="footer-bottom">
-                <span>&copy; 2026 SafeDeploy Studio. All rights reserved. Open source under the MIT License.</span>
+                <span>&copy; 2026 SQL Diff Studio. All rights reserved. Open source under the MIT License.</span>
                 <span>Version 1.0.0 LTS &bull; .NET 10.0</span>
             </div>
         </div>

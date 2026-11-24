@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SafeDeploy Studio — Comprehensive User Guide &amp; Operational Manual</title>
-    <meta name="description" content="Official User Guide for SafeDeploy Studio and SQL Diff Studio. Complete visual walkthroughs for database comparison, multi-SP filtering, guardrails, AI query tuning, token budget management, and 1-click rollback.">
+    <title>SQL Diff Studio — Comprehensive User Guide &amp; Operational Manual</title>
+    <meta name="description" content="Official User Guide for SQL Diff Studio. Complete visual walkthroughs for database comparison, multi-SP filtering, guardrails, AI query tuning, token budget management, and 1-click rollback.">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +19,7 @@
                 <div class="nav-brand-icon">
                     <svg class="icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                 </div>
-                <span>SafeDeploy Studio</span>
+                <span>SQL Diff Studio</span>
             </a>
 
             <nav class="nav-links">
@@ -109,7 +109,7 @@
                 <h1 class="article-title">Overview &amp; Core Concepts</h1>
                 <div class="article-meta">
                     <span>Reading time: 4 min</span>
-                    <span>Applies to: SafeDeploy Studio &amp; SQL Diff Studio v1.0+</span>
+                    <span>Applies to: SQL Diff Studio v1.0+</span>
                 </div>
 
                 <div class="screenshot-container">
@@ -122,16 +122,16 @@
                         <span class="screenshot-title">01_Overview &bull; Centralized Management Hub</span>
                         <span class="badge badge-success">Production Ready</span>
                     </div>
-                    <img src="assets/img/slack_01_overview.png" alt="SafeDeploy Studio Overview Dashboard" class="screenshot-img" />
+                    <img src="assets/img/slack_01_overview.png" alt="SQL Diff Studio Overview Dashboard" class="screenshot-img" />
                     <div class="screenshot-caption">
                         <span>Centralized control panel displaying active database environments, recent deployments, and safety posture.</span>
                     </div>
                 </div>
 
                 <div class="article-section">
-                    <h2 class="article-h2">1. What SafeDeploy Studio Does</h2>
+                    <h2 class="article-h2">1. What SQL Diff Studio Does</h2>
                     <p class="article-p">
-                        SafeDeploy Studio is a centralized database change governance and comparison platform built for engineering teams, DBA specialists, and DevOps administrators working with Microsoft SQL Server and Azure SQL. It eliminates dangerous manual script execution in SQL Server Management Studio (SSMS) by enforcing automated AST syntax validation, side-by-side diffing, AI-assisted query optimization, and instant 1-click rollback snapshots.
+                        SQL Diff Studio is a centralized database change governance and comparison platform built for engineering teams, DBA specialists, and DevOps administrators working with Microsoft SQL Server and Azure SQL. It eliminates dangerous manual script execution in SQL Server Management Studio (SSMS) by enforcing automated AST syntax validation, side-by-side diffing, AI-assisted query optimization, and instant 1-click rollback snapshots.
                     </p>
                 </div>
 
@@ -171,11 +171,11 @@
                 <div class="article-section">
                     <h2 class="article-h2">1. Distribution Formats</h2>
                     <p class="article-p">
-                        SafeDeploy Studio is provided in two ready-to-run release channels from the <a href="releases.html">Releases</a> portal:
+                        SQL Diff Studio is provided in two ready-to-run release channels from the <a href="releases.html">Releases</a> portal:
                     </p>
                     <ul style="margin-left: 1.5rem; color: var(--color-fg-muted); margin-bottom: 1rem; line-height: 1.8;">
                         <li><strong>Self-Contained Single Executable (<code>SqlDiffStudio.exe</code>):</strong> Completely portable 73 MB binary containing all .NET runtime components, DiffPlex diffing libraries, and SQL metadata providers. Requires no pre-installed .NET SDK.</li>
-                        <li><strong>Windows MSI Installer (<code>SafeDeployStudio-Setup.msi</code>):</strong> Enterprise installer with start-menu shortcuts and automated Edge WebView2 verification.</li>
+                        <li><strong>Windows MSI Installer (<code>SqlDiffStudio-Setup.msi</code>):</strong> Enterprise installer with start-menu shortcuts and automated Edge WebView2 verification.</li>
                     </ul>
                 </div>
 
@@ -205,7 +205,7 @@
                         </div>
                         <span class="screenshot-title">03_Workspace &bull; Streamlined Navigation</span>
                     </div>
-                    <img src="assets/img/slack_02_sidebar_collapsed.png" alt="SafeDeploy Studio Workspace Shell" class="screenshot-img" />
+                    <img src="assets/img/slack_02_sidebar_collapsed.png" alt="SQL Diff Studio Workspace Shell" class="screenshot-img" />
                     <div class="screenshot-caption">
                         <span>Compact navigation shell with collapsible navigation and quick-switch tabs.</span>
                     </div>
@@ -326,7 +326,7 @@
                     </div>
 
                     <p class="article-p">
-                        SafeDeploy Studio integrates with any OpenAI-compatible LLM endpoint (e.g., Groq, Azure OpenAI, Ollama, vLLM):
+                        SQL Diff Studio integrates with any OpenAI-compatible LLM endpoint (e.g., Groq, Azure OpenAI, Ollama, vLLM):
                     </p>
                     <ul style="margin-left: 1.5rem; color: var(--color-fg-muted); margin-bottom: 1rem; line-height: 1.8;">
                         <li><strong>Endpoint URL:</strong> Enter the chat completion URL (e.g., <code>https://api.groq.com/openai/v1/chat/completions</code>).</li>
@@ -370,7 +370,7 @@
                 <div class="article-section">
                     <h2 class="article-h2">1. Controlled Promotion Paths</h2>
                     <p class="article-p">
-                        SafeDeploy Studio defines explicit progression routes (Local &rarr; Development &rarr; Staging &rarr; Production). Direct, uncontrolled pushes to Production are flagged, requiring confirmation modals before live execution.
+                        SQL Diff Studio defines explicit progression routes (Local &rarr; Development &rarr; Staging &rarr; Production). Direct, uncontrolled pushes to Production are flagged, requiring confirmation modals before live execution.
                     </p>
                 </div>
             </article>
@@ -455,7 +455,7 @@ proc_Products_GetRelationalDataForCatalog
                         Databases often accumulate backup versions of stored procedures (e.g., <code>proc_OrderItem_ChangeProductOrEventTime_12348395484_26_07</code>).
                     </p>
                     <div class="callout callout-info">
-                        <strong>Smart Exclusion Rule:</strong> When you input original procedure names, SafeDeploy Studio automatically compares only the active production SPs and ignores versioned timestamp clones unless you explicitly enter a versioned name in the input box!
+                        <strong>Smart Exclusion Rule:</strong> When you input original procedure names, SQL Diff Studio automatically compares only the active production SPs and ignores versioned timestamp clones unless you explicitly enter a versioned name in the input box!
                     </div>
                 </div>
             </article>
@@ -521,7 +521,7 @@ proc_Products_GetRelationalDataForCatalog
                 <div class="article-section">
                     <h2 class="article-h2">1. Non-Negotiable Protection Rules</h2>
                     <p class="article-p">
-                        SafeDeploy Studio parses every SQL batch into an Abstract Syntax Tree (AST) using <code>Microsoft.SqlServer.TransactSql.ScriptDom</code>. The AST parser analyzes statement tokens semantically:
+                        SQL Diff Studio parses every SQL batch into an Abstract Syntax Tree (AST) using <code>Microsoft.SqlServer.TransactSql.ScriptDom</code>. The AST parser analyzes statement tokens semantically:
                     </p>
                     <div class="table-wrapper">
                         <table class="spec-table">
@@ -630,7 +630,7 @@ ROLLBACK TRANSACTION;
                 <div class="article-section">
                     <h2 class="article-h2">1. Safe Drop &amp; Create Normalization</h2>
                     <p class="article-p">
-                        To prevent <em>"There is already an object named '...' in the database"</em> errors, SafeDeploy Studio normalizes procedures across batches into safe idempotent statements:
+                        To prevent <em>"There is already an object named '...' in the database"</em> errors, SQL Diff Studio normalizes procedures across batches into safe idempotent statements:
                     </p>
                     <div class="code-block">
 IF OBJECT_ID(N'[dbo].[proc_OrderItem_ChangeProductOrEventTime]', 'P') IS NOT NULL
@@ -645,7 +645,7 @@ CREATE PROCEDURE [dbo].[proc_OrderItem_ChangeProductOrEventTime]
                 <div class="article-section">
                     <h2 class="article-h2">2. Identical Database Multi-Rollout Modal</h2>
                     <p class="article-p">
-                        When deploying to identical multi-tenant databases (such as <code>CE21_0001</code>, <code>CE21_0002</code>), SafeDeploy Studio detects the multi-tenant context and prompts the developer:
+                        When deploying to identical multi-tenant databases (such as <code>CE21_0001</code>, <code>CE21_0002</code>), SQL Diff Studio detects the multi-tenant context and prompts the developer:
                     </p>
                     <div class="callout callout-info">
                         <strong>Target Confirmation Modal:</strong><br>
@@ -680,7 +680,7 @@ CREATE PROCEDURE [dbo].[proc_OrderItem_ChangeProductOrEventTime]
                 <div class="article-section">
                     <h2 class="article-h2">1. Automatic Pre-Change Snapshots</h2>
                     <p class="article-p">
-                        Before modifying any target object, SafeDeploy Studio queries the target server's <code>sys.sql_modules</code> and writes the current definition to your configured backup directory:
+                        Before modifying any target object, SQL Diff Studio queries the target server's <code>sys.sql_modules</code> and writes the current definition to your configured backup directory:
                     </p>
                     <div class="code-block">D:\Project\CE21 DB Changes Backup\Dev\20261124_143022_proc_OrderItem_ChangeProductOrEventTime_DEV.sql</div>
                 </div>
@@ -688,12 +688,12 @@ CREATE PROCEDURE [dbo].[proc_OrderItem_ChangeProductOrEventTime]
                 <div class="article-section">
                     <h2 class="article-h2">2. In-File Audit Header Stamping</h2>
                     <p class="article-p">
-                        Every procedure applied by SafeDeploy Studio is stamped with an immutable audit header at the top of the file:
+                        Every procedure applied by SQL Diff Studio is stamped with an immutable audit header at the top of the file:
                     </p>
                     <div class="code-block">
 -- =========================================================================
 -- APPLIED BY: vishal.prajapati ON 24-Nov-2026 14:30:22 IST
--- TOOL: SafeDeploy Studio / SQL Diff Studio
+-- TOOL: SQL Diff Studio
 -- ROUTE: Local-0001 -> DEV-0001
 -- PRE-CHANGE ROLLBACK: 20261124_143022_proc_OrderItem_ChangeProductOrEventTime_DEV.sql
 -- =========================================================================
@@ -773,7 +773,7 @@ CREATE PROCEDURE [dbo].[proc_OrderItem_ChangeProductOrEventTime]
                     <h2 class="article-h2">2. Live Token Budget &amp; Quota Tracking</h2>
                     <div class="callout callout-info">
                         <strong>Token Usage Like Modern AI Agents (Cursor / Claude Code):</strong><br>
-                        SafeDeploy Studio reads live rate-limit response headers (<code>x-ratelimit-remaining-tokens</code>, <code>x-ratelimit-limit-tokens</code>, <code>x-ratelimit-reset-tokens</code>, <code>x-ratelimit-remaining-requests</code>) and renders an interactive token budget meter:
+                        SQL Diff Studio reads live rate-limit response headers (<code>x-ratelimit-remaining-tokens</code>, <code>x-ratelimit-limit-tokens</code>, <code>x-ratelimit-reset-tokens</code>, <code>x-ratelimit-remaining-requests</code>) and renders an interactive token budget meter:
                     </div>
                     <ul style="margin-left: 1.5rem; color: var(--color-fg-muted); margin-bottom: 1rem; line-height: 1.8;">
                         <li>🟢 <strong>Tokens Left:</strong> Shows exact token count and percentage (e.g. <code>298.5k / 300k left (99.5%)</code>).</li>
@@ -829,7 +829,7 @@ CREATE PROCEDURE [dbo].[proc_OrderItem_ChangeProductOrEventTime]
                     
                     <h3 class="article-h3">1. Why do I see "There is already an object named '...' in the database"?</h3>
                     <p class="article-p">
-                        In previous versions or manual scripts, executing <code>CREATE PROCEDURE</code> fails if the object already exists on the target. SafeDeploy Studio now automatically prepends <code>IF OBJECT_ID(...) IS NOT NULL DROP PROCEDURE ... GO</code> before <code>CREATE PROCEDURE</code>, ensuring idempotent and zero-error deployments.
+                        In previous versions or manual scripts, executing <code>CREATE PROCEDURE</code> fails if the object already exists on the target. SQL Diff Studio now automatically prepends <code>IF OBJECT_ID(...) IS NOT NULL DROP PROCEDURE ... GO</code> before <code>CREATE PROCEDURE</code>, ensuring idempotent and zero-error deployments.
                     </p>
 
                     <h3 class="article-h3">2. How do I prevent comparing backup version procedures?</h3>
@@ -854,7 +854,7 @@ CREATE PROCEDURE [dbo].[proc_OrderItem_ChangeProductOrEventTime]
     <!-- Compact Footer -->
     <footer class="footer">
         <div class="container footer-bottom">
-            <span>&copy; 2026 SafeDeploy Studio &bull; SQL Diff Studio. Open source under the MIT License.</span>
+            <span>&copy; 2026 SQL Diff Studio. Open source under the MIT License.</span>
             <span><a href="docs.html">Technical Documentation</a> &bull; <a href="releases.html">Releases</a></span>
         </div>
     </footer>

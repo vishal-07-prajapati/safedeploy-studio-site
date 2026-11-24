@@ -1,6 +1,6 @@
-# SafeDeploy Studio — Product Showcase Website
+# SQL Diff Studio — Product Showcase Website
 
-This repository hosts the public product landing page and documentation showcase for **SafeDeploy Studio**, deployed via **GitHub Pages**.
+This repository hosts the public product landing page and documentation showcase for **SQL Diff Studio**, deployed via **GitHub Pages**.
 
 ## Live Website
 👉 [https://vishal-07-prajapati.github.io/safedeploy-studio-site](https://vishal-07-prajapati.github.io/safedeploy-studio-site)

@@ -1,4 +1,4 @@
-# SafeDeploy Studio — Public Website Design Audit
+# SQL Diff Studio — Public Website Design Audit
 
 ## 1. Executive Summary
 

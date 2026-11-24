@@ -1,4 +1,4 @@
-# SafeDeploy Studio — Website Information Architecture
+# SQL Diff Studio — Website Information Architecture
 
 ## 1. Information Hierarchy & Site Structure
 
@@ -17,7 +17,7 @@ https://vishal-07-prajapati.github.io/safedeploy-studio-site/
 ## 2. Global Navigation System
 
 ### Header Bar (Fixed / Sticky Blur)
-* **Left:** SafeDeploy Studio Brandmark + Vector Shield Icon.
+* **Left:** SQL Diff Studio Brandmark + Vector Shield Icon.
 * **Center Navigation Links:**
   * **Product** (`index.html#overview`)
   * **Features** (`index.html#features`)
@@ -38,7 +38,7 @@ https://vishal-07-prajapati.github.io/safedeploy-studio-site/
 1. **Hero Section:**
    * Headline: *Database deployments. Controlled with confidence.*
    * Subtitle: *A centralized database deployment and management platform for engineering teams. Compare database changes, validate deployment scripts, enforce configurable safety policies, and manage deployment history from one unified workspace.*
-   * Actions: "Explore SafeDeploy Studio", "Read User Guide", "View on GitHub".
+   * Actions: "Explore SQL Diff Studio", "Read User Guide", "View on GitHub".
    * Visual Preview: Realistic developer workbench frame modeling the actual Blazor/WPF interface (Side-by-side SQL diff, ScriptDom validation badge, Vault snapshot status).
 2. **Product Pillars:**
    * Centralized Schema Comparison

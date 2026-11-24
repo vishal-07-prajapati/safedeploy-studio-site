@@ -1,12 +1,12 @@
 /**
- * SafeDeploy Studio — Enterprise Developer Platform Interactions
+ * SQL Diff Studio — Enterprise Developer Platform Interactions
  */
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Theme Management (Dark by Default)
     const themeToggleBtn = document.getElementById('themeToggle');
     const htmlElement = document.documentElement;
 
-    const storedTheme = localStorage.getItem('safedeploy-theme') || 'dark';
+    const storedTheme = localStorage.getItem('sqldiff-theme') || localStorage.getItem('safedeploy-theme') || 'dark';
     setTheme(storedTheme);
 
     if (themeToggleBtn) {
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const currentTheme = htmlElement.getAttribute('data-theme') || 'dark';
             const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
             setTheme(targetTheme);
-            localStorage.setItem('safedeploy-theme', targetTheme);
+            localStorage.setItem('sqldiff-theme', targetTheme);
         });
     }
 

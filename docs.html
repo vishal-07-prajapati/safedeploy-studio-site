@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SafeDeploy Studio — Technical Architecture & Specifications</title>
-    <meta name="description" content="Technical architecture, AST visitor engine, database provider abstraction, and IIS hosting guide for SafeDeploy Studio.">
+    <title>SQL Diff Studio — Technical Architecture & Specifications</title>
+    <meta name="description" content="Technical architecture, AST visitor engine, database provider abstraction, and IIS hosting guide for SQL Diff Studio.">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +19,7 @@
                 <div class="nav-brand-icon">
                     <svg class="icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                 </div>
-                <span>SafeDeploy Studio</span>
+                <span>SQL Diff Studio</span>
             </a>
 
             <nav class="nav-links">
@@ -67,26 +67,26 @@
         <section id="architecture" class="article-section">
             <h2 class="article-h2">1. Solution Structure & Dependency Rules</h2>
             <p class="article-p">
-                SafeDeploy Studio is structured into 14 decoupled projects enforcing strict unidirectional Clean Architecture dependency flows. The Domain core has zero external library dependencies.
+                SQL Diff Studio is structured into decoupled modules enforcing strict unidirectional Clean Architecture dependency flows. The Domain core has zero external library dependencies.
             </p>
             <div class="code-block">
-SafeDeployStudio.slnx
-├── SafeDeployStudio.Domain                   (Entities, Enums, Value Objects, Interfaces)
-├── SafeDeployStudio.DatabaseProviders
-│   ├── SafeDeployStudio.DatabaseProviders.Abstractions (IDatabaseProvider contracts)
-│   └── SafeDeployStudio.DatabaseProviders.SqlServer    (Dapper, SqlClient, ScriptDom)
-├── SafeDeployStudio.Guardrails               (ScriptDom TSql160Parser AST Visitors)
-├── SafeDeployStudio.Deployment               (DiffPlex side-by-side SQL diff engine)
-├── SafeDeployStudio.Backup                   (Pre-change snapshot generator & Vault)
-├── SafeDeployStudio.AI                       (SARGability analyzer & LLM adapter)
-├── SafeDeployStudio.Application              (CQRS use cases, DTOs, workflow service)
-├── SafeDeployStudio.Infrastructure           (EF Core SQLite & SQL Server Repositories)
-├── SafeDeployStudio.Api                      (ASP.NET Core Web API, SignalR hub)
-├── SafeDeployStudio.Web                      (Blazor Server Interactive UI)
-├── SafeDeployStudio.Desktop                  (WPF host + Microsoft WebView2)
+SqlDiffStudio.slnx
+├── SqlDiffStudio.Domain                   (Entities, Enums, Value Objects, Interfaces)
+├── SqlDiffStudio.DatabaseProviders
+│   ├── SqlDiffStudio.DatabaseProviders.Abstractions (IDatabaseProvider contracts)
+│   └── SqlDiffStudio.DatabaseProviders.SqlServer    (Dapper, SqlClient, ScriptDom)
+├── SqlDiffStudio.Guardrails               (ScriptDom TSql160Parser AST Visitors)
+├── SqlDiffStudio.Deployment               (DiffPlex side-by-side SQL diff engine)
+├── SqlDiffStudio.Backup                   (Pre-change snapshot generator & Vault)
+├── SqlDiffStudio.AI                       (SARGability analyzer & LLM adapter)
+├── SqlDiffStudio.Application              (CQRS use cases, DTOs, workflow service)
+├── SqlDiffStudio.Infrastructure           (EF Core SQLite & SQL Server Repositories)
+├── SqlDiffStudio.Api                      (ASP.NET Core Web API, SignalR hub)
+├── SqlDiffStudio.Web                      (Blazor Server Interactive UI)
+├── SqlDiffStudio.Desktop                  (WPF host + Microsoft WebView2)
 └── tests/
-    ├── SafeDeployStudio.UnitTests            (xUnit, FluentAssertions, Moq)
-    └── SafeDeployStudio.IntegrationTests     (In-Memory EF Core database integration)
+    ├── SqlDiffStudio.UnitTests            (xUnit, FluentAssertions, Moq)
+    └── SqlDiffStudio.IntegrationTests     (In-Memory EF Core database integration)
             </div>
         </section>
 
@@ -127,7 +127,7 @@ SafeDeployStudio.slnx
         <section id="vault" class="article-section">
             <h2 class="article-h2">3. Pre-Change Backup Snapshot Algorithm</h2>
             <p class="article-p">
-                Before applying changes to a target database, SafeDeploy Studio executes an automated backup procedure:
+                Before applying changes to a target database, SQL Diff Studio executes an automated backup procedure:
             </p>
 
             <div class="screenshot-container">
@@ -158,7 +158,7 @@ SafeDeployStudio.slnx
         <section id="iis" class="article-section">
             <h2 class="article-h2">4. Windows Server IIS Hosting Architecture</h2>
             <p class="article-p">
-                For centralized multi-user enterprise deployments, <code>SafeDeployStudio.Web</code> runs under Windows Server IIS using the <code>AspNetCoreModuleV2</code> out-of-process hosting model.
+                For centralized multi-user enterprise deployments, <code>SqlDiffStudio.Web</code> runs under Windows Server IIS using the <code>AspNetCoreModuleV2</code> out-of-process hosting model.
             </p>
             <div class="code-block">
 &lt;?xml version="1.0" encoding="utf-8"?&gt;
@@ -169,7 +169,7 @@ SafeDeployStudio.slnx
         &lt;add name="aspNetCore" path="*" verb="*" modules="AspNetCoreModuleV2" resourceType="Unspecified" /&gt;
       &lt;/handlers&gt;
       &lt;aspNetCore processPath="dotnet"
-                  arguments=".\SafeDeployStudio.Web.dll"
+                  arguments=".\SqlDiffStudio.Web.dll"
                   stdoutLogEnabled="true"
                   stdoutLogFile=".\logs\stdout"
                   hostingModel="inprocess" /&gt;
@@ -188,9 +188,9 @@ SafeDeployStudio.slnx
             <div class="code-block">
 git clone https://github.com/vishal-07-prajapati/safedeploy-studio.git
 cd safedeploy-studio
-dotnet restore SafeDeployStudio.slnx
-dotnet build SafeDeployStudio.slnx --configuration Release
-dotnet test SafeDeployStudio.slnx
+dotnet restore SqlDiffStudio.slnx
+dotnet build SqlDiffStudio.slnx --configuration Release
+dotnet test SqlDiffStudio.slnx
             </div>
         </section>
 
@@ -270,7 +270,7 @@ x-ratelimit-limit-requests      -> Maximum requests per minute/day
     <!-- Footer -->
     <footer class="footer">
         <div class="container footer-bottom">
-            <span>&copy; 2026 SafeDeploy Studio. All rights reserved. Open source under the MIT License.</span>
+            <span>&copy; 2026 SQL Diff Studio. All rights reserved. Open source under the MIT License.</span>
             <span><a href="index.html">Home</a> &bull; <a href="user-guide.html">User Guide</a> &bull; <a href="releases.html">Releases</a></span>
         </div>
     </footer>
