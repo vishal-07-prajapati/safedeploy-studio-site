@@ -697,6 +697,8 @@ a:hover {
     font-family: var(--font-mono);
     font-size: 12px;
     line-height: 1.55;
+    white-space: pre;
+    tab-size: 4;
     overflow-x: auto;
     margin: 1rem 0;
     color: var(--color-fg-default);
