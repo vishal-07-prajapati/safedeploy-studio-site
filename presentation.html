@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SQL Diff Studio — Feature Showcase &amp; Product Presentation</title>
+    <title>SQL Diff Studio — Product Presentation &amp; Roadmap</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="icon" type="image/png" href="assets/img/app-logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,21 +11,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0b0f14;
-            --surface: #11161d;
-            --card: #161c24;
-            --elevated: #1f2732;
-            --border: #2a3340;
-            --fg: #eef2f6;
-            --muted: #9aa4b2;
+            --bg: #070a0f;
+            --surface: #0d1219;
+            --card: rgba(22, 28, 36, 0.85);
+            --elevated: #1c2430;
+            --border: rgba(255, 255, 255, 0.09);
+            --border-hover: rgba(47, 129, 247, 0.45);
+            --fg: #f0f4f8;
+            --muted: #8f9aa8;
             --blue: #2f81f7;
             --blue-soft: rgba(47, 129, 247, 0.14);
             --green: #3fb950;
             --green-soft: rgba(63, 185, 80, 0.14);
             --red: #f85149;
             --red-soft: rgba(248, 81, 73, 0.12);
-            --amber: #d29922;
-            --amber-soft: rgba(210, 153, 34, 0.14);
             --purple: #a371f7;
             --purple-soft: rgba(163, 113, 247, 0.14);
         }
@@ -35,6 +34,10 @@
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             background: var(--bg);
+            background-image:
+                radial-gradient(circle at 50% 0%, rgba(47, 129, 247, 0.14), transparent 55%),
+                radial-gradient(rgba(141, 150, 160, 0.12) 1px, transparent 1px);
+            background-size: 100% 100%, 26px 26px;
             color: var(--fg);
             min-height: 100vh;
             display: flex;
@@ -42,16 +45,19 @@
             overflow-x: hidden;
         }
 
-        /* Top Minimal Bar */
+        /* Glassmorphic Topbar */
         .topbar {
-            height: 52px;
-            background: var(--surface);
+            height: 54px;
+            background: rgba(13, 18, 25, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border);
             padding: 0 24px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-shrink: 0;
+            z-index: 20;
         }
 
         .brand {
@@ -63,25 +69,16 @@
             color: #fff;
             text-decoration: none;
         }
+        .brand img { width: 26px; height: 26px; border-radius: 6px; }
 
-        .brand img {
-            width: 26px;
-            height: 26px;
-            border-radius: 6px;
-        }
-
-        .top-actions {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+        .top-actions { display: flex; align-items: center; gap: 8px; }
 
         .btn {
             background: var(--elevated);
             border: 1px solid var(--border);
             color: var(--fg);
             padding: 6px 12px;
-            border-radius: 6px;
+            border-radius: 7px;
             font-size: 12.5px;
             font-weight: 500;
             cursor: pointer;
@@ -89,12 +86,12 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            transition: background 0.15s;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .btn:hover { background: #2a3442; }
-        .btn.primary { background: var(--blue); border-color: var(--blue); color: #fff; font-weight: 600; }
+        .btn:hover { background: #26303f; border-color: rgba(255,255,255,0.2); transform: translateY(-1px); }
+        .btn.primary { background: var(--blue); border-color: var(--blue); color: #fff; font-weight: 600; box-shadow: 0 4px 14px rgba(47,129,247,0.3); }
         .btn.primary:hover { background: #1f6feb; }
-        .btn:disabled { opacity: 0.35; cursor: not-allowed; }
+        .btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
 
         /* Stage */
         .stage {
@@ -103,39 +100,47 @@
             align-items: center;
             justify-content: center;
             padding: 20px 24px;
+            perspective: 1200px;
         }
 
         .slide {
             display: none;
             width: 100%;
             max-width: 1240px;
-            min-height: 660px;
-            background: var(--surface);
+            min-height: 650px;
+            background: linear-gradient(180deg, rgba(17, 23, 32, 0.96), rgba(13, 18, 25, 0.98));
             border: 1px solid var(--border);
-            border-radius: 14px;
+            border-radius: 16px;
             padding: 36px 44px;
-            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.06);
             flex-direction: column;
             justify-content: space-between;
             gap: 20px;
+            position: relative;
         }
 
         .slide.active {
             display: flex;
-            animation: slideIn 0.22s ease-out;
+            animation: deckEnter 0.38s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(8px); }
+        @keyframes deckEnter {
+            from { opacity: 0; transform: translateY(14px) scale(0.985); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* Staggered child animations inside active slide */
+        .slide.active .anim-1 { animation: itemUp 0.4s 0.04s both cubic-bezier(0.16, 1, 0.3, 1); }
+        .slide.active .anim-2 { animation: itemUp 0.4s 0.10s both cubic-bezier(0.16, 1, 0.3, 1); }
+        .slide.active .anim-3 { animation: itemUp 0.4s 0.16s both cubic-bezier(0.16, 1, 0.3, 1); }
+        .slide.active .anim-4 { animation: itemUp 0.4s 0.22s both cubic-bezier(0.16, 1, 0.3, 1); }
+
+        @keyframes itemUp {
+            from { opacity: 0; transform: translateY(12px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .slide-hdr {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-        }
+        .slide-hdr { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 
         .pill {
             display: inline-flex;
@@ -154,19 +159,17 @@
         .pill.green { background: var(--green-soft); color: var(--green); border-color: rgba(63, 185, 80, 0.35); }
         .pill.purple { background: var(--purple-soft); color: var(--purple); border-color: rgba(163, 113, 247, 0.35); }
 
-        .slide-counter {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-            color: var(--muted);
-        }
+        .slide-counter { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted); }
 
         h1.hero-title {
-            font-size: clamp(2rem, 4vw, 3.25rem);
+            font-size: clamp(2rem, 4vw, 3.1rem);
             font-weight: 800;
             letter-spacing: -0.03em;
-            line-height: 1.12;
-            color: #fff;
-            margin-bottom: 12px;
+            line-height: 1.1;
+            background: linear-gradient(180deg, #ffffff 40%, #a5b4c7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 14px;
         }
 
         h2.title {
@@ -177,33 +180,15 @@
             margin-bottom: 6px;
         }
 
-        .lead {
-            font-size: 15.5px;
-            color: var(--muted);
-            line-height: 1.55;
-            max-width: 780px;
-        }
+        .lead { font-size: 15.5px; color: var(--muted); line-height: 1.55; max-width: 780px; }
 
-        .body {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+        .body { flex: 1; display: flex; flex-direction: column; justify-content: center; }
 
-        /* Grids */
-        .cols-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: stretch; }
+        .cols-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: stretch; }
         .cols-feature { display: grid; grid-template-columns: 0.88fr 1.25fr; gap: 28px; align-items: center; }
         .cols-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-        .cols-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
 
-        /* Feature Callout Cards */
-        .callout-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
+        .callout-list { display: flex; flex-direction: column; gap: 12px; }
         .callout {
             display: flex;
             gap: 12px;
@@ -211,8 +196,10 @@
             background: var(--card);
             border: 1px solid var(--border);
             border-radius: 10px;
-            padding: 13px 15px;
+            padding: 14px 16px;
+            transition: border-color 0.2s, transform 0.2s;
         }
+        .callout:hover { border-color: var(--border-hover); transform: translateX(3px); }
 
         .callout-num {
             width: 24px;
@@ -228,21 +215,9 @@
             flex-shrink: 0;
             margin-top: 2px;
         }
+        .callout h4 { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 3px; }
+        .callout p { font-size: 13px; color: var(--muted); line-height: 1.45; }
 
-        .callout h4 {
-            font-size: 14px;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 3px;
-        }
-
-        .callout p {
-            font-size: 13px;
-            color: var(--muted);
-            line-height: 1.45;
-        }
-
-        /* Before -> After Comparison */
         .ba-card {
             background: var(--card);
             border: 1px solid var(--border);
@@ -251,94 +226,43 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
+            transition: border-color 0.2s;
         }
-
-        .ba-title {
-            font-size: 14.5px;
-            font-weight: 700;
-            color: #fff;
-        }
-
-        .ba-row {
-            display: grid;
-            grid-template-columns: 1fr 24px 1fr;
-            gap: 8px;
-            align-items: center;
-        }
-
+        .ba-card:hover { border-color: var(--border-hover); }
+        .ba-title { font-size: 14.5px; font-weight: 700; color: #fff; }
+        .ba-row { display: grid; grid-template-columns: 1fr 24px 1fr; gap: 8px; align-items: center; }
         .ba-before {
             background: var(--red-soft);
             border: 1px solid rgba(248, 81, 73, 0.25);
             color: #ffa198;
-            padding: 8px 10px;
-            border-radius: 6px;
+            padding: 9px 11px;
+            border-radius: 7px;
             font-size: 12.5px;
             line-height: 1.4;
         }
-
         .ba-after {
             background: var(--green-soft);
             border: 1px solid rgba(63, 185, 80, 0.25);
             color: #7ee787;
-            padding: 8px 10px;
-            border-radius: 6px;
+            padding: 9px 11px;
+            border-radius: 7px;
             font-size: 12.5px;
             line-height: 1.4;
         }
+        .ba-arrow { text-align: center; color: var(--muted); font-weight: 700; }
 
-        .ba-arrow {
-            text-align: center;
-            color: var(--muted);
-            font-weight: 700;
-        }
-
-        /* Screenshot Frame */
         .shot {
             background: #fff;
             border: 1px solid var(--border);
-            border-radius: 10px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45);
+            box-shadow: 0 18px 44px rgba(0, 0, 0, 0.55);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .shot img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
+        .shot:hover { transform: scale(1.01); }
+        .shot img { width: 100%; height: auto; display: block; }
 
-        /* Feature Card */
-        .fcard {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 18px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .fcard-badge {
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--green);
-        }
-
-        .fcard h3 {
-            font-size: 15px;
-            font-weight: 700;
-            color: #fff;
-        }
-
-        .fcard p {
-            font-size: 13px;
-            color: var(--muted);
-            line-height: 1.5;
-        }
-
-        /* Roadmap Column */
-        .rcol {
+        .fcard, .rcol {
             background: var(--card);
             border: 1px solid var(--border);
             border-radius: 10px;
@@ -346,28 +270,21 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
+            transition: border-color 0.2s;
         }
+        .fcard:hover, .rcol:hover { border-color: var(--border-hover); }
+        .fcard-badge { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--green); }
+        .fcard h3 { font-size: 15px; font-weight: 700; color: #fff; }
+        .fcard p { font-size: 13px; color: var(--muted); line-height: 1.5; }
 
         .ritem {
-            background: var(--surface);
+            background: rgba(13, 18, 25, 0.8);
             border: 1px solid var(--border);
             border-radius: 8px;
             padding: 11px 13px;
         }
-
-        .ritem strong {
-            display: block;
-            font-size: 13.5px;
-            color: #fff;
-            margin-bottom: 3px;
-        }
-
-        .ritem span {
-            display: block;
-            font-size: 12.5px;
-            color: var(--muted);
-            line-height: 1.4;
-        }
+        .ritem strong { display: block; font-size: 13.5px; color: #fff; margin-bottom: 3px; }
+        .ritem span { display: block; font-size: 12.5px; color: var(--muted); line-height: 1.4; }
 
         code {
             font-family: 'JetBrains Mono', monospace;
@@ -378,10 +295,48 @@
             color: #79c0ff;
         }
 
+        /* Slide Grid Overview Modal */
+        .grid-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(7, 10, 15, 0.88);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            padding: 32px;
+            overflow-y: auto;
+        }
+        .grid-modal.open { display: block; animation: deckEnter 0.2s ease-out; }
+        .grid-modal-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .thumb-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 14px;
+            margin-top: 20px;
+        }
+        .thumb-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s;
+        }
+        .thumb-card:hover, .thumb-card.active {
+            border-color: var(--blue);
+            transform: translateY(-2px);
+            background: var(--elevated);
+        }
+
         /* Bottom Nav Bar */
         .bottombar {
             height: 54px;
-            background: var(--surface);
+            background: rgba(13, 18, 25, 0.85);
+            backdrop-filter: blur(12px);
             border-top: 1px solid var(--border);
             padding: 0 24px;
             display: flex;
@@ -390,12 +345,7 @@
             flex-shrink: 0;
         }
 
-        .dots {
-            display: flex;
-            gap: 6px;
-            align-items: center;
-        }
-
+        .dots { display: flex; gap: 6px; align-items: center; }
         .dot {
             width: 8px;
             height: 8px;
@@ -403,29 +353,25 @@
             background: var(--elevated);
             border: 1px solid var(--border);
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        .dot.active { width: 26px; background: var(--blue); border-color: var(--blue); }
 
-        .dot.active {
-            width: 24px;
-            background: var(--blue);
-            border-color: var(--blue);
-        }
-
-        /* Responsive Mobile / Tablet */
         @media (max-width: 960px) {
+            .topbar { padding: 0 14px; }
             .stage { padding: 12px; }
-            .slide { padding: 24px 20px; min-height: auto; }
-            .cols-2, .cols-feature, .cols-3, .cols-4 { grid-template-columns: 1fr; }
+            .slide { padding: 22px 18px; min-height: auto; }
+            .cols-2, .cols-feature, .cols-3 { grid-template-columns: 1fr; }
             .ba-row { grid-template-columns: 1fr; }
             .ba-arrow { transform: rotate(90deg); }
             .dots { display: none; }
+            .bottombar { padding: 0 14px; }
         }
 
         @media print {
             @page { size: landscape; margin: 0.2in; }
-            body { background: #11161d; }
-            .topbar, .bottombar { display: none !important; }
+            body { background: #0d1219; }
+            .topbar, .bottombar, .grid-modal { display: none !important; }
             .stage { display: block; padding: 0; }
             .slide {
                 display: flex !important;
@@ -443,64 +389,64 @@
 <header class="topbar">
     <a href="index.html" class="brand">
         <img src="assets/img/app-logo.png" alt="SQL Diff Studio Logo">
-        <span>SQL Diff Studio — Product Presentation</span>
+        <span>SQL Diff Studio</span>
     </a>
     <div class="top-actions">
-        <a href="index.html" class="btn">Home</a>
+        <button class="btn" onclick="toggleGrid()">All Slides (G)</button>
         <button class="btn" onclick="window.print()">Print / PDF</button>
         <button class="btn primary" onclick="toggleFullscreen()">Fullscreen (F)</button>
     </div>
 </header>
 
-<main class="stage">
+<main class="stage" id="stage">
 
     <!-- SLIDE 1: OVERVIEW -->
     <section class="slide active" data-title="Overview">
-        <div class="slide-hdr">
+        <div class="slide-hdr anim-1">
             <span class="pill green">Ready to Use Today • v1.0.0</span>
             <span class="slide-counter">01 / 08</span>
         </div>
         <div class="body">
             <div class="cols-feature">
-                <div>
+                <div class="anim-2">
                     <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;">
                         <img src="assets/img/app-logo.png" alt="SQL Diff Studio" style="width:52px;height:52px;border-radius:12px;">
                         <div>
-                            <div style="font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.06em;">Windows Desktop Tool</div>
+                            <div style="font-size:11.5px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Windows Desktop Tool</div>
                             <div style="font-size:20px;font-weight:800;color:#fff;">SQL Diff Studio</div>
                         </div>
                     </div>
-                    <h1 class="hero-title">Compare &amp; Deploy SQL Changes Safely</h1>
+                    <h1 class="hero-title">Compare &amp; Deploy SQL Migrations Safely</h1>
                     <p class="lead" style="margin-bottom:22px;">
-                        Built for SQL Server &amp; Azure SQL teams to reduce manual workload when managing multiple DB migrations—with targeted SP comparison, idempotent <code>DROP &amp; CREATE</code> bulk deployment, and automatic rollback backups.
+                        Reduces manual workload for managing multiple DB migrations—combining targeted SP comparison, idempotent <code>DROP &amp; CREATE</code> bulk deployment, and automatic rollback snapshots.
                     </p>
                     <div style="display:flex;gap:10px;flex-wrap:wrap;">
                         <button class="btn primary" onclick="go(1)">Explore Key Features →</button>
                         <a href="downloads/SqlDiffStudio-Setup.exe" class="btn">Download v1.0.0</a>
                     </div>
                 </div>
-                <div class="shot">
+                <div class="shot anim-3">
                     <img src="assets/img/sds_03_results_diff.png" alt="SQL Diff Studio Side-by-Side Diff">
                 </div>
             </div>
         </div>
-        <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);">
-            <span>Use ← / → Arrow Keys to navigate</span>
+        <div class="anim-4" style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);">
+            <span>Use ← / → Arrow Keys or Swipe to navigate</span>
             <span>SQL Server 2016–2022 • Azure SQL • Windows x64</span>
         </div>
     </section>
 
     <!-- SLIDE 2: BEFORE VS AFTER -->
     <section class="slide" data-title="Why It Matters">
-        <div class="slide-hdr">
+        <div class="slide-hdr anim-1">
             <span class="pill">Before vs. After</span>
             <span class="slide-counter">02 / 08</span>
         </div>
-        <div>
-            <h2 class="title">How SQL Diff Studio Solves Daily Pain Points</h2>
-            <p class="lead">Designed directly around real bottlenecks in multi-database SQL Server workflows.</p>
+        <div class="anim-2">
+            <h2 class="title">How SQL Diff Studio Reduces Manual Workload</h2>
+            <p class="lead">Built directly around real bottlenecks in multi-database SQL Server workflows.</p>
         </div>
-        <div class="body">
+        <div class="body anim-3">
             <div class="cols-2">
                 <div class="ba-card">
                     <div class="ba-title">1. Managing Multiple DB Migrations &amp; SP Filters</div>
@@ -541,23 +487,23 @@
         </div>
     </section>
 
-    <!-- SLIDE 3: FEATURE 1 - TARGETED COMPARISON -->
+    <!-- SLIDE 3: FEATURE 1 -->
     <section class="slide" data-title="Feature: Targeted Compare">
-        <div class="slide-hdr">
+        <div class="slide-hdr anim-1">
             <span class="pill">Feature Spotlight 1</span>
             <span class="slide-counter">03 / 08</span>
         </div>
         <div class="body">
             <div class="cols-feature">
-                <div>
-                    <h2 class="title">Fast, Targeted Comparison</h2>
+                <div class="anim-2">
+                    <h2 class="title">Targeted Comparison &amp; Filters</h2>
                     <p class="lead" style="margin-bottom:16px;">Compare one or multiple database pairs in parallel with clean, noise-free results.</p>
                     <div class="callout-list">
                         <div class="callout">
                             <span class="callout-num">1</span>
                             <div>
                                 <h4>SQL-Level Pre-Filtering</h4>
-                                <p>Paste SP names in <strong>Only include</strong> (supports wildcards <code>*</code>, <code>?</code>, or pasted <code>DROP PROC</code> lines). SQL Server returns only those exact objects.</p>
+                                <p>Paste SP names in <strong>Only include</strong> (supports wildcards <code>*</code>, <code>?</code>, or pasted <code>DROP PROC</code> lines). SQL Server returns only those matching objects.</p>
                             </div>
                         </div>
                         <div class="callout">
@@ -576,22 +522,22 @@
                         </div>
                     </div>
                 </div>
-                <div class="shot">
+                <div class="shot anim-3">
                     <img src="assets/img/sds_02_comparison.png" alt="Comparison Setup Tab">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SLIDE 4: FEATURE 2 - BULK DEPLOY & ROLLBACK -->
+    <!-- SLIDE 4: FEATURE 2 -->
     <section class="slide" data-title="Feature: Bulk Deploy">
-        <div class="slide-hdr">
+        <div class="slide-hdr anim-1">
             <span class="pill">Feature Spotlight 2</span>
             <span class="slide-counter">04 / 08</span>
         </div>
         <div class="body">
             <div class="cols-feature">
-                <div>
+                <div class="anim-2">
                     <h2 class="title">Bulk Apply &amp; Rollback Safety</h2>
                     <p class="lead" style="margin-bottom:16px;">Deploy single or multiple stored procedures safely across one or all tenant databases.</p>
                     <div class="callout-list">
@@ -618,22 +564,22 @@
                         </div>
                     </div>
                 </div>
-                <div class="shot">
+                <div class="shot anim-3">
                     <img src="assets/img/sds_05_bulk_apply.png" alt="Bulk Apply Confirmation Modal">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SLIDE 5: FEATURE 3 - AI & SARGABILITY -->
+    <!-- SLIDE 5: FEATURE 3 -->
     <section class="slide" data-title="Feature: AI Advisor">
-        <div class="slide-hdr">
+        <div class="slide-hdr anim-1">
             <span class="pill">Feature Spotlight 3</span>
             <span class="slide-counter">05 / 08</span>
         </div>
         <div class="body">
             <div class="cols-feature">
-                <div>
+                <div class="anim-2">
                     <h2 class="title">AI &amp; SARGability Advisor</h2>
                     <p class="lead" style="margin-bottom:16px;">Optimize query performance before deploying—offline or with your own LLM key.</p>
                     <div class="callout-list">
@@ -660,22 +606,22 @@
                         </div>
                     </div>
                 </div>
-                <div class="shot">
+                <div class="shot anim-3">
                     <img src="assets/img/sds_04_ai_drawer.png" alt="AI Performance Advisor Drawer">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SLIDE 6: FEATURE 4 - SECURITY & CONFIG -->
+    <!-- SLIDE 6: FEATURE 4 -->
     <section class="slide" data-title="Feature: Security">
-        <div class="slide-hdr">
+        <div class="slide-hdr anim-1">
             <span class="pill">Feature Spotlight 4</span>
             <span class="slide-counter">06 / 08</span>
         </div>
         <div class="body">
             <div class="cols-feature">
-                <div>
+                <div class="anim-2">
                     <h2 class="title">Enterprise Security &amp; Auditability</h2>
                     <p class="lead" style="margin-bottom:16px;">Zero plaintext secrets on screen or disk, with shared team visibility.</p>
                     <div class="callout-list">
@@ -702,7 +648,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="shot">
+                <div class="shot anim-3">
                     <img src="assets/img/sds_01_configurations.png" alt="Configurations and Security Tab">
                 </div>
             </div>
@@ -711,15 +657,15 @@
 
     <!-- SLIDE 7: FUTURE ENHANCEMENTS -->
     <section class="slide" data-title="Future Enhancements">
-        <div class="slide-hdr">
+        <div class="slide-hdr anim-1">
             <span class="pill purple">Future Enhancements Roadmap</span>
             <span class="slide-counter">07 / 08</span>
         </div>
-        <div>
+        <div class="anim-2">
             <h2 class="title">What's Coming Next</h2>
             <p class="lead">v1.0.0 is ready for daily production workflows today. Here is our planned expansion path.</p>
         </div>
-        <div class="body">
+        <div class="body anim-3">
             <div class="cols-3">
                 <div class="rcol">
                     <span class="pill green" style="width:fit-content;">v1.1 • Near-Term</span>
@@ -774,17 +720,17 @@
 
     <!-- SLIDE 8: READY TO USE -->
     <section class="slide" data-title="Ready to Use">
-        <div class="slide-hdr">
+        <div class="slide-hdr anim-1">
             <span class="pill green">Ready to Use Now</span>
             <span class="slide-counter">08 / 08</span>
         </div>
-        <div class="body" style="align-items:center;text-align:center;">
+        <div class="body anim-2" style="align-items:center;text-align:center;">
             <img src="assets/img/app-logo.png" alt="SQL Diff Studio" style="width:64px;height:64px;border-radius:14px;margin-bottom:16px;">
             <h1 class="hero-title" style="margin-bottom:10px;">Start Using SQL Diff Studio Today</h1>
             <p class="lead" style="margin-bottom:28px;text-align:center;">
                 Install v1.0.0 with the Windows Setup Wizard or extract the portable ZIP to simplify multi-DB migrations.
             </p>
-            <div class="cols-3" style="width:100%;max-width:920px;margin-bottom:28px;text-align:left;">
+            <div class="cols-3 anim-3" style="width:100%;max-width:920px;margin-bottom:28px;text-align:left;">
                 <div class="fcard">
                     <span class="fcard-badge">Step 1</span>
                     <h3>Install &amp; Launch</h3>
@@ -801,10 +747,11 @@
                     <p>Filter target SPs, inspect clean diffs, check SARGability, and deploy safely with backups.</p>
                 </div>
             </div>
-            <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+            <div class="anim-4" style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
                 <a href="downloads/SqlDiffStudio-Setup.exe" class="btn primary">Download Windows Installer (.exe)</a>
                 <a href="downloads/SqlDiffStudio-v1.0.0-win-x64.zip" class="btn">Download Portable ZIP</a>
                 <a href="user-guide.html" class="btn">Read User Guide</a>
+                <a href="index.html" class="btn">Back to Website</a>
             </div>
         </div>
         <div style="text-align:center;font-size:12px;color:var(--muted);">
@@ -813,6 +760,17 @@
     </section>
 
 </main>
+
+<!-- Slide Grid Overview Modal -->
+<div class="grid-modal" id="gridModal">
+    <div class="grid-modal-inner">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+            <h2 class="title">All Slides</h2>
+            <button class="btn" onclick="toggleGrid()">Close (Esc)</button>
+        </div>
+        <div class="thumb-grid" id="thumbGrid"></div>
+    </div>
+</div>
 
 <footer class="bottombar">
     <span id="slideLabel" style="font-size:12.5px;font-weight:600;color:var(--muted);">Overview</span>
@@ -827,21 +785,31 @@
 <script>
     const slides = Array.from(document.querySelectorAll('.slide'));
     const dotsContainer = document.getElementById('dotsContainer');
+    const thumbGrid = document.getElementById('thumbGrid');
+    const gridModal = document.getElementById('gridModal');
     let idx = 0;
 
-    slides.forEach((_, i) => {
+    slides.forEach((s, i) => {
         const d = document.createElement('button');
         d.className = 'dot';
         d.ariaLabel = `Slide ${i + 1}`;
         d.onclick = () => { idx = i; render(); };
         dotsContainer.appendChild(d);
+
+        const t = document.createElement('button');
+        t.className = 'thumb-card';
+        t.innerHTML = `<div style="font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:4px;">SLIDE ${String(i + 1).padStart(2, '0')}</div><div style="font-size:14px;font-weight:700;color:#fff;">${s.dataset.title || 'Slide'}</div>`;
+        t.onclick = () => { idx = i; toggleGrid(); render(); };
+        thumbGrid.appendChild(t);
     });
 
     const dots = Array.from(dotsContainer.children);
+    const thumbs = Array.from(thumbGrid.children);
 
     function render() {
         slides.forEach((s, i) => s.classList.toggle('active', i === idx));
         dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+        thumbs.forEach((t, i) => t.classList.toggle('active', i === idx));
         document.getElementById('counterLabel').textContent = `${idx + 1} / ${slides.length}`;
         document.getElementById('slideLabel').textContent = slides[idx].dataset.title || '';
         document.getElementById('prevBtn').disabled = idx === 0;
@@ -861,13 +829,28 @@
         }
     }
 
+    function toggleGrid() {
+        gridModal.classList.toggle('open');
+    }
+
     document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && gridModal.classList.contains('open')) { toggleGrid(); return; }
+        if (e.key === 'g' || e.key === 'G') { toggleGrid(); return; }
         if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); go(1); }
         else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); go(-1); }
         else if (e.key === 'Home') { idx = 0; render(); }
         else if (e.key === 'End') { idx = slides.length - 1; render(); }
         else if (e.key === 'f' || e.key === 'F') { toggleFullscreen(); }
     });
+
+    // Touch swipe support for mobile/tablet
+    let touchX = 0;
+    const stage = document.getElementById('stage');
+    stage.addEventListener('touchstart', (e) => { touchX = e.changedTouches[0].screenX; }, { passive: true });
+    stage.addEventListener('touchend', (e) => {
+        const diff = e.changedTouches[0].screenX - touchX;
+        if (Math.abs(diff) > 50) go(diff < 0 ? 1 : -1);
+    }, { passive: true });
 
     render();
 </script>

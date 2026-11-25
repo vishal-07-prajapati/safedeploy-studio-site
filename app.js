@@ -127,4 +127,36 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     });
+
+    // 5. Interactive Showcase Tabs (21st.dev style)
+    const showcaseTabs = document.querySelectorAll('.showcase-tab');
+    const showcasePanels = document.querySelectorAll('.showcase-panel');
+    if (showcaseTabs.length > 0 && showcasePanels.length > 0) {
+        showcaseTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.getAttribute('data-tab');
+                showcaseTabs.forEach(t => t.classList.remove('active'));
+                showcasePanels.forEach(p => p.classList.remove('active'));
+                tab.classList.add('active');
+                const panel = document.getElementById(`panel-${target}`);
+                if (panel) panel.classList.add('active');
+            });
+        });
+    }
+
+    // 6. Scroll Reveal Observer
+    const revealEls = document.querySelectorAll('.reveal');
+    if (revealEls.length > 0 && 'IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    io.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        revealEls.forEach(el => io.observe(el));
+    } else {
+        revealEls.forEach(el => el.classList.add('visible'));
+    }
 });
