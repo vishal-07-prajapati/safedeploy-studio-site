@@ -32,6 +32,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // 1b. Mobile Navigation Toggle
+    const navToggle = document.getElementById('navToggle');
+    const mobileNav = document.getElementById('mobileNav');
+    if (navToggle && mobileNav) {
+        navToggle.addEventListener('click', () => {
+            mobileNav.classList.toggle('open');
+        });
+        mobileNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => mobileNav.classList.remove('open'));
+        });
+    }
+
     // 2. User Guide Navigation & Article Switcher
     const guideNavItems = document.querySelectorAll('.docs-nav-item');
     const guideArticles = document.querySelectorAll('.guide-article');

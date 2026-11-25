@@ -1,10 +1,12 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SQL Diff Studio — Releases & Downloads</title>
     <meta name="description" content="Download official releases of SQL Diff Studio for 64-bit Windows environments. Verified Windows installer and portable packages.">
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" href="assets/img/app-logo.png">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,9 +18,7 @@
     <header class="navbar">
         <div class="container nav-container">
             <a href="index.html" class="nav-brand">
-                <div class="nav-brand-icon">
-                    <svg class="icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                </div>
+                                <img src="assets/img/app-logo.png" alt="SQL Diff Studio Logo" class="nav-brand-logo">
                 <span>SQL Diff Studio</span>
             </a>
 
@@ -46,9 +46,26 @@
                     <svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                     <span>Download</span>
                 </a>
+                <button id="navToggle" class="nav-toggle" aria-label="Open menu">
+                    <svg class="icon" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
             </div>
         </div>
-    </header>
+        </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobileNav" class="mobile-nav">
+        <a href="index.html#features" class="nav-link">Features</a>
+        <a href="index.html#workflow" class="nav-link">Workflow</a>
+        <a href="user-guide.html" class="nav-link">User Guide</a>
+        <a href="docs.html" class="nav-link">Documentation</a>
+        <a href="presentation.html" class="nav-link">Presentation</a>
+        <a href="releases.html" class="nav-link">Releases</a>
+        <div class="mobile-nav-actions">
+            <a href="downloads/SqlDiffStudio-Setup.exe" class="btn btn-primary" style="flex:1;justify-content:center;">Download Installer</a>
+            <a href="https://github.com/vishal-07-prajapati/safedeploy-studio" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">GitHub</a>
+        </div>
+    </div>
 
     <!-- Main Container -->
     <div class="container" style="padding: 3rem 1.5rem; max-width: 960px;">

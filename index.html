@@ -3,32 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SQL Diff Studio — Intelligent Database Deployment & Comparison Platform</title>
-    <meta name="description" content="Centralized database deployment and management platform for engineering teams. AST safety guardrails, side-by-side SQL diffs, transactional dry-runs, and 1-click rollback built on .NET 10.">
+    <title>SQL Diff Studio — SQL Server Schema Comparison &amp; Safe Deployment</title>
+    <meta name="description" content="Native Windows desktop tool for SQL Server and Azure SQL stored procedure comparison, idempotent DROP &amp; CREATE deployment, pre-change rollback snapshots, and SARGability optimization.">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" href="assets/img/app-logo.png">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Header Navigation -->
+    <!-- Sticky Header Navigation -->
     <header class="navbar">
         <div class="container nav-container">
             <a href="index.html" class="nav-brand">
-                <div class="nav-brand-icon">
-                    <svg class="icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                </div>
+                <img src="assets/img/app-logo.png" alt="SQL Diff Studio Logo" class="nav-brand-logo">
                 <span>SQL Diff Studio</span>
             </a>
 
-            <nav class="nav-links">
-                <a href="#overview" class="nav-link">Product</a>
-                <a href="#screenshots" class="nav-link">Visual Tour</a>
+            <nav class="nav-links" aria-label="Main navigation">
                 <a href="#features" class="nav-link">Features</a>
-                <a href="#workflow" class="nav-link">How It Works</a>
+                <a href="#workflow" class="nav-link">Workflow</a>
                 <a href="user-guide.html" class="nav-link">User Guide</a>
-                <a href="docs.html" class="nav-link">Documentation</a>
+                <a href="docs.html" class="nav-link">Docs</a>
                 <a href="presentation.html" class="nav-link">Presentation</a>
                 <a href="releases.html" class="nav-link">Releases</a>
             </nav>
@@ -42,382 +40,272 @@
                     <svg class="icon" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
                     <span>GitHub</span>
                 </a>
-                <a href="releases.html" class="btn btn-primary">
+                <a href="downloads/SqlDiffStudio-Setup.exe" class="btn btn-primary">
                     <svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                    <span>Download</span>
+                    <span>Download v1.0</span>
                 </a>
+                <button id="navToggle" class="nav-toggle" aria-label="Open menu">
+                    <svg class="icon" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
             </div>
         </div>
     </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobileNav" class="mobile-nav">
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#workflow" class="nav-link">Workflow</a>
+        <a href="user-guide.html" class="nav-link">User Guide</a>
+        <a href="docs.html" class="nav-link">Documentation</a>
+        <a href="presentation.html" class="nav-link">Presentation</a>
+        <a href="releases.html" class="nav-link">Releases</a>
+        <div class="mobile-nav-actions">
+            <a href="downloads/SqlDiffStudio-Setup.exe" class="btn btn-primary" style="flex:1;justify-content:center;">Download Installer</a>
+            <a href="https://github.com/vishal-07-prajapati/safedeploy-studio" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">GitHub</a>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="container hero-grid">
             <div>
                 <div class="hero-tagline">
-                    <svg class="icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                    <span>Enterprise Database Operations</span>
+                    <span style="width:7px;height:7px;border-radius:50%;background:var(--color-success-fg);display:inline-block;"></span>
+                    <span>v1.0.0 for Windows x64 — Ready to Use</span>
                 </div>
                 <h1 class="hero-heading">
-                    Database deployments.<br>Controlled with confidence.
+                    Compare, verify, and deploy SQL changes without the guesswork.
                 </h1>
                 <p class="hero-description">
-                    A centralized database deployment and management platform for engineering teams. Compare database changes, validate deployment scripts, enforce configurable safety policies and manage deployment history from one unified workspace.
+                    SQL Diff Studio is a lightweight Windows desktop workbench for SQL Server and Azure SQL teams. Compare stored procedures token-by-token, deploy idempotent DROP &amp; CREATE scripts in bulk, and generate automatic rollback snapshots before every change.
                 </p>
                 <div class="hero-buttons">
-                    <a href="#overview" class="btn btn-primary">
-                        <span>Explore SQL Diff Studio</span>
-                    </a>
-                    <a href="user-guide.html" class="btn btn-secondary">
-                        <svg class="icon" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-                        <span>Read the User Guide</span>
+                    <a href="downloads/SqlDiffStudio-Setup.exe" class="btn btn-primary">
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        <span>Download Installer (7.2 MB)</span>
                     </a>
                     <a href="presentation.html" class="btn btn-secondary">
-                        <span>📊 Presentation Deck</span>
+                        <svg class="icon" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                        <span>View Presentation</span>
                     </a>
                 </div>
                 <div class="hero-meta">
                     <div class="hero-meta-item">
                         <svg class="icon" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
-                        <span>Microsoft SQL Server & Azure SQL</span>
+                        <span>SQL Server 2016–2022 &amp; Azure SQL</span>
                     </div>
                     <div class="hero-meta-item">
-                        <svg class="icon" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
-                        <span>.NET 10 LTS Core Engine</span>
+                        <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        <span>DPAPI Encrypted Credentials</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Realistic Product Preview Frame -->
-            <div class="screenshot-container" style="margin: 0; box-shadow: 0 16px 40px rgba(0,0,0,0.35);">
+            <div class="screenshot-container" style="margin: 0; box-shadow: 0 20px 50px rgba(0,0,0,0.4);">
                 <div class="screenshot-header">
                     <div class="screenshot-dots">
                         <div class="screenshot-dot dot-red"></div>
                         <div class="screenshot-dot dot-yellow"></div>
                         <div class="screenshot-dot dot-green"></div>
                     </div>
-                    <span class="screenshot-title">SQL Diff Studio &bull; Live SQL Diff &amp; AI Advisor</span>
-                    <span class="badge badge-success">Production Ready</span>
+                    <span class="screenshot-title">SQL Diff Studio — Results &amp; Side-by-Side Diff</span>
                 </div>
-                <img src="assets/img/sds_03_results_diff.png" alt="SQL Diff Studio &amp; AI Performance Advisor" class="screenshot-img" />
-                <div class="screenshot-caption">
-                    <span>⚡ Side-by-Side SQL diff with AST syntax guardrails &amp; live AI query rewrite suggestions</span>
-                    <span class="screenshot-badge">v1.0.0 LTS</span>
+                <img src="assets/img/sds_03_results_diff.png" alt="SQL Diff Studio Side-by-Side Diff Workspace" class="screenshot-img" />
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Metrics Strip -->
+    <section class="metrics-strip">
+        <div class="container">
+            <div class="metrics-grid">
+                <div class="metric-item">
+                    <div class="metric-val">&lt; 1 sec</div>
+                    <div class="metric-label">Targeted SP comparison via SQL WHERE pushdown</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-val">100%</div>
+                    <div class="metric-label">Pre-change .sql rollback snapshots before deploy</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-val">1-Click Bulk</div>
+                    <div class="metric-label">Deploy multiple SPs across single or all tenant DBs</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-val">Offline + AI</div>
+                    <div class="metric-label">Deterministic SARGability rules &amp; live token meter</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Product Overview Section -->
-    <section id="overview" class="section">
+    <!-- Alternating Feature Spotlights -->
+    <section id="features" class="section">
         <div class="container">
             <div class="section-header">
-                <div class="section-label">Centralized Workspace</div>
-                <h2 class="section-title">End-to-End Database Change Governance</h2>
-                <p class="section-lead">
-                    SQL Diff Studio replaces ad-hoc manual scripts with a structured, repeatable deployment pipeline built for high-consequence database environments.
+                <h2 class="section-title">Built for fast, reliable database engineering</h2>
+                <p class="section-subtitle">
+                    Every workflow is designed around real daily SQL Server operations—eliminating noisy formatting diffs, manual script prep, and risky ad-hoc deployments.
+                </p>
+            </div>
+
+            <div class="spotlight-stack">
+                <!-- Feature 1 -->
+                <div class="spotlight-row">
+                    <div>
+                        <span class="spotlight-eyebrow">Targeted Comparison</span>
+                        <h3 class="spotlight-title">Filter specific stored procedures without scanning the whole database</h3>
+                        <p class="spotlight-desc">
+                            Paste a list of procedure names—even straight from <code>DROP PROC</code> or <code>EXEC</code> scripts—into the Only Include box. SQL Diff Studio pushes exact <code>IN</code> and wildcard <code>LIKE</code> filters directly to SQL Server, skipping thousands of unrelated objects.
+                        </p>
+                        <ul class="check-list">
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                <span>Parallel comparison across multiple Source → Target pairs</span>
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                <span>Smart CE21 versioned SP matching only when explicitly entered</span>
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                <span>Import existing Visual Studio <code>.scmp</code> schema compare profiles</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="spotlight-media">
+                        <div class="screenshot-container" style="margin:0;">
+                            <div class="screenshot-header">
+                                <div class="screenshot-dots"><div class="screenshot-dot dot-red"></div><div class="screenshot-dot dot-yellow"></div><div class="screenshot-dot dot-green"></div></div>
+                                <span class="screenshot-title">2. Comparison — Pairs &amp; SQL Name Filters</span>
+                            </div>
+                            <img src="assets/img/sds_02_comparison.png" alt="Comparison Setup and Name Filters" class="screenshot-img" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="spotlight-row reverse">
+                    <div>
+                        <span class="spotlight-eyebrow">Safe Deployment &amp; Rollback</span>
+                        <h3 class="spotlight-title">Idempotent DROP &amp; CREATE with automatic pre-change backups</h3>
+                        <p class="spotlight-desc">
+                            Deploy a single procedure or use <strong>Apply ALL</strong> to roll out multiple changes across one database or every tenant database at once. Every run saves the existing target DDL first and stamps an audit header into the deployed object.
+                        </p>
+                        <ul class="check-list">
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                <span>Standalone <code>IF OBJECT_ID(...) DROP</code> before <code>CREATE</code></span>
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                <span>Timestamped rollback <code>.sql</code> snapshots + <code>deployment_history.log</code></span>
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                <span>Auto-renames versioned SPs back to target base names on deploy</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="spotlight-media">
+                        <div class="screenshot-container" style="margin:0;">
+                            <div class="screenshot-header">
+                                <div class="screenshot-dots"><div class="screenshot-dot dot-red"></div><div class="screenshot-dot dot-yellow"></div><div class="screenshot-dot dot-green"></div></div>
+                                <span class="screenshot-title">Bulk Apply Confirmation &amp; Tenant Scope</span>
+                            </div>
+                            <img src="assets/img/sds_05_bulk_apply.png" alt="Bulk Apply Confirmation Dialog" class="screenshot-img" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="spotlight-row">
+                    <div>
+                        <span class="spotlight-eyebrow">Performance Advisor</span>
+                        <h3 class="spotlight-title">Catch non-SARGable queries and track live AI token budgets</h3>
+                        <p class="spotlight-desc">
+                            Run instant offline rules to catch index-breaking predicates like <code>YEAR(col)</code>, <code>ISNULL(col, ...)</code>, and leading wildcards. Optionally connect Groq or OpenAI for deep query rewrites with transparent token-remaining telemetry.
+                        </p>
+                        <ul class="check-list">
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                <span>Instant offline SARGability rules with zero external calls</span>
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                <span>DPAPI-encrypted API keys with masked input &amp; Test Connection</span>
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                <span>Live tokens remaining, request rate limits, and reset countdown</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="spotlight-media">
+                        <div class="screenshot-container" style="margin:0;">
+                            <div class="screenshot-header">
+                                <div class="screenshot-dots"><div class="screenshot-dot dot-red"></div><div class="screenshot-dot dot-yellow"></div><div class="screenshot-dot dot-green"></div></div>
+                                <span class="screenshot-title">AI &amp; SARGability Performance Advisor</span>
+                            </div>
+                            <img src="assets/img/sds_04_ai_drawer.png" alt="AI Performance Advisor Drawer" class="screenshot-img" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3-Step Workflow -->
+    <section id="workflow" class="section" style="background-color: var(--color-canvas-subtle); border-top: 1px solid var(--color-border-default); border-bottom: 1px solid var(--color-border-default);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Three steps from comparison to safe deployment</h2>
+                <p class="section-subtitle">
+                    One focused desktop window takes you from connection setup to verified rollout.
                 </p>
             </div>
 
             <div class="features-grid">
-                <div class="feature-box">
-                    <div class="feature-header">
-                        <div class="feature-icon-wrapper">
-                            <svg class="icon" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-                        </div>
-                        <h3 class="feature-title">Database Comparison</h3>
-                    </div>
-                    <p class="feature-body">
-                        Compare source and target database objects. Inspect live object definitions from <code>sys.sql_modules</code> with whitespace-normalized line-by-line diffing.
+                <div class="card">
+                    <div class="step-num" style="margin-bottom:1rem;">1</div>
+                    <h3 class="card-title">Configure &amp; Secure</h3>
+                    <p class="card-desc">
+                        Save DEV, Local, and Staging SQL Server profiles with Windows DPAPI encryption. Set your shared backup folder and test optional AI credentials.
                     </p>
-                    <div class="feature-footer">DiffPlex AST Engine</div>
                 </div>
-
-                <div class="feature-box">
-                    <div class="feature-header">
-                        <div class="feature-icon-wrapper">
-                            <svg class="icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                        </div>
-                        <h3 class="feature-title">AST Safety Guardrails</h3>
-                    </div>
-                    <p class="feature-body">
-                        Static T-SQL Abstract Syntax Tree verification blocks physical table drops, truncations, and schema alterations while permitting temporary staging tables.
+                <div class="card">
+                    <div class="step-num" style="margin-bottom:1rem;">2</div>
+                    <h3 class="card-title">Filter &amp; Compare</h3>
+                    <p class="card-desc">
+                        Select database pairs, enter specific SP names or wildcards, and run a token-normalized comparison that ignores formatting noise.
                     </p>
-                    <div class="feature-footer">Microsoft.SqlServer.ScriptDom 180</div>
                 </div>
-
-                <div class="feature-box">
-                    <div class="feature-header">
-                        <div class="feature-icon-wrapper">
-                            <svg class="icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-                        </div>
-                        <h3 class="feature-title">Transactional Sandbox Dry-Runs</h3>
-                    </div>
-                    <p class="feature-body">
-                        Execute migration scripts against the target schema in an atomic transaction sandbox with automatic rollback to catch syntax and permission errors.
+                <div class="card">
+                    <div class="step-num" style="margin-bottom:1rem;">3</div>
+                    <h3 class="card-title">Review &amp; Apply</h3>
+                    <p class="card-desc">
+                        Inspect side-by-side diffs, run SARGability checks, and deploy one or all selected SPs with automatic rollback snapshots.
                     </p>
-                    <div class="feature-footer">Isolated BEGIN TRAN ... ROLLBACK</div>
-                </div>
-
-                <div class="feature-box">
-                    <div class="feature-header">
-                        <div class="feature-icon-wrapper">
-                            <svg class="icon" viewBox="0 0 24 24"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
-                        </div>
-                        <h3 class="feature-title">Pre-Change Backup Vault</h3>
-                    </div>
-                    <p class="feature-body">
-                        Captures an immutable pre-change snapshot with SHA-256 integrity checksums prior to applying any modifications to target environments.
-                    </p>
-                    <div class="feature-footer">Cryptographic Snapshot Storage</div>
-                </div>
-
-                <div class="feature-box">
-                    <div class="feature-header">
-                        <div class="feature-icon-wrapper">
-                            <svg class="icon" viewBox="0 0 24 24"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg>
-                        </div>
-                        <h3 class="feature-title">1-Click Instant Rollback</h3>
-                    </div>
-                    <p class="feature-body">
-                        Instantly restore previous procedural states using self-contained rollback scripts generated automatically before change execution.
-                    </p>
-                    <div class="feature-footer">Automated Idempotent DDL</div>
-                </div>
-
-                <div class="feature-box">
-                    <div class="feature-header">
-                        <div class="feature-icon-wrapper">
-                            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                        </div>
-                        <h3 class="feature-title">Deployment Audit Trail</h3>
-                    </div>
-                    <p class="feature-body">
-                        Complete deployment records including execution logs, exact timestamps, duration in milliseconds, risk assessments, and user identity.
-                    </p>
-                    <div class="feature-footer">Immutable Audit Repository</div>
-                </div>
-
-                <div class="feature-box">
-                    <div class="feature-header">
-                        <div class="feature-icon-wrapper">
-                            <svg class="icon" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                        </div>
-                        <h3 class="feature-title">Bulk Stored Procedure Apply</h3>
-                    </div>
-                    <p class="feature-body">
-                        Deploy dozens of stored procedures in one operation with the "⚡ Apply ALL" button. Includes multi-tenant group rollout, batch review, and individual pre-change rollback snapshots.
-                    </p>
-                    <div class="feature-footer">⚡ High-Throughput Batch Engine</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Visual Tour / Screenshots Showcase Section -->
-    <section id="screenshots" class="section" style="background-color: var(--color-canvas-inset);">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">Visual Walkthrough</div>
-                <h2 class="section-title">See SQL Diff Studio in Action</h2>
-                <p class="section-lead">
-                    Explore real interfaces for side-by-side SQL diffing, live LLM query performance optimization, pre-change backup vaults, and multi-tenant environment governance.
-                </p>
-            </div>
-
-            <div class="screenshot-grid">
-                <!-- Showcase 1: SQL Diff Viewer -->
-                <div class="screenshot-container">
-                    <div class="screenshot-header">
-                        <div class="screenshot-dots">
-                            <div class="screenshot-dot dot-red"></div>
-                            <div class="screenshot-dot dot-yellow"></div>
-                            <div class="screenshot-dot dot-green"></div>
-                        </div>
-                        <span class="screenshot-title">01_Diff_Viewer &bull; Side-by-Side SQL Comparison</span>
-                        <span class="badge badge-success">Live Inspection</span>
-                    </div>
-                    <img src="assets/img/sds_03_results_diff.png" alt="Side-by-side SQL Diff View" class="screenshot-img" />
-                    <div class="screenshot-caption">
-                        <span>Side-by-side line comparison with addition/deletion gutter counters and AST syntax normalization.</span>
-                        <a href="user-guide.html#reviewing-diff" class="screenshot-badge">Learn More &rarr;</a>
-                    </div>
-                </div>
-
-                <!-- Showcase 2: AI Performance Advisor & SARGability -->
-                <div class="screenshot-container">
-                    <div class="screenshot-header">
-                        <div class="screenshot-dots">
-                            <div class="screenshot-dot dot-red"></div>
-                            <div class="screenshot-dot dot-yellow"></div>
-                            <div class="screenshot-dot dot-green"></div>
-                        </div>
-                        <span class="screenshot-title">02_AI_Assistant &bull; Live Query Tuning &amp; Quota Tracker</span>
-                        <span class="badge badge-attention">AI Powered</span>
-                    </div>
-                    <img src="assets/img/sds_04_ai_drawer.png" alt="AI Performance Advisor &amp; SARGability Drawer" class="screenshot-img" />
-                    <div class="screenshot-caption">
-                        <span>Offline SARGability anti-pattern detection + live Groq/OpenAI query rewrites with rate-limit budget tracking.</span>
-                        <a href="user-guide.html#sargability" class="screenshot-badge">Learn More &rarr;</a>
-                    </div>
-                </div>
-
-                <!-- Showcase 3: Pre-Change Backup Vault -->
-                <div class="screenshot-container">
-                    <div class="screenshot-header">
-                        <div class="screenshot-dots">
-                            <div class="screenshot-dot dot-red"></div>
-                            <div class="screenshot-dot dot-yellow"></div>
-                            <div class="screenshot-dot dot-green"></div>
-                        </div>
-                        <span class="screenshot-title">03_Backup_Vault &bull; 1-Click Rollback Storage</span>
-                        <span class="badge badge-success">Cryptographic Vault</span>
-                    </div>
-                    <img src="assets/img/sds_05_bulk_apply.png" alt="Pre-change Backup Vault &amp; Rollback" class="screenshot-img" />
-                    <div class="screenshot-caption">
-                        <span>Automated pre-change DDL snapshots stamped with SHA-256 hashes and in-file audit headers before execution.</span>
-                        <a href="user-guide.html#backup-vault" class="screenshot-badge">Learn More &rarr;</a>
-                    </div>
-                </div>
-
-                <!-- Showcase 4: Database Connections & Configurations -->
-                <div class="screenshot-container">
-                    <div class="screenshot-header">
-                        <div class="screenshot-dots">
-                            <div class="screenshot-dot dot-red"></div>
-                            <div class="screenshot-dot dot-yellow"></div>
-                            <div class="screenshot-dot dot-green"></div>
-                        </div>
-                        <span class="screenshot-title">04_Connections &bull; Encrypted Credentials &amp; Handshake Test</span>
-                        <span class="badge badge-success">DPAPI Protected</span>
-                    </div>
-                    <img src="assets/img/sds_01_configurations.png" alt="Database Connections Management" class="screenshot-img" />
-                    <div class="screenshot-caption">
-                        <span>Windows Integrated &amp; SQL Authentication with DPAPI encrypted secrets and live server test ping.</span>
-                        <a href="user-guide.html#database-connections" class="screenshot-badge">Learn More &rarr;</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 6-Step Workflow Section -->
-    <section id="workflow" class="section">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">Deployment Lifecycle</div>
-                <h2 class="section-title">The 7-Step Controlled Workflow</h2>
-                <p class="section-lead">
-                    Every database change progresses through strict automated checkpoints before touching production databases.
-                </p>
-            </div>
-
-            <div class="lifecycle-list">
-                <div class="lifecycle-item">
-                    <div class="lifecycle-step-num">STEP 01</div>
-                    <h3 class="lifecycle-step-name">Select Project</h3>
-                    <p class="lifecycle-step-desc">Choose the project and source/target environment route within isolated tenant boundaries.</p>
-                </div>
-                <div class="lifecycle-item">
-                    <div class="lifecycle-step-num">STEP 02</div>
-                    <h3 class="lifecycle-step-name">Compare Changes</h3>
-                    <p class="lifecycle-step-desc">Review object differences from live schema modules with line-by-line additions and deletions.</p>
-                </div>
-                <div class="lifecycle-item">
-                    <div class="lifecycle-step-num">STEP 03</div>
-                    <h3 class="lifecycle-step-name">Validate</h3>
-                    <p class="lifecycle-step-desc">Run AST guardrail checks blocking destructive DDL, smart quotes, and administrative commands.</p>
-                </div>
-                <div class="lifecycle-item">
-                    <div class="lifecycle-step-num">STEP 04</div>
-                    <h3 class="lifecycle-step-name">Review</h3>
-                    <p class="lifecycle-step-desc">Inspect generated plan, SARGability index warnings, and deterministic performance advisory.</p>
-                </div>
-                <div class="lifecycle-item">
-                    <div class="lifecycle-step-num">STEP 05</div>
-                    <h3 class="lifecycle-step-name">Authorize</h3>
-                    <p class="lifecycle-step-desc">Verify required approvals for production targets before execution permissions are granted.</p>
-                </div>
-                <div class="lifecycle-item">
-                    <div class="lifecycle-step-num">STEP 06</div>
-                    <h3 class="lifecycle-step-name">Deploy</h3>
-                    <p class="lifecycle-step-desc">Capture pre-change backup snapshot in Vault and execute changes within an atomic transaction.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Architecture Section -->
-    <section id="architecture" class="section">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">Engineering Architecture</div>
-                <h2 class="section-title">Built on .NET 10 LTS Clean Architecture</h2>
-                <p class="section-lead">
-                    Modular monolith engineered for enterprise reliability, high performance, and long-term maintainability.
-                </p>
-            </div>
-
-            <div class="table-wrapper">
-                <table class="spec-table">
-                    <thead>
-                        <tr>
-                            <th>Layer</th>
-                            <th>Projects</th>
-                            <th>Core Responsibilities & Technologies</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="font-weight: 600; color: var(--color-fg-default);">Presentation</td>
-                            <td><code>SqlDiffStudio.Wpf</code><br><code>SqlDiffStudio.Desktop</code></td>
-                            <td>Blazor Server interactive workbench with Dark/Light themes; Native Windows WPF client hosting Microsoft WebView2 runtime.</td>
-                        </tr>
-                        <tr>
-                            <td style="font-weight: 600; color: var(--color-fg-default);">Application & API</td>
-                            <td><code>SqlDiffStudio.Application</code><br><code>SqlDiffStudio.Core</code></td>
-                            <td>CQRS workflow orchestration, procedure migration pipelines, RESTful controllers, SignalR real-time log streaming hub.</td>
-                        </tr>
-                        <tr>
-                            <td style="font-weight: 600; color: var(--color-fg-default);">Safety & Analysis</td>
-                            <td><code>SqlDiffStudio.Guardrails</code><br><code>SqlDiffStudio.AI</code></td>
-                            <td>Microsoft.SqlServer.TransactSql.ScriptDom 180 AST visitors, deterministic SARGability query anti-pattern analyzer.</td>
-                        </tr>
-                        <tr>
-                            <td style="font-weight: 600; color: var(--color-fg-default);">Database Operations</td>
-                            <td><code>SqlDiffStudio.DatabaseProviders</code><br><code>SqlDiffStudio.Deployment</code></td>
-                            <td>Microsoft.Data.SqlClient, Dapper, DiffPlex diff engine, transactional sandbox runner with clean rollback.</td>
-                        </tr>
-                        <tr>
-                            <td style="font-weight: 600; color: var(--color-fg-default);">Storage & Vault</td>
-                            <td><code>SqlDiffStudio.Backup</code><br><code>SqlDiffStudio.Infrastructure</code></td>
-                            <td>Pre-change SHA-256 backup snapshot generator, EF Core SQLite application database, repository abstractions.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
-
-    <!-- Community & GitHub -->
+    <!-- Download CTA Banner -->
     <section class="section">
-        <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem;">
-            <div>
-                <div class="section-label">Open Source</div>
-                <h2 class="section-title" style="margin-bottom: 0.35rem;">Publicly Available Source Code</h2>
-                <p style="color: var(--color-fg-muted); font-size: 14px; max-width: 580px;">
-                    SQL Diff Studio is developed openly on GitHub under the MIT License. Explore the repository, review the Clean Architecture implementation, and submit feedback.
-                </p>
-            </div>
-            <div style="display: flex; gap: 0.75rem;">
-                <a href="https://github.com/vishal-07-prajapati/safedeploy-studio" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-                    <svg class="icon" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-                    <span>Source Repository</span>
-                </a>
-                <a href="https://github.com/vishal-07-prajapati/safedeploy-studio/issues" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-                    <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                    <span>Report Issue</span>
-                </a>
+        <div class="container">
+            <div class="card" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.5rem;padding:2rem;">
+                <div>
+                    <h2 class="section-title" style="font-size:1.5rem;margin-bottom:0.35rem;">Ready to use on Windows today</h2>
+                    <p class="card-desc" style="max-width:600px;">
+                        Install SQL Diff Studio v1.0.0 with the guided Windows Setup Wizard (7.2 MB) or grab the portable ZIP distribution.
+                    </p>
+                </div>
+                <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+                    <a href="downloads/SqlDiffStudio-Setup.exe" class="btn btn-primary">Download Setup (.exe)</a>
+                    <a href="downloads/SqlDiffStudio-v1.0.0-win-x64.zip" class="btn btn-secondary">Portable ZIP</a>
+                    <a href="presentation.html" class="btn btn-secondary">View Presentation</a>
+                </div>
             </div>
         </div>
     </section>
@@ -427,49 +315,42 @@
         <div class="container">
             <div class="footer-grid">
                 <div>
-                    <div style="display: flex; align-items: center; gap: 0.5rem; font-weight: 600; color: var(--color-fg-default); margin-bottom: 0.65rem;">
-                        <svg class="icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    <div class="nav-brand" style="margin-bottom: 0.75rem;">
+                        <img src="assets/img/app-logo.png" alt="SQL Diff Studio" class="nav-brand-logo">
                         <span>SQL Diff Studio</span>
                     </div>
-                    <p style="color: var(--color-fg-muted); font-size: 12px; line-height: 1.6; max-width: 320px;">
-                        Enterprise database deployment and change management platform built on .NET 10 LTS and Microsoft SQL Server technologies.
+                    <p class="footer-brand-desc">
+                        Fast, safe SQL Server &amp; Azure SQL comparison, idempotent deployment, and performance analysis for engineering teams.
                     </p>
                 </div>
-
                 <div>
                     <div class="footer-col-title">Product</div>
                     <ul class="footer-links">
-                        <li><a href="#overview" class="footer-link">Overview</a></li>
                         <li><a href="#features" class="footer-link">Features</a></li>
                         <li><a href="#workflow" class="footer-link">Workflow</a></li>
-                        <li><a href="releases.html" class="footer-link">Downloads</a></li>
+                        <li><a href="presentation.html" class="footer-link">Presentation Deck</a></li>
+                        <li><a href="releases.html" class="footer-link">Releases &amp; Downloads</a></li>
                     </ul>
                 </div>
-
                 <div>
                     <div class="footer-col-title">Documentation</div>
                     <ul class="footer-links">
                         <li><a href="user-guide.html" class="footer-link">User Guide</a></li>
-                        <li><a href="docs.html" class="footer-link">Technical Specs</a></li>
-                        <li><a href="docs.html#guardrails" class="footer-link">Guardrail Rules</a></li>
-                        <li><a href="docs.html#iis" class="footer-link">IIS Hosting</a></li>
+                        <li><a href="docs.html" class="footer-link">Architecture Reference</a></li>
+                        <li><a href="user-guide.html#ai-advisor" class="footer-link">AI &amp; SARGability</a></li>
                     </ul>
                 </div>
-
                 <div>
-                    <div class="footer-col-title">Community</div>
+                    <div class="footer-col-title">Resources</div>
                     <ul class="footer-links">
                         <li><a href="https://github.com/vishal-07-prajapati/safedeploy-studio" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub Repository</a></li>
-                        <li><a href="https://github.com/vishal-07-prajapati/safedeploy-studio/releases" target="_blank" rel="noopener noreferrer" class="footer-link">Release Notes</a></li>
-                        <li><a href="https://github.com/vishal-07-prajapati/safedeploy-studio/issues" target="_blank" rel="noopener noreferrer" class="footer-link">Issue Tracker</a></li>
-                        <li><a href="https://github.com/vishal-07-prajapati/safedeploy-studio/blob/master/LICENSE" target="_blank" rel="noopener noreferrer" class="footer-link">MIT License</a></li>
+                        <li><a href="https://github.com/vishal-07-prajapati/safedeploy-studio/releases/tag/v1.0.0" target="_blank" rel="noopener noreferrer" class="footer-link">v1.0.0 Release Notes</a></li>
                     </ul>
                 </div>
             </div>
-
             <div class="footer-bottom">
-                <span>&copy; 2026 SQL Diff Studio. All rights reserved. Open source under the MIT License.</span>
-                <span>Version 1.0.0 LTS &bull; .NET 10.0</span>
+                <span>&copy; 2026 SQL Diff Studio. Built for SQL Server &amp; Azure SQL Engineering.</span>
+                <span>v1.0.0 • Windows x64</span>
             </div>
         </div>
     </footer>

@@ -3,23 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SQL Diff Studio — Product Presentation &amp; Roadmap</title>
+    <title>SQL Diff Studio — Feature Showcase &amp; Product Presentation</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" href="assets/img/app-logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-canvas: #090d13;
-            --bg-slide: #0d1117;
-            --bg-card: #161b22;
-            --bg-elevated: #21262d;
-            --border: #30363d;
-            --fg: #e6edf3;
-            --fg-muted: #8d96a0;
-            --accent: #2f81f7;
-            --accent-soft: rgba(47, 129, 247, 0.14);
+            --bg: #0b0f14;
+            --surface: #11161d;
+            --card: #161c24;
+            --elevated: #1f2732;
+            --border: #2a3340;
+            --fg: #eef2f6;
+            --muted: #9aa4b2;
+            --blue: #2f81f7;
+            --blue-soft: rgba(47, 129, 247, 0.14);
             --green: #3fb950;
             --green-soft: rgba(63, 185, 80, 0.14);
+            --red: #f85149;
+            --red-soft: rgba(248, 81, 73, 0.12);
             --amber: #d29922;
             --amber-soft: rgba(210, 153, 34, 0.14);
             --purple: #a371f7;
@@ -30,769 +34,816 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            background: var(--bg-canvas);
+            background: var(--bg);
             color: var(--fg);
-            height: 100vh;
-            overflow: hidden;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden;
         }
 
-        /* Deck Stage */
+        /* Top Minimal Bar */
+        .topbar {
+            height: 52px;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 14px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .brand img {
+            width: 26px;
+            height: 26px;
+            border-radius: 6px;
+        }
+
+        .top-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn {
+            background: var(--elevated);
+            border: 1px solid var(--border);
+            color: var(--fg);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12.5px;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.15s;
+        }
+        .btn:hover { background: #2a3442; }
+        .btn.primary { background: var(--blue); border-color: var(--blue); color: #fff; font-weight: 600; }
+        .btn.primary:hover { background: #1f6feb; }
+        .btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+        /* Stage */
         .stage {
             flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px 28px 12px 28px;
-            overflow: hidden;
+            padding: 20px 24px;
         }
 
         .slide {
             display: none;
             width: 100%;
-            max-width: 1280px;
-            height: 100%;
-            max-height: 740px;
-            background: var(--bg-slide);
+            max-width: 1240px;
+            min-height: 660px;
+            background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 14px;
-            padding: 40px 48px;
-            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55);
+            padding: 36px 44px;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
             flex-direction: column;
             justify-content: space-between;
-            position: relative;
-            overflow: hidden;
+            gap: 20px;
         }
 
         .slide.active {
             display: flex;
-            animation: fadeIn 0.22s ease-out;
+            animation: slideIn 0.22s ease-out;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Slide Header */
-        .slide-top {
+        .slide-hdr {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 18px;
+            gap: 12px;
         }
 
-        .kicker {
+        .pill {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            font-size: 12px;
+            gap: 7px;
+            font-size: 11.5px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--accent);
-            background: var(--accent-soft);
-            border: 1px solid rgba(47, 129, 247, 0.35);
+            letter-spacing: 0.06em;
             padding: 4px 12px;
             border-radius: 999px;
+            background: var(--blue-soft);
+            color: #79c0ff;
+            border: 1px solid rgba(47, 129, 247, 0.35);
         }
+        .pill.green { background: var(--green-soft); color: var(--green); border-color: rgba(63, 185, 80, 0.35); }
+        .pill.purple { background: var(--purple-soft); color: var(--purple); border-color: rgba(163, 113, 247, 0.35); }
 
-        .kicker.green {
-            color: var(--green);
-            background: var(--green-soft);
-            border-color: rgba(63, 185, 80, 0.35);
-        }
-
-        .kicker.purple {
-            color: var(--purple);
-            background: var(--purple-soft);
-            border-color: rgba(163, 113, 247, 0.35);
-        }
-
-        .slide-num-badge {
+        .slide-counter {
             font-family: 'JetBrains Mono', monospace;
             font-size: 12px;
-            color: var(--fg-muted);
+            color: var(--muted);
         }
 
-        h1.title-hero {
-            font-size: 52px;
+        h1.hero-title {
+            font-size: clamp(2rem, 4vw, 3.25rem);
             font-weight: 800;
             letter-spacing: -0.03em;
-            line-height: 1.1;
-            margin-bottom: 16px;
-            background: linear-gradient(135deg, #ffffff 30%, #79c0ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            line-height: 1.12;
+            color: #fff;
+            margin-bottom: 12px;
         }
 
-        h2.slide-title {
-            font-size: 30px;
+        h2.title {
+            font-size: clamp(1.4rem, 2.5vw, 1.95rem);
             font-weight: 700;
             letter-spacing: -0.02em;
-            margin-bottom: 8px;
-            color: #ffffff;
+            color: #fff;
+            margin-bottom: 6px;
         }
 
-        .subtitle {
-            font-size: 16px;
-            color: var(--fg-muted);
-            line-height: 1.5;
-            max-width: 820px;
+        .lead {
+            font-size: 15.5px;
+            color: var(--muted);
+            line-height: 1.55;
+            max-width: 780px;
         }
 
-        /* Layouts */
-        .slide-body {
+        .body {
             flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            min-height: 0;
         }
 
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-            align-items: center;
-            height: 100%;
-        }
+        /* Grids */
+        .cols-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: stretch; }
+        .cols-feature { display: grid; grid-template-columns: 0.88fr 1.25fr; gap: 28px; align-items: center; }
+        .cols-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+        .cols-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
 
-        .grid-2-wide {
-            display: grid;
-            grid-template-columns: 0.9fr 1.35fr;
-            gap: 28px;
-            align-items: center;
-            height: 100%;
-        }
-
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-        }
-
-        .grid-4 {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-        }
-
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 18px 20px;
-        }
-
-        .card h3 {
-            font-size: 15px;
-            font-weight: 700;
-            margin-bottom: 6px;
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .card p, .card li {
-            font-size: 13.5px;
-            color: var(--fg-muted);
-            line-height: 1.5;
-        }
-
-        .card ul {
-            padding-left: 18px;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .bullet-list {
-            list-style: none;
+        /* Feature Callout Cards */
+        .callout-list {
             display: flex;
             flex-direction: column;
             gap: 12px;
         }
 
-        .bullet-list li {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-left: 3px solid var(--accent);
-            border-radius: 8px;
-            padding: 12px 16px;
-            font-size: 14px;
-            line-height: 1.45;
-        }
-
-        .bullet-list li strong {
-            color: #ffffff;
-            display: block;
-            margin-bottom: 2px;
-        }
-
-        .bullet-list li span {
-            color: var(--fg-muted);
-            font-size: 13px;
-        }
-
-        .screenshot-frame {
-            background: #ffffff;
+        .callout {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            background: var(--card);
             border: 1px solid var(--border);
             border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+            padding: 13px 15px;
+        }
+
+        .callout-num {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            background: var(--blue);
+            color: #fff;
+            font-size: 12px;
+            font-weight: 700;
             display: flex;
             align-items: center;
             justify-content: center;
-            max-height: 490px;
+            flex-shrink: 0;
+            margin-top: 2px;
         }
 
-        .screenshot-frame img {
+        .callout h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 3px;
+        }
+
+        .callout p {
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.45;
+        }
+
+        /* Before -> After Comparison */
+        .ba-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .ba-title {
+            font-size: 14.5px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .ba-row {
+            display: grid;
+            grid-template-columns: 1fr 24px 1fr;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .ba-before {
+            background: var(--red-soft);
+            border: 1px solid rgba(248, 81, 73, 0.25);
+            color: #ffa198;
+            padding: 8px 10px;
+            border-radius: 6px;
+            font-size: 12.5px;
+            line-height: 1.4;
+        }
+
+        .ba-after {
+            background: var(--green-soft);
+            border: 1px solid rgba(63, 185, 80, 0.25);
+            color: #7ee787;
+            padding: 8px 10px;
+            border-radius: 6px;
+            font-size: 12.5px;
+            line-height: 1.4;
+        }
+
+        .ba-arrow {
+            text-align: center;
+            color: var(--muted);
+            font-weight: 700;
+        }
+
+        /* Screenshot Frame */
+        .shot {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45);
+        }
+        .shot img {
             width: 100%;
             height: auto;
-            max-height: 488px;
-            object-fit: contain;
             display: block;
         }
 
-        .stat-box {
-            background: var(--bg-card);
+        /* Feature Card */
+        .fcard {
+            background: var(--card);
             border: 1px solid var(--border);
             border-radius: 10px;
             padding: 18px;
-            text-align: center;
-        }
-
-        .stat-val {
-            font-size: 28px;
-            font-weight: 800;
-            color: var(--accent);
-            margin-bottom: 4px;
-        }
-
-        .stat-lbl {
-            font-size: 12.5px;
-            color: var(--fg-muted);
-        }
-
-        .roadmap-col {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 20px;
-            height: 100%;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 8px;
         }
 
-        .roadmap-tag {
-            display: inline-block;
-            font-size: 11.5px;
+        .fcard-badge {
+            font-size: 11px;
             font-weight: 700;
-            padding: 3px 10px;
-            border-radius: 999px;
-            width: fit-content;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--green);
         }
 
-        .tag-near { background: var(--green-soft); color: var(--green); border: 1px solid rgba(63, 185, 80, 0.35); }
-        .tag-mid  { background: var(--accent-soft); color: var(--accent); border: 1px solid rgba(47, 129, 247, 0.35); }
-        .tag-long { background: var(--purple-soft); color: var(--purple); border: 1px solid rgba(163, 113, 247, 0.35); }
+        .fcard h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #fff;
+        }
 
-        .roadmap-item {
-            background: var(--bg-slide);
+        .fcard p {
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        /* Roadmap Column */
+        .rcol {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .ritem {
+            background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 8px;
             padding: 11px 13px;
         }
 
-        .roadmap-item strong {
-            font-size: 13.5px;
-            color: #ffffff;
+        .ritem strong {
             display: block;
+            font-size: 13.5px;
+            color: #fff;
             margin-bottom: 3px;
         }
 
-        .roadmap-item span {
-            font-size: 12.5px;
-            color: var(--fg-muted);
-            line-height: 1.4;
+        .ritem span {
             display: block;
+            font-size: 12.5px;
+            color: var(--muted);
+            line-height: 1.4;
         }
-
-        .cta-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 18px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            text-decoration: none;
-            border: 1px solid var(--border);
-            color: var(--fg);
-            background: var(--bg-elevated);
-            transition: transform 0.15s, background 0.15s;
-        }
-
-        .cta-btn:hover { transform: translateY(-1px); background: #30363d; }
-        .cta-btn.primary { background: var(--accent); border-color: var(--accent); color: #ffffff; }
-        .cta-btn.primary:hover { background: #1f6feb; }
 
         code {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-            background: var(--bg-elevated);
-            padding: 2px 6px;
+            font-size: 11.5px;
+            background: var(--elevated);
+            padding: 1px 5px;
             border-radius: 4px;
             color: #79c0ff;
         }
 
-        /* Presenter Controls Bar */
-        .controls {
+        /* Bottom Nav Bar */
+        .bottombar {
             height: 54px;
-            background: var(--bg-slide);
+            background: var(--surface);
             border-top: 1px solid var(--border);
             padding: 0 24px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            font-size: 13px;
+            flex-shrink: 0;
         }
 
-        .ctrl-group {
+        .dots {
             display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .ctrl-btn {
-            background: var(--bg-elevated);
-            border: 1px solid var(--border);
-            color: var(--fg);
-            padding: 6px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 12.5px;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
             gap: 6px;
-            text-decoration: none;
+            align-items: center;
         }
 
-        .ctrl-btn:hover { background: #30363d; }
-        .ctrl-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-
-        .progress-bar {
-            width: 180px;
-            height: 6px;
-            background: var(--bg-elevated);
+        .dot {
+            width: 8px;
+            height: 8px;
             border-radius: 999px;
-            overflow: hidden;
+            background: var(--elevated);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.2s;
         }
 
-        .progress-fill {
-            height: 100%;
-            background: var(--accent);
-            transition: width 0.25s ease;
+        .dot.active {
+            width: 24px;
+            background: var(--blue);
+            border-color: var(--blue);
         }
 
-        /* Print / Export to PDF */
+        /* Responsive Mobile / Tablet */
+        @media (max-width: 960px) {
+            .stage { padding: 12px; }
+            .slide { padding: 24px 20px; min-height: auto; }
+            .cols-2, .cols-feature, .cols-3, .cols-4 { grid-template-columns: 1fr; }
+            .ba-row { grid-template-columns: 1fr; }
+            .ba-arrow { transform: rotate(90deg); }
+            .dots { display: none; }
+        }
+
         @media print {
-            @page { size: landscape; margin: 0.25in; }
-            body { background: #0d1117; height: auto; overflow: visible; }
-            .controls { display: none !important; }
+            @page { size: landscape; margin: 0.2in; }
+            body { background: #11161d; }
+            .topbar, .bottombar { display: none !important; }
             .stage { display: block; padding: 0; }
             .slide {
                 display: flex !important;
                 page-break-after: always;
                 break-after: page;
-                height: 94vh;
-                max-height: none;
+                min-height: 95vh;
                 box-shadow: none;
-                margin-bottom: 16px;
+                margin-bottom: 12px;
             }
         }
     </style>
 </head>
 <body>
 
-<div class="stage">
+<header class="topbar">
+    <a href="index.html" class="brand">
+        <img src="assets/img/app-logo.png" alt="SQL Diff Studio Logo">
+        <span>SQL Diff Studio — Product Presentation</span>
+    </a>
+    <div class="top-actions">
+        <a href="index.html" class="btn">Home</a>
+        <button class="btn" onclick="window.print()">Print / PDF</button>
+        <button class="btn primary" onclick="toggleFullscreen()">Fullscreen (F)</button>
+    </div>
+</header>
 
-    <!-- SLIDE 1: TITLE -->
-    <section class="slide active" data-title="Title">
-        <div class="slide-top">
-            <span class="kicker green">● v1.0.0 — Ready to Use Today</span>
-            <span class="slide-num-badge">01 / 10</span>
+<main class="stage">
+
+    <!-- SLIDE 1: OVERVIEW -->
+    <section class="slide active" data-title="Overview">
+        <div class="slide-hdr">
+            <span class="pill green">Ready to Use Today • v1.0.0</span>
+            <span class="slide-counter">01 / 08</span>
         </div>
-        <div class="slide-body" style="justify-content: center;">
-            <h1 class="title-hero">SQL Diff Studio</h1>
-            <p class="subtitle" style="font-size: 20px; margin-bottom: 32px;">
-                Fast, Safe SQL Server &amp; Azure SQL Schema Comparison, Idempotent Deployment, and AI-Assisted Performance Tuning — Built for Engineering Teams.
-            </p>
-            <div class="grid-4">
-                <div class="stat-box">
-                    <div class="stat-val">&lt; 1 sec</div>
-                    <div class="stat-lbl">Filtered SP Compare (SQL-Level Pushdown)</div>
+        <div class="body">
+            <div class="cols-feature">
+                <div>
+                    <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;">
+                        <img src="assets/img/app-logo.png" alt="SQL Diff Studio" style="width:52px;height:52px;border-radius:12px;">
+                        <div>
+                            <div style="font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.06em;">Windows Desktop Tool</div>
+                            <div style="font-size:20px;font-weight:800;color:#fff;">SQL Diff Studio</div>
+                        </div>
+                    </div>
+                    <h1 class="hero-title">Compare &amp; Deploy SQL Changes Safely</h1>
+                    <p class="lead" style="margin-bottom:22px;">
+                        Built for SQL Server &amp; Azure SQL teams to compare stored procedures in under a second, deploy idempotent <code>DROP &amp; CREATE</code> scripts in bulk, and never lose a rollback backup.
+                    </p>
+                    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                        <button class="btn primary" onclick="go(1)">Explore Key Features →</button>
+                        <a href="downloads/SqlDiffStudio-Setup.exe" class="btn">Download v1.0.0</a>
+                    </div>
                 </div>
-                <div class="stat-box">
-                    <div class="stat-val">DROP + CREATE</div>
-                    <div class="stat-lbl">Idempotent Execution &amp; Pre-Change Backup</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-val">Bulk Apply</div>
-                    <div class="stat-lbl">Multi-Select &amp; All-Tenant DB Rollout</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-val">AI + Offline</div>
-                    <div class="stat-lbl">SARGability Rules &amp; Live Token Meter</div>
+                <div class="shot">
+                    <img src="assets/img/sds_03_results_diff.png" alt="SQL Diff Studio Side-by-Side Diff">
                 </div>
             </div>
         </div>
-        <div style="display:flex; justify-content:space-between; color:var(--fg-muted); font-size:12.5px;">
-            <span>CE21 Engineering &amp; Database Operations</span>
-            <span>Use ← / → arrow keys to navigate • Press F for Fullscreen</span>
+        <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);">
+            <span>Use ← / → Arrow Keys to navigate</span>
+            <span>SQL Server 2016–2022 • Azure SQL • Windows x64</span>
         </div>
     </section>
 
-    <!-- SLIDE 2: PROBLEM STATEMENT -->
-    <section class="slide" data-title="The Problem">
-        <div class="slide-top">
-            <span class="kicker">Why We Built SQL Diff Studio</span>
-            <span class="slide-num-badge">02 / 10</span>
+    <!-- SLIDE 2: BEFORE VS AFTER -->
+    <section class="slide" data-title="Why It Matters">
+        <div class="slide-hdr">
+            <span class="pill">Before vs. After</span>
+            <span class="slide-counter">02 / 08</span>
         </div>
         <div>
-            <h2 class="slide-title">Solving Real Daily SQL Deployment Bottlenecks</h2>
-            <p class="subtitle" style="margin-bottom: 20px;">Traditional compare tools and manual SSMS scripts create friction, slow down releases, and risk human error.</p>
+            <h2 class="title">How SQL Diff Studio Solves Daily Pain Points</h2>
+            <p class="lead">Designed directly around real bottlenecks in multi-database SQL Server workflows.</p>
         </div>
-        <div class="slide-body">
-            <div class="grid-2">
-                <ul class="bullet-list">
-                    <li>
-                        <strong>1. Slow Full-Database Scans</strong>
-                        <span>Comparing 4,500+ objects over Azure SQL just to check 5 stored procedures wastes 20–30 seconds on every run.</span>
-                    </li>
-                    <li>
-                        <strong>2. Manual DROP / CREATE &amp; "Object Already Exists" Errors</strong>
-                        <span>Executing raw <code>CREATE PROCEDURE</code> scripts without reliable pre-drop logic causes deployment failures mid-release.</span>
-                    </li>
-                    <li>
-                        <strong>3. Missing Rollback Snapshots &amp; Audit Trails</strong>
-                        <span>Forgetting to script out the previous target SP definition makes emergency rollbacks stressful and error-prone.</span>
-                    </li>
-                </ul>
-                <ul class="bullet-list">
-                    <li>
-                        <strong>4. Versioned SP Naming Friction</strong>
-                        <span>CE21 versioned SPs (e.g., <code>_13049627712_26_05</code>) require manual renaming before deploying back to base procedures.</span>
-                    </li>
-                    <li>
-                        <strong>5. Noisy Whitespace &amp; Formatting Diffs</strong>
-                        <span>Indentation, comments, brackets, and <code>ALTER</code> vs <code>CREATE</code> headers clutter real logic changes.</span>
-                    </li>
-                    <li>
-                        <strong>6. Non-SARGable Queries Slipping Through</strong>
-                        <span><code>YEAR(col)</code>, <code>ISNULL(col, ...)</code>, and leading wildcards cause full table scans in production.</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </section>
+        <div class="body">
+            <div class="cols-2">
+                <div class="ba-card">
+                    <div class="ba-title">1. Comparing Specific Stored Procedures</div>
+                    <div class="ba-row">
+                        <div class="ba-before"><strong>Before:</strong> Downloads all 4,500+ objects from Azure SQL (25–30s wait) just to check 5 SPs.</div>
+                        <div class="ba-arrow">→</div>
+                        <div class="ba-after"><strong>With SQL Diff Studio:</strong> Pushes <code>IN / LIKE</code> filter to SQL Server. Finishes in <strong>&lt; 1 second</strong>.</div>
+                    </div>
+                </div>
 
-    <!-- SLIDE 3: READY TODAY -->
-    <section class="slide" data-title="Ready Today">
-        <div class="slide-top">
-            <span class="kicker green">● Production Ready — Available Now</span>
-            <span class="slide-num-badge">03 / 10</span>
-        </div>
-        <div>
-            <h2 class="slide-title">What Is Ready to Use Today (v1.0.0)</h2>
-            <p class="subtitle" style="margin-bottom: 20px;">Everything needed for daily DEV, Staging, and Multi-Tenant SQL Server workflows is live and verified.</p>
-        </div>
-        <div class="slide-body">
-            <div class="grid-3">
-                <div class="card">
-                    <h3>⚡ Targeted SQL Pre-Filtering</h3>
-                    <p>When SP names or wildcards are entered in <strong>Only include</strong>, SQL Server only queries matching objects (<code>IN</code> / <code>LIKE</code>) instead of scanning the entire database.</p>
+                <div class="ba-card">
+                    <div class="ba-title">2. Deploying Without "Already Exists" Errors</div>
+                    <div class="ba-row">
+                        <div class="ba-before"><strong>Before:</strong> Manual <code>CREATE</code> scripts fail if SP exists, or forget pre-change backups.</div>
+                        <div class="ba-arrow">→</div>
+                        <div class="ba-after"><strong>With SQL Diff Studio:</strong> Saves rollback <code>.sql</code> first, runs standalone <code>DROP</code>, then <code>CREATE</code>.</div>
+                    </div>
                 </div>
-                <div class="card">
-                    <h3>🔍 Token-Normalized DiffPlex</h3>
-                    <p>Ignores comments, brackets, casing, semicolons, and formatting noise so you see only real business-logic changes side by side.</p>
+
+                <div class="ba-card">
+                    <div class="ba-title">3. CE21 Versioned SP Naming</div>
+                    <div class="ba-row">
+                        <div class="ba-before"><strong>Before:</strong> Manually stripping <code>_13049627712_26_05</code> suffixes before deploying to target DBs.</div>
+                        <div class="ba-arrow">→</div>
+                        <div class="ba-after"><strong>With SQL Diff Studio:</strong> Auto-matches versioned SPs to base SPs only when entered, and renames on deploy.</div>
+                    </div>
                 </div>
-                <div class="card">
-                    <h3>🧬 Smart CE21 Version Matching</h3>
-                    <p>Activates version-to-base matching strictly when a versioned SP is added to input, auto-renaming it to the base SP on deployment.</p>
-                </div>
-                <div class="card">
-                    <h3>🛡️ Idempotent DROP &amp; CREATE</h3>
-                    <p>Runs a standalone <code>IF OBJECT_ID(...) DROP</code> before <code>CREATE</code>, stamps an in-file audit header, and logs every deployment.</p>
-                </div>
-                <div class="card">
-                    <h3>🚀 Bulk Apply &amp; Rollback Vault</h3>
-                    <p>Multi-select rows or click <strong>Apply ALL</strong> to deploy across one DB or all tenant DBs with automatic pre-change <code>.sql</code> snapshots.</p>
-                </div>
-                <div class="card">
-                    <h3>💡 AI &amp; SARGability Advisor</h3>
-                    <p>Instant offline anti-pattern checks plus optional Groq/OpenAI query tuning with DPAPI-encrypted keys and live token quota tracking.</p>
+
+                <div class="ba-card">
+                    <div class="ba-title">4. Catching Slow Non-SARGable Queries</div>
+                    <div class="ba-row">
+                        <div class="ba-before"><strong>Before:</strong> <code>YEAR(col)</code>, <code>ISNULL()</code>, and leading <code>%</code> wildcards slip into production unnoticed.</div>
+                        <div class="ba-arrow">→</div>
+                        <div class="ba-after"><strong>With SQL Diff Studio:</strong> Instant offline SARGability rules + optional AI rewrite suggestions.</div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SLIDE 4: CONFIGURATIONS & AI QUOTA -->
-    <section class="slide" data-title="Configurations">
-        <div class="slide-top">
-            <span class="kicker">Walkthrough • Step 1</span>
-            <span class="slide-num-badge">04 / 10</span>
+    <!-- SLIDE 3: FEATURE 1 - TARGETED COMPARISON -->
+    <section class="slide" data-title="Feature: Targeted Compare">
+        <div class="slide-hdr">
+            <span class="pill">Feature Spotlight 1</span>
+            <span class="slide-counter">03 / 08</span>
         </div>
-        <div class="slide-body">
-            <div class="grid-2-wide">
+        <div class="body">
+            <div class="cols-feature">
                 <div>
-                    <h2 class="slide-title">Secure Configurations &amp; Live AI Quota</h2>
-                    <p class="subtitle" style="margin-bottom: 18px;">Centralized connection profiles, shared backup folders, and protected AI credentials.</p>
-                    <ul class="bullet-list">
-                        <li><strong>DPAPI Credential Encryption</strong><span>SQL passwords and AI API keys are encrypted per Windows user in <code>settings.json</code> and masked by default with a Show/Hide toggle.</span></li>
-                        <li><strong>Test Connection &amp; Live Token Meter</strong><span>Verify LLM connectivity in one click and monitor remaining tokens, request limits, and reset windows.</span></li>
-                        <li><strong>Shared Backup &amp; History Log</strong><span>Point backups to a team folder so every developer's pre-change snapshots and audit logs stay organized.</span></li>
-                    </ul>
+                    <h2 class="title">Fast, Targeted Comparison</h2>
+                    <p class="lead" style="margin-bottom:16px;">Compare one or multiple database pairs in parallel with clean, noise-free results.</p>
+                    <div class="callout-list">
+                        <div class="callout">
+                            <span class="callout-num">1</span>
+                            <div>
+                                <h4>SQL-Level Pre-Filtering</h4>
+                                <p>Paste SP names in <strong>Only include</strong> (supports wildcards <code>*</code>, <code>?</code>, or pasted <code>DROP PROC</code> lines). SQL Server returns only those exact objects.</p>
+                            </div>
+                        </div>
+                        <div class="callout">
+                            <span class="callout-num">2</span>
+                            <div>
+                                <h4>Token-Normalized Diff</h4>
+                                <p>Ignores comments, casing, brackets, and whitespace so formatting differences never clutter real code changes.</p>
+                            </div>
+                        </div>
+                        <div class="callout">
+                            <span class="callout-num">3</span>
+                            <div>
+                                <h4>Parallel Pairs &amp; .scmp Import</h4>
+                                <p>Compare <code>DEV → Local</code>, <code>CE21Root</code>, and <code>CE21Chat</code> simultaneously or import Visual Studio <code>.scmp</code> files.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="screenshot-frame">
-                    <img src="assets/img/sds_01_configurations.png" alt="SQL Diff Studio Configurations Tab">
+                <div class="shot">
+                    <img src="assets/img/sds_02_comparison.png" alt="Comparison Setup Tab">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SLIDE 5: COMPARISON SETUP -->
-    <section class="slide" data-title="Comparison Setup">
-        <div class="slide-top">
-            <span class="kicker">Walkthrough • Step 2</span>
-            <span class="slide-num-badge">05 / 10</span>
+    <!-- SLIDE 4: FEATURE 2 - BULK DEPLOY & ROLLBACK -->
+    <section class="slide" data-title="Feature: Bulk Deploy">
+        <div class="slide-hdr">
+            <span class="pill">Feature Spotlight 2</span>
+            <span class="slide-counter">04 / 08</span>
         </div>
-        <div class="slide-body">
-            <div class="grid-2-wide">
+        <div class="body">
+            <div class="cols-feature">
                 <div>
-                    <h2 class="slide-title">Multi-Pair Parallel Comparison &amp; Filtering</h2>
-                    <p class="subtitle" style="margin-bottom: 18px;">Compare multiple database pairs in parallel or import existing Visual Studio <code>.scmp</code> files.</p>
-                    <ul class="bullet-list">
-                        <li><strong>SQL-Level SP Pre-Filtering</strong><span>Paste SP names (even copied from <code>DROP PROC</code> / <code>EXEC</code> scripts) to fetch only those objects directly from SQL Server.</span></li>
-                        <li><strong>Granular Diff Rules</strong><span>Control case sensitivity, comments, brackets, semicolons, and <code>CREATE / ALTER</code> header normalization.</span></li>
-                        <li><strong>Parallel Execution</strong><span>Tick multiple pairs (<code>CE21_0001</code>, <code>CE21Root</code>, <code>CE21Chat</code>) to compare them concurrently.</span></li>
-                    </ul>
+                    <h2 class="title">Bulk Apply &amp; Rollback Safety</h2>
+                    <p class="lead" style="margin-bottom:16px;">Deploy single or multiple stored procedures safely across one or all tenant databases.</p>
+                    <div class="callout-list">
+                        <div class="callout">
+                            <span class="callout-num">1</span>
+                            <div>
+                                <h4>Multi-Select &amp; "Apply ALL"</h4>
+                                <p>Select specific rows or click <strong>Apply ALL</strong> to review and deploy all modified procedures in one batch.</p>
+                            </div>
+                        </div>
+                        <div class="callout">
+                            <span class="callout-num">2</span>
+                            <div>
+                                <h4>Pre-Change Rollback Snapshot</h4>
+                                <p>Before touching the target DB, the existing procedure definition is saved as a timestamped <code>.sql</code> rollback file.</p>
+                            </div>
+                        </div>
+                        <div class="callout">
+                            <span class="callout-num">3</span>
+                            <div>
+                                <h4>Idempotent DROP + CREATE &amp; Audit</h4>
+                                <p>Executes a standalone <code>IF OBJECT_ID(...) DROP</code> followed by <code>CREATE</code> with an embedded developer/ticket audit header.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="screenshot-frame">
-                    <img src="assets/img/sds_02_comparison.png" alt="SQL Diff Studio Comparison Tab">
+                <div class="shot">
+                    <img src="assets/img/sds_05_bulk_apply.png" alt="Bulk Apply Confirmation Modal">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SLIDE 6: RESULTS & DIFF -->
-    <section class="slide" data-title="Results & Diff">
-        <div class="slide-top">
-            <span class="kicker">Walkthrough • Step 3</span>
-            <span class="slide-num-badge">06 / 10</span>
+    <!-- SLIDE 5: FEATURE 3 - AI & SARGABILITY -->
+    <section class="slide" data-title="Feature: AI Advisor">
+        <div class="slide-hdr">
+            <span class="pill">Feature Spotlight 3</span>
+            <span class="slide-counter">05 / 08</span>
         </div>
-        <div class="slide-body">
-            <div class="grid-2-wide">
+        <div class="body">
+            <div class="cols-feature">
                 <div>
-                    <h2 class="slide-title">Side-by-Side Diff Inspection &amp; Export</h2>
-                    <p class="subtitle" style="margin-bottom: 18px;">Pinpoint exact token-level differences and deploy or export results effortlessly.</p>
-                    <ul class="bullet-list">
-                        <li><strong>Reformatted &amp; Raw Views</strong><span>Switch between normalized reformatted SQL, original line breaks, or raw definitions with jump-to-change navigation.</span></li>
-                        <li><strong>Multi-Select &amp; Quick Copy</strong><span>Use <code>Ctrl+C</code> for SP names, copy source/target definitions, or export filtered rows straight to Excel.</span></li>
-                        <li><strong>Instant Status Updates</strong><span>After deploying, the grid automatically refreshes the target status to <code>Identical</code>.</span></li>
-                    </ul>
+                    <h2 class="title">AI &amp; SARGability Advisor</h2>
+                    <p class="lead" style="margin-bottom:16px;">Optimize query performance before deploying—offline or with your own LLM key.</p>
+                    <div class="callout-list">
+                        <div class="callout">
+                            <span class="callout-num">1</span>
+                            <div>
+                                <h4>Offline Static SARGability Rules</h4>
+                                <p>Instantly flags <code>YEAR(col)</code>, <code>ISNULL(col, ...)</code>, leading <code>%</code> wildcards, <code>SELECT *</code>, and missing <code>SET NOCOUNT ON</code>.</p>
+                            </div>
+                        </div>
+                        <div class="callout">
+                            <span class="callout-num">2</span>
+                            <div>
+                                <h4>AI Query Rewrite Suggestions</h4>
+                                <p>Connect Groq or OpenAI-compatible endpoints to get exact SARGable T-SQL rewrites and index recommendations.</p>
+                            </div>
+                        </div>
+                        <div class="callout">
+                            <span class="callout-num">3</span>
+                            <div>
+                                <h4>Live Token Budget Meter</h4>
+                                <p>Displays remaining tokens, request quota, reset countdown, and per-call usage right inside the drawer.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="screenshot-frame">
-                    <img src="assets/img/sds_03_results_diff.png" alt="SQL Diff Studio Results and Side-by-Side Diff">
+                <div class="shot">
+                    <img src="assets/img/sds_04_ai_drawer.png" alt="AI Performance Advisor Drawer">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SLIDE 7: BULK DEPLOYMENT -->
-    <section class="slide" data-title="Bulk Deployment">
-        <div class="slide-top">
-            <span class="kicker">Walkthrough • Step 4</span>
-            <span class="slide-num-badge">07 / 10</span>
+    <!-- SLIDE 6: FEATURE 4 - SECURITY & CONFIG -->
+    <section class="slide" data-title="Feature: Security">
+        <div class="slide-hdr">
+            <span class="pill">Feature Spotlight 4</span>
+            <span class="slide-counter">06 / 08</span>
         </div>
-        <div class="slide-body">
-            <div class="grid-2-wide">
+        <div class="body">
+            <div class="cols-feature">
                 <div>
-                    <h2 class="slide-title">Safe Bulk Apply &amp; Tenant Rollout</h2>
-                    <p class="subtitle" style="margin-bottom: 18px;">Deploy 1 or 50 stored procedures safely across single or all tenant databases.</p>
-                    <ul class="bullet-list">
-                        <li><strong>Pre-Deployment Review Modal</strong><span>Inspect every candidate SP (including version-to-base mappings) before executing.</span></li>
-                        <li><strong>Single DB vs. All Tenant DBs</strong><span>Target a specific DB like <code>CE21_0001</code> or roll out across all matching tenant databases in one batch.</span></li>
-                        <li><strong>Automatic Rollback Snapshots</strong><span>Captures the existing target DDL into a timestamped <code>.sql</code> file before running <code>DROP</code> + <code>CREATE</code>.</span></li>
-                    </ul>
+                    <h2 class="title">Enterprise Security &amp; Auditability</h2>
+                    <p class="lead" style="margin-bottom:16px;">Zero plaintext secrets on screen or disk, with shared team visibility.</p>
+                    <div class="callout-list">
+                        <div class="callout">
+                            <span class="callout-num">1</span>
+                            <div>
+                                <h4>Windows DPAPI Encryption</h4>
+                                <p>SQL Server passwords and AI API keys are encrypted per Windows account in <code>%AppData%\SqlDiffStudio\settings.json</code>.</p>
+                            </div>
+                        </div>
+                        <div class="callout">
+                            <span class="callout-num">2</span>
+                            <div>
+                                <h4>Masked Keys &amp; Connection Test</h4>
+                                <p>API keys stay masked by default with a <strong>Show/Hide</strong> toggle and a <strong>Test AI Connection</strong> button that reports live quota.</p>
+                            </div>
+                        </div>
+                        <div class="callout">
+                            <span class="callout-num">3</span>
+                            <div>
+                                <h4>Shared Backup &amp; History Log</h4>
+                                <p>Configure a shared team folder for rollback scripts and inspect <code>deployment_history.log</code> anytime.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="screenshot-frame">
-                    <img src="assets/img/sds_05_bulk_apply.png" alt="SQL Diff Studio Bulk Apply Confirmation Dialog">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SLIDE 8: AI & SARGABILITY -->
-    <section class="slide" data-title="AI & SARGability">
-        <div class="slide-top">
-            <span class="kicker">Walkthrough • Step 5</span>
-            <span class="slide-num-badge">08 / 10</span>
-        </div>
-        <div class="slide-body">
-            <div class="grid-2-wide">
-                <div>
-                    <h2 class="slide-title">AI &amp; SARGability Performance Advisor</h2>
-                    <p class="subtitle" style="margin-bottom: 18px;">Catch index-killing SQL anti-patterns before they reach production.</p>
-                    <ul class="bullet-list">
-                        <li><strong>Tab 1: Offline Static Rules (Instant)</strong><span>Detects <code>YEAR()/MONTH()</code> on columns, <code>ISNULL()</code> predicates, leading <code>%</code> wildcards, <code>SELECT *</code>, and missing <code>SET NOCOUNT ON</code>.</span></li>
-                        <li><strong>Tab 2: Live AI Query Optimization</strong><span>Sends the SP to your configured OpenAI/Groq model for actionable index and query rewrite suggestions.</span></li>
-                        <li><strong>Transparent Token Budget</strong><span>Displays remaining tokens, reset countdown, and exact prompt/completion usage on every call.</span></li>
-                    </ul>
-                </div>
-                <div class="screenshot-frame">
-                    <img src="assets/img/sds_04_ai_drawer.png" alt="SQL Diff Studio AI and SARGability Drawer">
+                <div class="shot">
+                    <img src="assets/img/sds_01_configurations.png" alt="Configurations and Security Tab">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SLIDE 9: FUTURE ENHANCEMENTS -->
+    <!-- SLIDE 7: FUTURE ENHANCEMENTS -->
     <section class="slide" data-title="Future Enhancements">
-        <div class="slide-top">
-            <span class="kicker purple">Roadmap • Future Enhancements</span>
-            <span class="slide-num-badge">09 / 10</span>
+        <div class="slide-hdr">
+            <span class="pill purple">Future Enhancements Roadmap</span>
+            <span class="slide-counter">07 / 08</span>
         </div>
         <div>
-            <h2 class="slide-title">Planned Future Enhancements</h2>
-            <p class="subtitle" style="margin-bottom: 18px;">SQL Diff Studio is ready for daily use today — here is how we plan to expand it next.</p>
+            <h2 class="title">What's Coming Next</h2>
+            <p class="lead">v1.0.0 is ready for daily production workflows today. Here is our planned expansion path.</p>
         </div>
-        <div class="slide-body">
-            <div class="grid-3" style="height: 100%;">
-                <div class="roadmap-col">
-                    <span class="roadmap-tag tag-near">v1.1 • Near-Term</span>
-                    <div class="roadmap-item">
+        <div class="body">
+            <div class="cols-3">
+                <div class="rcol">
+                    <span class="pill green" style="width:fit-content;">v1.1 • Near-Term</span>
+                    <div class="ritem">
                         <strong>1-Click Rollback History UI</strong>
-                        <span>Browse <code>deployment_history.log</code> inside the app and re-apply any saved pre-change snapshot in one click.</span>
+                        <span>Browse <code>deployment_history.log</code> inside the app and restore any saved pre-change snapshot in one click.</span>
                     </div>
-                    <div class="roadmap-item">
+                    <div class="ritem">
                         <strong>Transactional Dry-Run Sandbox</strong>
-                        <span>Optional <code>BEGIN TRAN ... ROLLBACK TRAN</code> pre-flight check to catch missing tables/columns before live execution.</span>
+                        <span>Optional <code>BEGIN TRAN ... ROLLBACK TRAN</code> pre-check to catch missing objects before live commit.</span>
                     </div>
-                    <div class="roadmap-item">
-                        <strong>Table &amp; Index Schema Diffing</strong>
-                        <span>Expand beyond SPs/Views/Functions to compare table columns, indexes, and foreign key constraints.</span>
-                    </div>
-                </div>
-
-                <div class="roadmap-col">
-                    <span class="roadmap-tag tag-mid">v1.2 • Mid-Term</span>
-                    <div class="roadmap-item">
-                        <strong>Git &amp; Daily_DB_Changes Sync</strong>
-                        <span>Automatically export deployed scripts into <code>Daily_DB_Changes</code> folders and prepare Git commits with ticket tags.</span>
-                    </div>
-                    <div class="roadmap-item">
-                        <strong>Execution Plan Analysis</strong>
-                        <span>Fetch <code>SET SHOWPLAN_XML ON</code> estimates and feed missing-index hints directly into the AI Advisor.</span>
-                    </div>
-                    <div class="roadmap-item">
-                        <strong>Team Webhooks (Slack / Teams)</strong>
-                        <span>Post automated deployment summaries when shared DEV or Staging databases are updated.</span>
+                    <div class="ritem">
+                        <strong>Table &amp; Index Diffing</strong>
+                        <span>Compare table columns, constraints, and indexes alongside stored procedures and views.</span>
                     </div>
                 </div>
 
-                <div class="roadmap-col">
-                    <span class="roadmap-tag tag-long">v2.0 • Long-Term</span>
-                    <div class="roadmap-item">
-                        <strong>Multi-Tenant Drift Matrix</strong>
-                        <span>Visual parity dashboard showing SP checksums across all <code>CE21_0001</code>..<code>CE21_NNNN</code> tenant databases at a glance.</span>
+                <div class="rcol">
+                    <span class="pill" style="width:fit-content;">v1.2 • Mid-Term</span>
+                    <div class="ritem">
+                        <strong>Daily_DB_Changes &amp; Git Sync</strong>
+                        <span>Auto-append deployed scripts into team <code>Daily_DB_Changes</code> folders and stage Git commits with ticket IDs.</span>
                     </div>
-                    <div class="roadmap-item">
-                        <strong>Headless CLI &amp; CI/CD Runner</strong>
-                        <span>Run automated schema drift checks and generate diff reports in GitHub Actions or Azure DevOps pipelines.</span>
+                    <div class="ritem">
+                        <strong>Execution Plan Insights</strong>
+                        <span>Capture <code>SHOWPLAN_XML</code> estimates and feed missing-index hints into the AI Advisor.</span>
                     </div>
-                    <div class="roadmap-item">
-                        <strong>Role-Based Approval Gates</strong>
-                        <span>Require peer sign-off before bulk-applying changes to protected Staging or Production targets.</span>
+                    <div class="ritem">
+                        <strong>Slack / Teams Notifications</strong>
+                        <span>Send automated deployment summaries when shared DEV or Staging databases are updated.</span>
+                    </div>
+                </div>
+
+                <div class="rcol">
+                    <span class="pill purple" style="width:fit-content;">v2.0 • Long-Term</span>
+                    <div class="ritem">
+                        <strong>Multi-Tenant Parity Matrix</strong>
+                        <span>Visual dashboard showing SP version parity across all <code>CE21_0001</code>..<code>CE21_NNNN</code> tenant databases.</span>
+                    </div>
+                    <div class="ritem">
+                        <strong>CLI &amp; CI/CD Pipeline Runner</strong>
+                        <span>Headless drift checks and automated diff reports for GitHub Actions and Azure DevOps.</span>
+                    </div>
+                    <div class="ritem">
+                        <strong>Peer Approval Gates</strong>
+                        <span>Require second-developer sign-off before bulk-applying to Staging or Production targets.</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SLIDE 10: GET STARTED -->
+    <!-- SLIDE 8: READY TO USE -->
     <section class="slide" data-title="Ready to Use">
-        <div class="slide-top">
-            <span class="kicker green">● Ready to Use Now</span>
-            <span class="slide-num-badge">10 / 10</span>
+        <div class="slide-hdr">
+            <span class="pill green">Ready to Use Now</span>
+            <span class="slide-counter">08 / 08</span>
         </div>
-        <div class="slide-body" style="align-items: center; text-align: center;">
-            <h1 class="title-hero" style="font-size: 44px; margin-bottom: 14px;">Ready for Your Team Today</h1>
-            <p class="subtitle" style="margin-bottom: 30px; text-align: center;">
-                Install <strong>SQL Diff Studio v1.0.0</strong> via the single-file Windows Setup Wizard or Portable ZIP, configure your SQL connections once, and start comparing in seconds.
+        <div class="body" style="align-items:center;text-align:center;">
+            <img src="assets/img/app-logo.png" alt="SQL Diff Studio" style="width:64px;height:64px;border-radius:14px;margin-bottom:16px;">
+            <h1 class="hero-title" style="margin-bottom:10px;">Start Using SQL Diff Studio Today</h1>
+            <p class="lead" style="margin-bottom:28px;text-align:center;">
+                Install v1.0.0 in 10 seconds with the Windows Setup Wizard or extract the portable ZIP.
             </p>
-            <div class="grid-3" style="width: 100%; max-width: 920px; margin-bottom: 32px; text-align: left;">
-                <div class="card">
-                    <h3>1. Install in 10 Seconds</h3>
-                    <p>Run <code>SqlDiffStudio-Setup.exe</code> (7.29 MB) for Start Menu &amp; Desktop shortcuts, or extract the portable ZIP.</p>
+            <div class="cols-3" style="width:100%;max-width:920px;margin-bottom:28px;text-align:left;">
+                <div class="fcard">
+                    <span class="fcard-badge">Step 1</span>
+                    <h3>Install &amp; Launch</h3>
+                    <p>Run <code>SqlDiffStudio-Setup.exe</code> (7.2 MB) for automatic Desktop &amp; Start Menu shortcuts.</p>
                 </div>
-                <div class="card">
-                    <h3>2. Add Connections</h3>
-                    <p>Save DEV, Local, and Staging servers securely with Windows DPAPI encryption and optional AI Advisor keys.</p>
+                <div class="fcard">
+                    <span class="fcard-badge">Step 2</span>
+                    <h3>Save Connections</h3>
+                    <p>Add DEV, Local, and Staging servers once—encrypted automatically with Windows DPAPI.</p>
                 </div>
-                <div class="card">
-                    <h3>3. Compare &amp; Deploy</h3>
-                    <p>Filter specific SPs for sub-second comparison, review clean diffs, and deploy safely with automatic backups.</p>
+                <div class="fcard">
+                    <span class="fcard-badge">Step 3</span>
+                    <h3>Compare &amp; Deploy</h3>
+                    <p>Filter target SPs, inspect clean diffs, check SARGability, and deploy safely with backups.</p>
                 </div>
             </div>
-            <div style="display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;">
-                <a href="downloads/SqlDiffStudio-Setup.exe" class="cta-btn primary">⬇ Download Installer (.exe)</a>
-                <a href="user-guide.html" class="cta-btn">📖 Open User Guide</a>
-                <a href="releases.html" class="cta-btn">📦 View Releases</a>
-                <a href="index.html" class="cta-btn">🏠 Back to Home</a>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+                <a href="downloads/SqlDiffStudio-Setup.exe" class="btn primary">Download Windows Installer (.exe)</a>
+                <a href="downloads/SqlDiffStudio-v1.0.0-win-x64.zip" class="btn">Download Portable ZIP</a>
+                <a href="user-guide.html" class="btn">Read User Guide</a>
             </div>
         </div>
-        <div style="text-align:center; color:var(--fg-muted); font-size:12.5px;">
-            Thank you! Questions &amp; Live Demo
+        <div style="text-align:center;font-size:12px;color:var(--muted);">
+            SQL Diff Studio v1.0.0 • Thank you!
         </div>
     </section>
 
-</div>
+</main>
 
-<!-- Presenter Controls -->
-<div class="controls">
-    <div class="ctrl-group">
-        <a href="index.html" class="ctrl-btn">← Home</a>
-        <span style="color:var(--fg-muted); font-weight:600;" id="slideTitleLabel">Title</span>
+<footer class="bottombar">
+    <span id="slideLabel" style="font-size:12.5px;font-weight:600;color:var(--muted);">Overview</span>
+    <div class="dots" id="dotsContainer"></div>
+    <div style="display:flex;align-items:center;gap:8px;">
+        <button class="btn" id="prevBtn" onclick="go(-1)">← Prev</button>
+        <span id="counterLabel" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);min-width:48px;text-align:center;">1 / 8</span>
+        <button class="btn primary" id="nextBtn" onclick="go(1)">Next →</button>
     </div>
-
-    <div class="ctrl-group">
-        <button class="ctrl-btn" id="prevBtn" onclick="go(-1)">◀ Prev</button>
-        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-        <span id="counterLabel" style="font-family:'JetBrains Mono',monospace; color:var(--fg-muted); min-width:54px; text-align:center;">1 / 10</span>
-        <button class="ctrl-btn" id="nextBtn" onclick="go(1)">Next ▶</button>
-    </div>
-
-    <div class="ctrl-group">
-        <button class="ctrl-btn" onclick="window.print()">🖨 Print / PDF</button>
-        <button class="ctrl-btn" onclick="toggleFullscreen()">⛶ Fullscreen (F)</button>
-    </div>
-</div>
+</footer>
 
 <script>
     const slides = Array.from(document.querySelectorAll('.slide'));
+    const dotsContainer = document.getElementById('dotsContainer');
     let idx = 0;
+
+    slides.forEach((_, i) => {
+        const d = document.createElement('button');
+        d.className = 'dot';
+        d.ariaLabel = `Slide ${i + 1}`;
+        d.onclick = () => { idx = i; render(); };
+        dotsContainer.appendChild(d);
+    });
+
+    const dots = Array.from(dotsContainer.children);
 
     function render() {
         slides.forEach((s, i) => s.classList.toggle('active', i === idx));
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
         document.getElementById('counterLabel').textContent = `${idx + 1} / ${slides.length}`;
-        document.getElementById('slideTitleLabel').textContent = slides[idx].dataset.title || '';
-        document.getElementById('progressFill').style.width = `${((idx + 1) / slides.length) * 100}%`;
+        document.getElementById('slideLabel').textContent = slides[idx].dataset.title || '';
         document.getElementById('prevBtn').disabled = idx === 0;
         document.getElementById('nextBtn').disabled = idx === slides.length - 1;
     }
